@@ -1,0 +1,41 @@
+{% extends 'core/base_template.html' %}
+{% load static extras %}
+
+{% block seo_description %}{{ page.seo_description }}{% endblock %}
+{% block seo_keywords %}{{ page.seo_keywords }}{% endblock %}
+{% block seo_title %}{{ page.seo_title }}{% endblock %}
+
+{% block template_body_block %}
+    <div class="page" id="page-testimonials">
+        <section class="top-ban" id="page-ban" {% if page.banner %}
+                 style="background-image: url('{{ page.banner.url }}');"{% endif %}>
+            <div class="container h-100">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <h1>{{ page.banner_text }}</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-body">
+            <div class="container">
+                {% for testimonial in testimonials %}
+                    <div class="testi-box">
+                        <img src="{% static 'img/quote.png' %}" class="mb-2" alt="">
+                        <p>{{ testimonial.text }}</p>
+                        <div class="row align-items-center">
+                            <div class="col-auto pb-1">
+                                <img src="{% static 'img/stars.png' %}" alt="">
+                            </div>
+                            <div class="col-auto">
+                                <h4 class="m-0 text-uppercase font-weight-bold">{{ testimonial.author }}</h4>
+                            </div>
+                            <div class="col-auto">
+                                <h5 class="m-0">{{ testimonial.position }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

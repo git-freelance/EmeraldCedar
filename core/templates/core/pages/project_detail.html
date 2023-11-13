@@ -1,0 +1,98 @@
+{% extends 'core/base_template.html' %}
+{% load static extras %}
+
+{% block seo_description %}{{ project.seo_description }}{% endblock %}
+{% block seo_keywords %}{{ project.seo_keywords }}{% endblock %}
+{% block seo_title %}{{ project.seo_title }}{% endblock %}
+
+{% block include_css %}
+    <link rel="stylesheet" href="{% static 'lib/twentytwenty/twentytwenty.css' %}">
+{% endblock %}
+
+{% block template_body_block %}
+    <div class="page" id="page-project">
+        <section class="top-ban" id="page-ban" {% if project.banner %}
+                 style="background-image: url('{{ project.banner.url }}');"{% endif %}>
+            <div class="container h-100">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <h1>{{ project.name }}</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-body">
+            <div class="container">
+                <div class="mb-3 redactor-wr">
+                    {% autoescape off %}
+                        {{ project.body_1 }}
+                    {% endautoescape %}
+                </div>
+
+                {% if project.before_image and project.after_image %}
+                    <div id="comparison" class="mb-4 twentytwenty-container">
+                        <img src="{{ project.before_image.url }}" alt="">
+                        <img src="{{ project.after_image.url }}" alt="">
+                    </div>
+                {% endif %}
+
+                <div class="redactor-wr">
+                    {% autoescape off %}
+                        {{ project.body_2 }}
+                    {% endautoescape %}
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="owl-carousel owl-theme" id="owl-project-photos">
+                {% for chunk in photos_chunks %}
+                    <div class="photo-row">
+                        {% for photo in chunk %}
+                            <a href="{{ photo.image.url }}" data-fancybox="project">
+                                <img src="{{ photo.get_thumbnail.url }}" alt="">
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% get_about_section %}
+
+    </div>
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+    <script src="{% static 'lib/twentytwenty/jquery.event.move.js' %}"></script>
+    <script src="{% static 'lib/twentytwenty/jquery.twentytwenty.js' %}"></script>
+    <script>
+        $(function () {
+            $("#comparison").twentytwenty();
+            //
+            $('#owl-project-photos').owlCarousel({
+                loop: true,
+                //rewind: true,
+                nav: false,
+                margin: 2,
+                dots: false,
+                autoplay: true,
+                //autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 2,
+                    },
+                    768: {
+                        items: 3,
+                    },
+                    992: {
+                        items: 4,
+                    },
+                    1200: {
+                        items: 4
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'core/base_html.html' %}
+{% load static extras %}
+
+{% block body_block %}
+
+    {% get_nav_top %}
+
+    {% block template_body_block %}{% endblock %}
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'img/logo-2.png' %}" class="img-fluid mb-4"></a>
+                    <p class="m-0 font-weight-light">{{ site_config.footer_text|linebreaksbr }}</p>
+                </div>
+
+                <div class="col-lg-5">
+                    <h5 class="mt-lg-4 mb-3">FOLLOW US</h5>
+
+                    <div class="row">
+                        <div class="col-sm-8 col-md-6 col-lg-12">
+                            <div class="form-row">
+                                {% if site_config.facebook_link %}
+                                    <div class="col-3">
+                                        <a href="{{ site_config.facebook_link|default:'#' }}" class="soc soc-1"
+                                           target="_blank">
+                                            <i class="fab fa-facebook-f"></i></a>
+                                    </div>
+                                {% endif %}
+                                {% if site_config.twitter_link %}
+                                    <div class="col-3">
+                                        <a href="{{ site_config.twitter_link|default:'#' }}" class="soc soc-2"
+                                           target="_blank">
+                                            <i class="fab fa-twitter"></i></a>
+                                    </div>
+                                {% endif %}
+                                {% if site_config.youtube_link %}
+                                    <div class="col-3">
+                                        <a href="{{ site_config.youtube_link|default:'#' }}" class="soc soc-3"
+                                           target="_blank">
+                                            <i class="fab fa-youtube"></i></a>
+                                    </div>
+                                {% endif %}
+                                {% if site_config.instagram_link %}
+                                    <div class="col-3">
+                                        <a href="{{ site_config.instagram_link|default:'#' }}" class="soc soc-4"
+                                           target="_blank">
+                                            <i class="fab fa-instagram"></i></a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-4 my-lg-5 line"></div>
+
+            <div class="row">
+                <div class="col-lg-auto">
+                    <p class="m-0 font-weight-light">©Copyright 2019 Emeral Cedar Contracting.All rights reserved.</p>
+                </div>
+                <div class="col-lg-auto ml-lg-auto">
+                    <p class="m-0 font-weight-light">
+                        <a href="{% url 'custom_page' 'privacy-policy' %}">Privacy Policy</a> |
+                        <a href="{% url 'custom_page' 'terms-conditions' %}">Terms & Conditions</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}

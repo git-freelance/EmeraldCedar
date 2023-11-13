@@ -1,0 +1,20 @@
+<section id="section-about" class="p-body">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="font-weight-bold mb-lg-4">{{ header }}</h3>
+                <p class="mb-lg-4">{{ text|linebreaksbr }}</p>
+                {% if button_text %}
+                    <a href="{{ button_page.get_absolute_url }}"
+                       class="btn btn-lg px-md-5 btn-green btn-sm-block">
+                        {{ button_text }}</a>
+                {% endif %}
+            </div>
+            {% if image %}
+                <div class="col-lg-5 mt-4 mt-lg-0 text-center">
+                    <img src="{{ image.url }}" alt="" class="img-fluid">
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

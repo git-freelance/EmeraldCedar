@@ -1,0 +1,50 @@
+{% extends 'core/base_template.html' %}
+{% load extras %}
+
+{% block template_body_block %}
+    <div class="page page-dash-projects" id="page-dash">
+        <section class="top-ban" id="page-ban">
+            <div class="container h-100">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <h1>All Projects</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="dash-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-left">
+                        {% get_dash_sidebar %}
+                    </div>
+                    <div class="col-lg-9 col-right">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Cost</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for project in projects %}
+                                    <tr>
+                                        <td><a href="{{ project.get_absolute_url }}" class="font-weight-bold">
+                                            {{ project.name }}</a></td>
+                                        <td>{{ project.start_date|date }}</td>
+                                        <td>{{ project.end_date|date }}</td>
+                                        <td>{% if project.cost %}${{ project.cost }}{% endif %}</td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

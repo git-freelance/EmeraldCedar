@@ -1,0 +1,22 @@
+<div class="list-group mb-3">
+    {% url 'dash_projects' as dash_projects_url %}
+    <a href="{{ dash_projects_url }}" class="list-group-item list-group-item-action
+                            {% if request.path == dash_projects_url %}active{% endif %}">All Projects
+    </a>
+
+    {% for project in projects %}
+        {% with project.get_absolute_url as project_url %}
+            <a href="{{ project_url }}"
+               class="list-group-item list-group-item-action
+                                        {% if request.path == project_url %}active{% endif %}">
+                <i class="fas fa-chevron-right mr-2"></i>{{ project }}</a>
+        {% endwith %}
+    {% endfor %}
+</div>
+
+<div class="list-group">
+    {% url 'dash_password' as dash_password_url %}
+    <a href="{{ dash_password_url }}" class="list-group-item list-group-item-action
+                            {% if request.path == dash_password_url %}active{% endif %}">Change
+        Password</a>
+</div>

@@ -1,0 +1,5 @@
+{% load extras %}
+<a href="{{ service.get_absolute_url }}" class="service-box"
+     {% if service.featured_image %}style="background-image: url('{{ service.featured_image.url }}');"{% endif %}>
+    <h3>{{ service.name|splitlines }}</h3>
+</a>

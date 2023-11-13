@@ -1,0 +1,96 @@
+#page-dash {
+
+  .dash-body {
+    overflow-x: hidden;
+
+    .col-left {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      background: #fafafa;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 100%;
+        background: #fafafa;
+        width: 1000px;
+        height: 100%;
+      }
+
+      @media only screen and (max-width: 991px) {
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 100%;
+          background: #fafafa;
+          width: 1000px;
+          height: 100%;
+        }
+      }
+
+      .list-group {
+        .active {
+          background-color: @green;
+          border-color: @green;
+        }
+      }
+    }
+
+    .col-right {
+      padding-top: 30px;
+      padding-bottom: 30px;
+
+      @media only screen and (min-width: 992px) {
+        box-shadow: inset 5px 0px 17px -8px #383838;
+      }
+    }
+  }
+
+  &.page-dash-projects {
+    table {
+      border: 1px solid #dee2e6;
+
+      thead {
+        border: 0;
+        tr th {
+
+          background-color: @green;
+          color: #fff;
+        }
+      }
+
+      tbody {
+        a {
+          color: @green;
+        }
+      }
+    }
+  }
+
+  &.page-dash-project {
+    .nav-pills {
+      .nav-link {
+        color: @green;
+
+        &.active {
+          color: #fff;
+          background-color: @green;
+        }
+      }
+    }
+
+    .card {
+      .card-header {
+        color: #fff;
+        background-color: @green;
+      }
+      .card-body {
+        li {
+          list-style: square;
+        }
+      }
+    }
+  }
+}

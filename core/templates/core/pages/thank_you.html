@@ -1,0 +1,29 @@
+{% extends 'core/base_template.html' %}
+{% load static extras %}
+
+{% block seo_description %}{{ page.seo_description }}{% endblock %}
+{% block seo_keywords %}{{ page.seo_keywords }}{% endblock %}
+{% block seo_title %}{{ page.seo_title }}{% endblock %}
+
+{% block template_body_block %}
+    <div class="page" id="page-custompage">
+        <section class="top-ban" id="page-ban" {% if page.banner %}
+                 style="background-image: url('{{ page.banner.url }}');"{% endif %}>
+            <div class="container h-100">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <h1>{{ page.banner_text }}</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-body">
+            <div class="container">
+                <div class="redactor-wr">
+                    {% autoescape off %}
+                        {{ page.body }}
+                    {% endautoescape %}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

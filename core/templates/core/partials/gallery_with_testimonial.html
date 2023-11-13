@@ -1,0 +1,8 @@
+{% load extras %}
+<div id="img-gallery">
+    {% for chunk in photos_chunks %}
+        <div class="form-row {% if forloop.counter|divisibleby:"2" %}even{% endif %}">
+            {% get_gallery_row chunk testimonials %}
+        </div>
+    {% endfor %}
+</div>

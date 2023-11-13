@@ -1,0 +1,35 @@
+{% extends 'account/base_account.html' %}
+{% load widget_tweaks %}
+
+{% block account_block %}
+    <form method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+            {{ form.login|add_class:'form-control form-control-lg' }}
+            {{ form.email.errors }}
+            {{ form.login.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.password|add_class:'form-control form-control-lg' }}
+            {{ form.password.errors }}
+        </div>
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1" name="remember">
+                <label class="custom-control-label" for="customCheck1">Remember Me</label>
+            </div>
+        </div>
+
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+
+        <button type="submit" class="btn btn-lg btn-block">Sign In</button>
+    </form>
+
+    <div class="mt-2">
+        <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
+    </div>
+{% endblock %}

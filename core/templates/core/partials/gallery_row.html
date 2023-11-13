@@ -1,0 +1,225 @@
+{% load extras %}
+{% with photos|length as len %}
+
+    {% if len == 1 %}
+        <div class="col-lg-6 mb-10">
+            <a href="{{ photos.0.image.url }}" data-fancybox="gallery" class="img-box h2x">
+                <img src="{{ photos.0.image.url }}" alt="">
+            </a>
+        </div>
+        <div class="col-lg-6 mb-10">
+            {% get_testi_box_in_gallery testimonials True %}
+        </div>
+
+    {% elif len == 2 %}
+        <div class="col-6 mb-10">
+            <a href="{{ photos.0.image.url }}" data-fancybox="gallery" class="img-box h2x">
+                <img src="{{ photos.0.image.url }}" alt="">
+            </a>
+        </div>
+        <div class="col-6 mb-10">
+            <a href="{{ photos.1.image.url }}" data-fancybox="gallery" class="img-box h2x">
+                <img src="{{ photos.1.image.url }}" alt="">
+            </a>
+        </div>
+
+    {% elif len == 3 %}
+        <div class="col-lg-6 mb-10">
+            <a href="{{ photos.0.image.url }}" data-fancybox="gallery" class="img-box h2x">
+                <img src="{{ photos.0.image.url }}" alt="">
+            </a>
+        </div>
+        <div class="col-lg-6 mb-10">
+            <div class="form-row">
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.1.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.1.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.2.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.2.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    {% get_testi_box_in_gallery testimonials %}
+                </div>
+            </div>
+        </div>
+
+    {% elif len == 4 %}
+        <div class="col-lg-6">
+            <div class="form-row">
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.0.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.0.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.1.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.1.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-row">
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.2.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.2.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.3.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.3.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    {% elif len == 5 %}
+        <div class="col-lg-6 mb-10">
+            <a href="{{ photos.0.image.url }}" data-fancybox="gallery" class="img-box h2x">
+                <img src="{{ photos.0.image.url }}" alt="">
+            </a>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-row">
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.1.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.1.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.2.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.2.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.3.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.3.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+                <div class="col-6 mb-10">
+                    <a href="{{ photos.4.image.url }}" data-fancybox="gallery" class="img-box">
+                        <img src="{{ photos.4.get_thumbnail.url }}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    {% elif len == 6 %}
+        <div class="col-12">
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-row">
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.0.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.0.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.1.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.1.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-row">
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.2.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.2.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.3.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.3.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-row h-100">
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.4.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.4.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.5.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.5.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-10">
+                    {% get_testi_box_in_gallery testimonials %}
+                </div>
+            </div>
+        </div>
+
+    {% elif len == 7 %}
+        <div class="col-12">
+            <div class="form-row">
+                <div class="col-lg-6 mb-10">
+                    <a href="{{ photos.0.image.url }}" data-fancybox="gallery" class="img-box h2x">
+                        <img src="{{ photos.0.image.url }}" alt="">
+                    </a>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-row">
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.1.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.1.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.2.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.2.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.3.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.3.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.4.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.4.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-lg-6">
+                    <div class="form-row h-100">
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.5.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.5.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-6 mb-10">
+                            <a href="{{ photos.6.image.url }}" data-fancybox="gallery" class="img-box">
+                                <img src="{{ photos.6.get_thumbnail.url }}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-10">
+                    {% get_testi_box_in_gallery testimonials %}
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+{% endwith %}

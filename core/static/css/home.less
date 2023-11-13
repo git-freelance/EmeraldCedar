@@ -1,0 +1,106 @@
+#page-home {
+
+  section#home-ban {
+    .btn {
+      @media only screen and (max-width: 767px) {
+        text-shadow: 0 0 15px #000, 0 0 15px #000;
+        
+        &:hover {
+          text-shadow: none;
+        }
+      }
+    }
+  }
+
+  section#home-welcome {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding: 60px 0;
+
+    @media only screen and (max-width: 479px) {
+      padding: 30px 0;
+    }
+  }
+
+  section#home-services {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding: 60px 0 30px;
+
+    @media only screen and (max-width: 479px) {
+      padding: 30px 0 0;
+    }
+  }
+
+  section#home-testimonials {
+    padding: 60px 0 30px;
+
+    @media only screen and (max-width: 479px) {
+      padding: 30px 0 0;
+    }
+
+    .testi-box {
+      text-align: center;
+
+      p {
+        .font-opensans;
+        color: #6c6c6c;
+        font-weight: 300;
+        font-style: italic;
+      }
+    }
+
+    .owl-dots {
+      .owl-dot {
+        span {
+          border-radius: 0;
+          background: #ebebeb;
+        }
+
+        &.active {
+          span {
+            background: #15856e;
+          }
+        }
+      }
+    }
+  }
+
+  section#home-blog {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+
+    @media only screen and (max-width: 479px) {
+      padding: 30px 0;
+    }
+
+    .owl-stage {
+      display: flex;
+    }
+  }
+
+  section#home-map {
+    height: 500px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    padding: 30px 0;
+
+    @media only screen and (max-width: 767px) {
+      height: auto;
+    }
+
+    .white-box {
+      background: #fff;
+      text-align: center;
+      padding: 20px;
+
+      p {
+        font-size: 17px;
+      }
+    }
+  }
+
+}

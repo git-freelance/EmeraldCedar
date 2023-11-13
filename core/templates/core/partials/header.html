@@ -1,0 +1,74 @@
+{% load static mptt_tags extras %}
+
+<nav id="nav-top">
+    <div class="container">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+            </div>
+            <div class="col-auto ml-auto">
+                <div id="nav-cats">
+                    <ul class="root">
+                        {% recursetree nodes %}
+                            <li class="text-uppercase">
+                                <a href="{{ node.get_absolute_url }}">{{ node.name|safe }}</a>
+                                {% if not node.is_leaf_node %}
+                                    <ul>
+                                        {{ children }}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endrecursetree %}
+                    </ul>
+                </div>
+                <a href="#nav-cats" class="btn btn-outline-light d-lg-none"><i class="fas fa-lg fa-bars"></i></a>
+            </div>
+        </div>
+
+    </div>
+</nav>
+{#<nav class="navbar navbar-expand-lg navbar-dark" id="nav-top">#}
+{#    <div class="container">#}
+{#        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>#}
+{#        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"#}
+{#                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+{##}
+{#        <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
+{#            <ul class="navbar-nav ml-auto">#}
+{#                {% recursetree nodes %}#}
+{#                    {% with url=node.get_absolute_url %}#}
+{#                        {% if node.is_root_node and node.is_leaf_node %}#}
+{#                            <li class="nav-item {% if request.path == url %}active{% endif %}">#}
+{#                                <a class="nav-link" href="{{ url }}">{{ node.name|safe }}</a>#}
+{#                            </li>#}
+{#                        {% elif node.get_descendant_count > 0 %}#}
+{#                            <li class="nav-item dropdown">#}
+{#                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">#}
+{#                                    {{ node.name }}#}
+{#                                </a>#}
+{#                                <div class="dropdown-menu">#}
+{#                                    {{ children }}#}
+{#                                </div>#}
+{#                            </li>#}
+{#                        {% else %}#}
+{#                            <a class="dropdown-item" href="{{ url }}">{{ node.name }}</a>#}
+{#                        {% endif %}#}
+{#                    {% endwith %}#}
+{#                {% endrecursetree %}#}
+{#                <li class="nav-item">#}
+{#                    {% if request.user.is_authenticated %}#}
+{#                        {% if request.path|startswith:'/dash/' %}#}
+{#                            <a href="{% url 'account_logout' %}" class="nav-link">LOGOUT</a>#}
+{#                        {% else %}#}
+{#                            <a href="{% url 'redirect_login' %}" class="nav-link">DASH</a>#}
+{#                        {% endif %}#}
+{#                    {% else %}#}
+{#                        <a href="{% url 'account_login' %}" class="nav-link">LOGIN</a>#}
+{#                    {% endif %}#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#</nav>#}

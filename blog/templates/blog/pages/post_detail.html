@@ -1,0 +1,73 @@
+{% extends 'core/base_template.html' %}
+{% load static extras %}
+
+{% block seo_description %}{{ post.seo_description }}{% endblock %}
+{% block seo_keywords %}{{ post.seo_keywords }}{% endblock %}
+{% block seo_title %}{{ post.seo_title }}{% endblock %}
+
+{% block template_body_block %}
+    <div class="page" id="page-post">
+        <section class="top-ban" id="page-ban"
+                 {% if banner %}style="background-image: url('{{ banner.url }}');"{% endif %}>
+            <div class="container h-100">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <h1>{{ post.name }}</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mb-3 mb-lg-0">
+                        <div class="redactor-wr">
+                            {% autoescape off %}
+                                {{ post.body }}
+                            {% endautoescape %}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div id="sidebar">
+                            <div id="side-form" class="mb-4">
+                                <h3 class="font-weight-bold text-center text-light">GET A FREE
+                                    CONSULTATION</h3>
+                                <form action="." method="POST" id="form-contact">
+                                    {% csrf_token %}
+                                    {{ form.non_field_errors }}
+                                    {% for field in form %}
+                                        {% if field.name == 'h0n3yp0t' %}
+                                            {{ field }}
+                                        {% else %}
+                                            <div class="mb-2">
+                                                {{ field }}
+                                                {{ field.errors }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <button type="submit" class="btn btn-lg btn-block btn-success">SUBMIT</button>
+                                </form>
+                            </div>
+
+{#                            <h4 class="font-weight-semibold">ARCHIVES</h4>#}
+{#                            <div class="mb-3 mb-lg-4">#}
+{#                                {% for archive in archives %}#}
+{#                                    <p class="mb-2">#}
+{#                                        <a class="text-muted"#}
+{#                                           href="{% url 'posts_by_month' archive|date:"Y" archive|date:"m" %}">#}
+{#                                        {{ archive|date:"F Y" }}</a></p>#}
+{#                                {% endfor %}#}
+{#                            </div>#}
+
+                            <h4 class="font-weight-semibold">LATEST NEWS</h4>
+                            <div>
+                                {% for latest_new in latest_news %}
+                                    <p class="mb-2"><a href="{{ latest_new.get_absolute_url }}" class="text-muted">{{ latest_new.name }}</a></p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

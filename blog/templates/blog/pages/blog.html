@@ -1,0 +1,62 @@
+{% extends 'core/base_template.html' %}
+{% load static extras %}
+
+{% block seo_description %}{{ page.seo_description }}{% endblock %}
+{% block seo_keywords %}{{ page.seo_keywords }}{% endblock %}
+{% block seo_title %}{{ page.seo_title }}{% endblock %}
+
+{% block template_body_block %}
+    <div class="page" id="page-blogpage">
+        <section class="top-ban" id="page-ban" {% if page.banner %}
+                 style="background-image: url('{{ page.banner.url }}');"{% endif %}>
+            <div class="container h-100">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    {% if month %}
+                        <h1>Blog: {{ month|date:"F Y" }}</h1>
+                    {% else %}
+                        <h1>{{ page.banner_text }}</h1>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <section class="p-body">
+            <div class="container">
+                <div class="row">
+                    {% for post in object_list %}
+                        <div class="col-md-6 col-lg-4 mb-30">
+                            {% get_post_box post %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% if is_paginated %}
+                    <nav aria-label="...">
+                        <ul class="pagination justify-content-center">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous
+                                        Page</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous Page</a>
+                                </li>
+                            {% endif %}
+
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next Page</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Next Page</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

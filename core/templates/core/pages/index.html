@@ -1,0 +1,212 @@
+{% extends 'core/base_template.html' %}
+{% load static extras %}
+
+{% block seo_description %}{{ page.seo_description }}{% endblock %}
+{% block seo_keywords %}{{ page.seo_keywords }}{% endblock %}
+{% block seo_title %}{{ page.seo_title }}{% endblock %}
+
+{% block template_body_block %}
+    <div id="page-home">
+        <section class="top-ban" id="home-ban">
+            <div class="container h-100">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <div class="w-100">
+                        <h1 class="mb-3 mb-sm-4">{{ page.banner_text|linebreaksbr }}</h1>
+
+                        <div class="row">
+                            <div class="col-lg-6 mx-auto">
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3 mb-md-0">
+                                        {% if page.banner_button_1_text %}
+                                            <a href="{{ page.banner_button_1_page.get_absolute_url }}" id="btn_hb_1"
+                                               class="btn btn-lg btn-block btn-green">{{ page.banner_button_1_text }}</a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {% if page.banner_button_2_text %}
+                                            <a href="{{ page.banner_button_2_page.get_absolute_url }}"
+                                               class="btn btn-lg btn-block btn-outline-light">{{ page.banner_button_2_text }}</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="home-welcome" {% if page.section_2_background_image %}
+                 style="background-image: url('{{ page.section_2_background_image.url }}');"{% endif %}>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="font-weight-bold mb-lg-4">{{ page.section_2_header }}</h3>
+
+                        {% if page.section_2_image %}
+                            <div class="text-center d-lg-none mb-3">
+                                <img src="{{ page.section_2_image.url }}" alt="" class="img-fluid">
+                            </div>
+                        {% endif %}
+
+                        <p class="mb-lg-4">{{ page.section_2_text|linebreaksbr }}</p>
+                        {% if page.section_2_button_text %}
+                            <a href="{{ page.section_2_button_page.get_absolute_url }}"
+                               class="btn btn-lg px-md-5 btn-green btn-sm-block">
+                                {{ page.section_2_button_text }}</a>
+                        {% endif %}
+                    </div>
+                    {% if page.section_2_image %}
+                        <div class="col-lg-5 mt-4 mt-lg-0 text-center d-none d-lg-block">
+                            <img src="{{ page.section_2_image.url }}" alt="" class="img-fluid">
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <section id="home-services" {% if page.section_3_background_image %}
+                 style="background-image: url('{{ page.section_3_background_image.url }}');"{% endif %}>
+            <div class="container">
+                <h2 class="text-center font-weight-bold mb-3 mb-lg-4">{{ page.section_3_header }}</h2>
+
+                <div class="row">
+                    {% for service in services %}
+                        <div class="col-md-6 col-lg-4">
+                            {% get_service_box service %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="home-testimonials">
+            <div class="container">
+                <h2 class="text-center font-weight-bold mb-3 mb-lg-4">{{ page.section_4_header }}</h2>
+
+                <div class="owl-carousel owl-theme" id="owl-testi">
+                    {% for testimonial in testimonials %}
+                        <div class="testi-box">
+                            <p class="mb-3">"{{ testimonial.text }}"</p>
+                            <img src="{% static 'img/stars.png' %}" class="img-fluid" alt="">
+                            {% if testimonial.author %}
+                                <h5 class="font-weight-semibold text-uppercase mt-3 mb-0">{{ testimonial.author }}</h5>
+                            {% endif %}
+                            {% if testimonial.position %}
+                                <h6 class="mb-0 mt-1 font-weight-light">{{ testimonial.position }}</h6>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="home-blog">
+            <div class="container">
+                <h2 class="text-center font-weight-bold mb-3 mb-lg-4">{{ page.section_5_header }}</h2>
+
+                <div class="owl-carousel owl-theme" id="owl-posts">
+                    {% for post in latest_posts %}
+                        {% get_post_box post %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="home-map" {% if page.section_6_background_image %}
+                 style="background-image: url('{{ page.section_6_background_image.url }}');"{% endif %}>
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-lg-7 col-xl-6">
+                        <div class="white-box">
+                            <h2 class="font-weight-semibold">{{ page.section_6_header }}</h2>
+                            <p class="font-weight-light">{{ page.section_6_text }}</p>
+                            {% if page.section_6_button_text %}
+                                <a href="{{ page.section_6_button_page.get_absolute_url }}"
+                                   class="btn btn-lg px-md-5 btn-green btn-sm-block">
+                                    {{ page.section_6_button_text }}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+    <script>
+        $(function () {
+            var images = {{ slides|safe }};
+            // Preload Images
+            $.each(images, function (i, v) {
+                var image_preload = new Image();
+                image_preload.src = v;
+            });
+            //
+            var nextimage = 0;
+            doSlideshow();
+
+            function doSlideshow() {
+                if (nextimage >= images.length) {
+                    nextimage = 0;
+                }
+                $('#home-ban')
+                    .css('background-image', 'url("' + images[nextimage++] + '")')
+                    .fadeIn(1000, function () {
+                        if (images.length > 1) {
+                            setTimeout(doSlideshow, 3000);
+                        }
+                    });
+            }
+
+            // Testi
+            $('#owl-testi').owlCarousel({
+                loop: true,
+                nav: false,
+                items: 1,
+                autoplay: true,
+                autoplayHoverPause: true,
+                dots: false,
+            });
+            // Posts
+            $('#owl-posts').owlCarousel({
+                loop: true,
+                nav: false,
+                autoplay: true,
+                autoplayHoverPause: true,
+                margin: 30,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    768: {
+                        items: 2,
+                    },
+                    992: {
+                        items: 3,
+                    }
+                }
+            });
+
+            //
+            var $btn_hb_1 = $('#btn_hb_1');
+
+            function init_btn_hb_1() {
+                if ($(window).width() <= 767) {
+                    $btn_hb_1.removeClass('btn-green').addClass('btn-outline-light');
+                } else {
+                    $btn_hb_1.removeClass('btn-outline-light').addClass('btn-green');
+                }
+            }
+
+            init_btn_hb_1();
+
+            $(window).resize(function () {
+                init_btn_hb_1();
+            });
+        });
+    </script>
+{% endblock %}

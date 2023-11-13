@@ -1,0 +1,48 @@
+#page-account {
+  min-height: 100vh;
+  background-color: #15856e;
+  background-repeat: no-repeat;
+  background-image: url('/static/img/ec-xl.png');
+  background-position: left bottom;
+
+  @media only screen and (min-width: 992px) {
+    background-repeat: no-repeat, no-repeat;
+    background-image: url('/static/img/ec-xl.png'), url('/static/img/ec-xxl.png');
+    background-position: left bottom, right bottom;
+  }
+  //position: relative;
+
+  #account-body {
+    flex-grow: 1;
+
+    #box {
+      border: 1px solid #19cba7;
+      color: #fff;
+
+      a {
+        color: inherit;
+      }
+
+      .btn {
+        background: #fb8507;
+        color: #fff;
+
+        &:hover {
+          background: lighten(#fb8507, 10%);
+        }
+      }
+
+      //padding: 20px;
+    }
+  }
+
+  #account-footer {
+    padding: 30px 0;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+
+    a {
+      color: inherit;
+    }
+  }
+}

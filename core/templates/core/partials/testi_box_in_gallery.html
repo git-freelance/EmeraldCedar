@@ -1,0 +1,10 @@
+<div class="testi-box-in-gallery {% if h2x %}h2x{% endif %}">
+    <div class="owl-carousel owl-theme owl-gallery-testi">
+        {% for testimonial in testimonials %}
+            <div class="h-100 d-flex flex-column">
+                <p>{{ testimonial.text }}</p>
+                <h5 class="text-right mb-0 mt-auto">- {{ testimonial.author }}</h5>
+            </div>
+        {% endfor %}
+    </div>
+</div>

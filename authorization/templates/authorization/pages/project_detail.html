@@ -1,0 +1,166 @@
+{% extends 'core/base_template.html' %}
+{% load static extras %}
+
+{% block include_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'lib/circliful/css/jquery.circliful.css' %}">
+{% endblock %}
+
+{% block template_body_block %}
+    <div class="page page-dash-project" id="page-dash">
+        <section class="top-ban" id="page-ban" {% if project.cover_image %}
+                 style="background-image: url('{{ project.cover_image.url }}');"{% endif %}>
+            <div class="container h-100">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <h1>{{ project.name }}</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="dash-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-left">
+                        {% get_dash_sidebar %}
+                    </div>
+                    <div class="col-lg-9 col-right">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-general-tab" data-toggle="pill"
+                                   href="#pills-general" role="tab"
+                                   aria-controls="pills-general" aria-selected="true">General</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-warranty-tab" data-toggle="pill" href="#pills-warranty"
+                                   role="tab"
+                                   aria-controls="pills-warranty" aria-selected="false">Warranty</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane show active" id="pills-general" role="tabpanel"
+                                 aria-labelledby="pills-general-tab">
+                                <p class="mb-0"><span class="font-weight-semibold">
+                                    Address:</span> {{ project.address|default_if_none:'' }}</p>
+                                <p class="mb-0"><span class="font-weight-semibold">
+                                    Start Date:</span> {{ project.start_date|date }}
+                                </p>
+                                <p class="mb-0"><span class="font-weight-semibold">
+                                    End Date:</span> {{ project.end_date|date }}</p>
+                                <p class="mb-4"><span class="font-weight-semibold">
+                                    Cost:</span> ${{ project.cost|default_if_none:'' }}</p>
+
+                                {% if project.description %}
+                                    <p class="mb-0 font-weight-semibold">Description:</p>
+                                    <p>{{ project.description|linebreaksbr }}</p>
+                                {% endif %}
+
+                                {% with project.attributesubattributepair_set.all as attributes_pair %}
+                                    {% if attributes_pair %}
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Roof Specs
+                                            </div>
+                                            <div class="card-body">
+                                                {% regroup attributes_pair by attribute as attribute_list %}
+                                                {% for attribute in attribute_list %}
+                                                    <h5 class="font-weight-semibold">{{ attribute.grouper }}</h5>
+                                                    <ul>
+                                                        {% for subattribute in attribute.list %}
+                                                            {% if subattribute.subattribute %}
+                                                                <li class="mb-1">{{ subattribute.subattribute }}</li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+
+                            <div class="tab-pane" id="pills-warranty" role="tabpanel"
+                                 aria-labelledby="pills-warranty-tab">
+                                <div class="row mb-3">
+                                    <div class="col-md mb-2 mb-md-0">
+                                        <h5>Warranty type:
+                                            <span class="font-weight-semibold">{{ project.warranty_type|default_if_none:'' }}</span></h5>
+                                        <p class="mb-0">Warranty start:
+                                            <span class="font-weight-semibold">{{ project.warranty_start_date|date }}</span>
+                                        </p>
+                                        <p class="mb-0">Warranty end:
+                                            <span class="font-weight-semibold">{{ project.warranty_end_date|date }}</span>
+                                        </p>
+                                    </div>
+                                    {% if allow_chart %}
+                                        <div class="col-md-7">
+                                            <div class="row no-gutters">
+                                                <div class="col-4">
+                                                    <div id="circle-years"></div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div id="circle-months"></div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div id="circle-days"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                {% if project.warranty_certificate %}
+                                    <p class="mb-2 font-weight-semibold">Certificate:</p>
+                                    <img src="{{ project.warranty_certificate.url }}" class="img-fluid" alt="">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+    <script src="{% static 'lib/circliful/js/jquery.circliful.js' %}"></script>
+    <script>
+        $(function () {
+            {% if allow_chart %}
+                var opts = {
+                    backgroundColor: '#60686f',
+                    fontColor: '#000',
+                    animationStep: 6,
+                    foregroundBorderWidth: 15,
+                    backgroundBorderWidth: 20,
+                    percentageY: 95,
+                    percentageTextSize: 35,
+                    textY: 120,
+                    noPercentageSign: true,
+                    radius: 76,
+                };
+
+                $('#circle-years').circliful(Object.assign(opts, {
+                    percent: {{ years_in_percent|floatformat:2 }},
+                    text: 'YEAR{{ years_left|pluralize|upper }}',
+                    replacePercentageByText: '{{ years_left }}',
+                    foregroundColor: '#fc6',
+                }));
+
+                $('#circle-months').circliful(Object.assign(opts, {
+                    percent: {{ months_in_percent|floatformat:2 }},
+                    text: 'MONTH{{ months_left|pluralize|upper }}',
+                    replacePercentageByText: '{{ months_left }}',
+                    foregroundColor: '#9cf',
+                }));
+
+                $('#circle-days').circliful(Object.assign(opts, {
+                    percent: {{ days_in_percent|floatformat:2 }},
+                    text: 'DAY{{ days_left|pluralize|upper }}',
+                    replacePercentageByText: '{{ days_left }}',
+                    foregroundColor: '#bfb',
+                }));
+            {% endif %}
+        });
+    </script>
+{% endblock %}

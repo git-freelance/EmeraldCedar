@@ -1,0 +1,68 @@
+{% extends 'core/base_template.html' %}
+{% load static extras %}
+
+{% block seo_description %}{{ page.seo_description }}{% endblock %}
+{% block seo_keywords %}{{ page.seo_keywords }}{% endblock %}
+{% block seo_title %}{{ page.seo_title }}{% endblock %}
+
+{% block template_body_block %}
+    {% with page.categories.all.0 as first_category %}
+        <div class="page" id="page-custompage">
+            <section class="top-ban" id="page-ban" {% if page.banner %}
+                     style="background-image: url('{{ page.banner.url }}');"{% endif %}>
+                <div class="container h-100">
+                    <div class="h-100 d-flex align-items-center justify-content-center">
+                        <h1 id="ban-he">{{ first_category.name }}</h1>
+                    </div>
+                </div>
+            </section>
+
+            <section class="p-body">
+                <div class="container">
+                    <div class="mb-30">
+                        <div class="form-row">
+                            {% for category in page.categories.all %}
+                                <div class="col-auto mb-2">
+                                    <button class="btn btn-outline-success btn-category {% if category == first_category %}active{% endif %}"
+                                            data-id="{{ category.pk }}" data-name="{{ category.name }}">
+                                        {{ category.name }}</button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div id="gal-cont">
+                        {% get_gallery_with_testimonial first_category.images.all page.testimonials.all %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    {% endwith %}
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+    <script>
+        $(function () {
+            $('.btn-category').click(function () {
+                var $self = $(this);
+                var category_id = $self.data('id');
+                $('.btn-category').removeClass('active');
+                $self.addClass('active');
+                $.get('.', {category_id: category_id}, function (data) {
+                    $('#ban-he').html($self.data('name'));
+                    //$('#gal-cont').html(data);
+                    //
+                    $('#gal-cont').fadeOut(100, function () {
+                        $(this).html(data).fadeIn(100, function () {
+                            init_gallery_testi();
+                        });
+                    });
+                    //
+                    //init_gallery_testi();
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
