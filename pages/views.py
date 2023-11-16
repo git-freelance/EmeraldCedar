@@ -5,13 +5,15 @@ from django.views.generic import DetailView, ListView, FormView
 from django.urls import reverse_lazy
 
 from core.helpers import chunks_with_reps
-from core.models import FeaturedProject, Service
 from core.forms import ContactForm
 from core.templatetags.extras import get_gallery_with_testimonial
 
 from blog.models import Post
 from .models import HomePage, MapPage, CustomPage, ContactPage, ThankYouPage, FeaturedProjectsPage, TestimonialsPage, \
     Testimonial, ProjectGalleryPage, GalleryCategory
+
+
+import core.models
 
 
 class IndexView(DetailView):
@@ -25,9 +27,11 @@ class IndexView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
         ctx['slides'] = json.dumps([x.image.url for x in self.object.banners.all()])
-        ctx['services'] = Service.objects.all()
         ctx['testimonials'] = self.object.section_4_testimonials.all()
         ctx['latest_posts'] = Post.objects.all()[:6]
+        ctx['about_us'] = core.models.AboutUsSection.objects.all()[:6]
+        ctx['statistics'] = core.models.StatisticsSection.objects.all()[:4]
+        ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
 
 
@@ -52,18 +56,18 @@ class MapDetailView(DetailView):
 
 class ServiceDetailView(DetailView):
     template_name = 'core/pages/service_detail.html'
-    model = Service
+    model = core.models.Service
     context_object_name = 'service'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
-        ctx['other_services'] = Service.objects.all().exclude(pk=self.object.pk).order_by('?')
+        ctx['other_services'] = core.models.Service.objects.all().exclude(pk=self.object.pk).order_by('?')
         return ctx
 
 
 class FeaturedProjectsView(ListView):
     template_name = 'core/pages/featured_projects.html'
-    model = FeaturedProject
+    model = core.models.FeaturedProject
     context_object_name = 'projects'
 
     def get_context_data(self, **kwargs):
@@ -74,7 +78,7 @@ class FeaturedProjectsView(ListView):
 
 class ProjectDetailView(DetailView):
     template_name = 'core/pages/project_detail.html'
-    model = FeaturedProject
+    model = core.models.FeaturedProject
     context_object_name = 'project'
 
     def get_context_data(self, **kwargs):

@@ -69,12 +69,10 @@ class HomePage(Page, SEOModelMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
 
     banner_text = models.TextField(blank=True)
+    banner_header = models.CharField(max_length=200, blank=True, verbose_name="Banner Title")
     banner_button_1_text = models.CharField(max_length=50, blank=True, null=True, verbose_name='Button 1 text')
     banner_button_1_page = models.ForeignKey('pages.Page', blank=True, null=True, on_delete=models.SET_NULL,
                                              related_name='banner_button_1_homepage', verbose_name='Button 1 page')
-    banner_button_2_text = models.CharField(max_length=50, blank=True, null=True, verbose_name='Button 2 text')
-    banner_button_2_page = models.ForeignKey('pages.Page', blank=True, null=True, on_delete=models.SET_NULL,
-                                             related_name='banner_button_2_homepage', verbose_name='Button 2 page')
 
     section_2_background_image = ImageField(upload_to=upload_common_images_to, blank=True, null=True,
                                             verbose_name='Background image')
@@ -87,6 +85,7 @@ class HomePage(Page, SEOModelMixin, SingletonModel):
 
     section_3_background_image = ImageField(upload_to=upload_common_images_to, blank=True, null=True,
                                             verbose_name='Background image')
+    section_3_short_description = models.CharField(max_length=200, blank=True, verbose_name='Short Description')
     section_3_header = models.CharField(max_length=200, blank=True, verbose_name='Header')
 
     section_4_header = models.CharField(max_length=200, blank=True, verbose_name='Header')
@@ -101,6 +100,10 @@ class HomePage(Page, SEOModelMixin, SingletonModel):
     section_6_button_text = models.CharField(max_length=50, blank=True, null=True, verbose_name='Button text')
     section_6_button_page = models.ForeignKey('pages.Page', blank=True, null=True, on_delete=models.SET_NULL,
                                               related_name='section_6_homepage', verbose_name='Button page')
+    section_about_us_description_1 = models.TextField(blank=True, verbose_name='Description 1')
+    section_about_us_description_2 = models.TextField(blank=True, verbose_name='Description 2')
+    section_about_us_short_description = models.TextField(blank=True, verbose_name='Short Description')
+    section_about_us_header = models.CharField(max_length=200, blank=True, verbose_name='Section Header')
 
     class Meta:
         verbose_name = 'Home Page'
@@ -242,6 +245,7 @@ class Testimonial(models.Model):
     text = models.TextField()
     author = models.CharField(max_length=100, blank=True, null=True)
     position = models.CharField(max_length=100, blank=True, null=True, default='House Owner')
+    user_image = ImageField(upload_to=upload_common_images_to, blank=True, null=True, verbose_name='User Image')
 
     def __str__(self):
         return self.text[:20] + '...'

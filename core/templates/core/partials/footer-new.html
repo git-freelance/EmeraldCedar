@@ -1,0 +1,11 @@
+{% load static mptt_tags extras %}
+<div class="footer-column">
+    <div class="column-heading">Links</div>
+    <ul class="footer-links">
+        {% recursetree nodes %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ node.get_absolute_url }}">{{ node.name|safe }}</a>
+            </li>
+        {% endrecursetree %}
+    </ul>
+</div>

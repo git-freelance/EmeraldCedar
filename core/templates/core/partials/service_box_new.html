@@ -1,0 +1,48 @@
+{% load extras %}
+{% if position == 'left' %}
+<section class="content-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 image-column" {% if service.banner %}style="background: url('{{ service.banner.url }}') {{ position }} top no-repeat;"{% endif %}>
+                <!-- Optional: You can include an <img> element within this column if needed -->
+                <img src="{% if service.featured_image %}{{ service.featured_image.url }}{% endif %}" alt="Description of the image" class="post-image">
+              </div>
+          <!-- Column for text -->
+          <div class="col-md-6 text-column">
+            <h2>{{ service.name }}</h2>
+            <p>{{ service.body }}</p>
+        <a href="{{ service.get_absolute_url }}" class="content-section-btn">{{ service.button_text }}</a>
+          </div>
+    
+          <!-- Column for image -->
+          
+        </div>
+      </div>
+</section>
+
+{% else %}
+<section class="content-section">
+    <div class="container">
+        <div class="row">
+             <!-- Column for text -->
+          <div class="col-md-6 text-column d-none d-sm-block">
+            <h2>{{ service.name }}</h2>
+        <p>{{ service.body }}</p>
+        <a href="{{ service.get_absolute_url }}" class="content-section-btn">{{ service.button_text }}</a>
+          </div>
+            <div class="col-md-6 image-column" {% if service.banner %}style="background: url('{{ service.banner.url }}') {{ position }} top no-repeat;"{% endif %}>
+                <!-- Optional: You can include an <img> element within this column if needed -->
+                <img src="{% if service.featured_image %}{{ service.featured_image.url }}{% endif %}" alt="Description of the image">
+              </div>
+              <div class="col-md-6 text-column d-block d-sm-none">
+                <h2>{{ service.name }}</h2>
+            <p>{{ service.body }}</p>
+            <a href="{{ service.get_absolute_url }}" class="content-section-btn">{{ service.button_text }}</a>
+              </div>
+    
+          <!-- Column for image -->
+          
+        </div>
+      </div>
+</section>
+{% endif %}

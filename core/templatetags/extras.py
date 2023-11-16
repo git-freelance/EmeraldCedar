@@ -6,7 +6,7 @@ from django.utils.html import strip_tags
 
 from authorization.models import Project
 from core.helpers import chunks
-from core.models import TopNavigationItem
+import core.models
 
 register = template.Library()
 
@@ -14,12 +14,30 @@ register = template.Library()
 @register.inclusion_tag('core/partials/header.html', takes_context=True)
 def get_nav_top(context):
     return {'request': context['request'],
-            'nodes': TopNavigationItem.objects.all().select_related('parent', 'page')}
+            'nodes': core.models.TopNavigationItem.objects.all().select_related('parent', 'page')}
+
+
+@register.inclusion_tag('core/partials/header-new.html', takes_context=True)
+def get_nav_top_new(context):
+    return {'request': context['request'],
+            'nodes': core.models.TopNavigationItem.objects.all().select_related('parent', 'page')}
+
+
+@register.inclusion_tag('core/partials/footer-new.html', takes_context=True)
+def get_nav_bottom_new(context):
+    return {'request': context['request'],
+            'nodes': core.models.TopNavigationItem.objects.all().select_related('parent', 'page')}
 
 
 @register.inclusion_tag('core/partials/service_box.html')
 def get_service_box(service):
     return {'service': service}
+
+@register.inclusion_tag('core/partials/service_box_new.html')
+def get_service_box_new(service, position):
+    position = 'left' if int(position%2) else 'right'
+    print(position, service)
+    return {'service': service, "position": position}
 
 
 @register.inclusion_tag('core/partials/gallery_with_testimonial.html')

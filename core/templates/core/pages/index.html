@@ -1,212 +1,231 @@
-{% extends 'core/base_template.html' %}
-{% load static extras %}
-
+{% load static mptt_tags extras %}
 {% block seo_description %}{{ page.seo_description }}{% endblock %}
 {% block seo_keywords %}{{ page.seo_keywords }}{% endblock %}
 {% block seo_title %}{{ page.seo_title }}{% endblock %}
 
+{% comment %} 
+{% extends 'core/base_template.html' %}
 {% block template_body_block %}
-    <div id="page-home">
-        <section class="top-ban" id="home-ban">
-            <div class="container h-100">
-                <div class="h-100 d-flex align-items-center justify-content-center">
-                    <div class="w-100">
-                        <h1 class="mb-3 mb-sm-4">{{ page.banner_text|linebreaksbr }}</h1>
+{% endblock %} 
+{% endcomment %}
 
-                        <div class="row">
-                            <div class="col-lg-6 mx-auto">
-                                <div class="form-row">
-                                    <div class="col-md-6 mb-3 mb-md-0">
-                                        {% if page.banner_button_1_text %}
-                                            <a href="{{ page.banner_button_1_page.get_absolute_url }}" id="btn_hb_1"
-                                               class="btn btn-lg btn-block btn-green">{{ page.banner_button_1_text }}</a>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {% if page.banner_button_2_text %}
-                                            <a href="{{ page.banner_button_2_page.get_absolute_url }}"
-                                               class="btn btn-lg btn-block btn-outline-light">{{ page.banner_button_2_text }}</a>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="home-welcome" {% if page.section_2_background_image %}
-                 style="background-image: url('{{ page.section_2_background_image.url }}');"{% endif %}>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <h3 class="font-weight-bold mb-lg-4">{{ page.section_2_header }}</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/style.css' %}"  rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-                        {% if page.section_2_image %}
-                            <div class="text-center d-lg-none mb-3">
-                                <img src="{{ page.section_2_image.url }}" alt="" class="img-fluid">
-                            </div>
-                        {% endif %}
+</head>
+<body>
 
-                        <p class="mb-lg-4">{{ page.section_2_text|linebreaksbr }}</p>
-                        {% if page.section_2_button_text %}
-                            <a href="{{ page.section_2_button_page.get_absolute_url }}"
-                               class="btn btn-lg px-md-5 btn-green btn-sm-block">
-                                {{ page.section_2_button_text }}</a>
-                        {% endif %}
-                    </div>
-                    {% if page.section_2_image %}
-                        <div class="col-lg-5 mt-4 mt-lg-0 text-center d-none d-lg-block">
-                            <img src="{{ page.section_2_image.url }}" alt="" class="img-fluid">
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </section>
+<!-- Background Section -->
+<section class="background-section" {% if page.section_2_background_image %}
+style="background-image: url('{{ page.section_2_background_image.url }}');"{% endif %}></section>
 
-        <section id="home-services" {% if page.section_3_background_image %}
-                 style="background-image: url('{{ page.section_3_background_image.url }}');"{% endif %}>
-            <div class="container">
-                <h2 class="text-center font-weight-bold mb-3 mb-lg-4">{{ page.section_3_header }}</h2>
+<!-- Navbar -->
+{% get_nav_top_new %}
 
-                <div class="row">
-                    {% for service in services %}
-                        <div class="col-md-6 col-lg-4">
-                            {% get_service_box service %}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <section id="home-testimonials">
-            <div class="container">
-                <h2 class="text-center font-weight-bold mb-3 mb-lg-4">{{ page.section_4_header }}</h2>
-
-                <div class="owl-carousel owl-theme" id="owl-testi">
-                    {% for testimonial in testimonials %}
-                        <div class="testi-box">
-                            <p class="mb-3">"{{ testimonial.text }}"</p>
-                            <img src="{% static 'img/stars.png' %}" class="img-fluid" alt="">
-                            {% if testimonial.author %}
-                                <h5 class="font-weight-semibold text-uppercase mt-3 mb-0">{{ testimonial.author }}</h5>
-                            {% endif %}
-                            {% if testimonial.position %}
-                                <h6 class="mb-0 mt-1 font-weight-light">{{ testimonial.position }}</h6>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <section id="home-blog">
-            <div class="container">
-                <h2 class="text-center font-weight-bold mb-3 mb-lg-4">{{ page.section_5_header }}</h2>
-
-                <div class="owl-carousel owl-theme" id="owl-posts">
-                    {% for post in latest_posts %}
-                        {% get_post_box post %}
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-
-        <section id="home-map" {% if page.section_6_background_image %}
-                 style="background-image: url('{{ page.section_6_background_image.url }}');"{% endif %}>
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-lg-7 col-xl-6">
-                        <div class="white-box">
-                            <h2 class="font-weight-semibold">{{ page.section_6_header }}</h2>
-                            <p class="font-weight-light">{{ page.section_6_text }}</p>
-                            {% if page.section_6_button_text %}
-                                <a href="{{ page.section_6_button_page.get_absolute_url }}"
-                                   class="btn btn-lg px-md-5 btn-green btn-sm-block">
-                                    {{ page.section_6_button_text }}</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- Banner with Text -->
+<section class="banner">
+    <div class="banner-text">
+        <h1>{{ page.banner_header }}</h1>
+        <p>{{ page.banner_text }}</p>
+        <button class="banner-btn" href="{{ page.banner_button_1_page.get_absolute_url }}">{{ page.banner_button_1_text}}</button>
     </div>
-{% endblock %}
+</section>
 
-{% block include_js %}
-    {{ block.super }}
-    <script>
-        $(function () {
-            var images = {{ slides|safe }};
-            // Preload Images
-            $.each(images, function (i, v) {
-                var image_preload = new Image();
-                image_preload.src = v;
-            });
-            //
-            var nextimage = 0;
-            doSlideshow();
+<!-- New Section -->
+<section class="new-section">
+    <div class="container">
+        <div class="row">
+            {% for stats in statistics %}
+                <div class="col-md-3 georgian-info">
+                    <div class="customer-number">{{ stats.value }}</div>
+                    <p>{{ stats.title }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- <h2>Our Happy Customers</h2>
+    <div class="customer-number">200</div>
+    <p>Satisfied customers and counting!</p> -->
+</section>
 
-            function doSlideshow() {
-                if (nextimage >= images.length) {
-                    nextimage = 0;
-                }
-                $('#home-ban')
-                    .css('background-image', 'url("' + images[nextimage++] + '")')
-                    .fadeIn(1000, function () {
-                        if (images.length > 1) {
-                            setTimeout(doSlideshow, 3000);
-                        }
-                    });
-            }
+<section class="services" style="margin-bottom:4rem;">
+    <div class="container">
+    <h2>{{ page.section_3_header }}</h2> <hr>
+    <h1 style="font-size:3rem;">{{ page.section_3_short_description }}</h1>
+</div>
+</section>
+{% for index, service in services.items %}
+    {% get_service_box_new service index %}
+{% endfor %}
 
-            // Testi
-            $('#owl-testi').owlCarousel({
-                loop: true,
-                nav: false,
-                items: 1,
-                autoplay: true,
-                autoplayHoverPause: true,
-                dots: false,
-            });
-            // Posts
-            $('#owl-posts').owlCarousel({
-                loop: true,
-                nav: false,
-                autoplay: true,
-                autoplayHoverPause: true,
-                margin: 30,
-                dots: false,
-                responsive: {
-                    0: {
-                        items: 1,
-                    },
-                    768: {
-                        items: 2,
-                    },
-                    992: {
-                        items: 3,
-                    }
-                }
-            });
+<section class="AboutUs">
+    <div class="container">
+    <h2>{{ page.section_about_us_header }}</h2> <hr>
+    <h1 style="font-size:3rem;color:3DA437;">{{ page.section_about_us_short_description }}</h1>
+    <div class="row">
+        {% for about_info in about_us %}
+        <div class="col-md-4">
+            <div class="testimonial">
+                <img src="{% if about_info.image %}{{ about_info.image.url }}{% endif %}" alt="Image" class="img-fluid">
+                <div class="testimonial-text">
+                    <h2>{{ about_info.title }}</h2>
+                    <p>{{ about_info.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_1 }}</p>
+        </div>
+        <div class="col-md-6 text-center">
+            <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_2 }}</p>
+        </div>
+    </div>
+</div>
+</section>
+<section class="review">
+    <div class="demo">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="testimonial-slider" class="owl-carousel">
+                        
+                        {% for testimonial in testimonials %}
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    <div class="testimonial-icon">
+                                    <img src="{% static 'img/new_images/review.png' %}">
+                                    </div>
+                                    <div class="testimonial-head">
+                                        <img src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}">
+                                        <div class="testimonial-head-text">
+                                            <h3>{{ testimonial.author }}</h3>
+                                            <p>{{ testimonial.position }}</p>
+                                        </div>
+                                    </div>
+                                    <p class="description">
+                                        {{ testimonial.text }}
+                                    </p>
+                                </div>
+                                <!-- <h3 class="title">williamson</h3>
+                                <span class="post">Web Developer</span> -->
+                            </div>
+                        {% endfor %}
+     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="rating_section">
+    <div class="container">
+    <div class="rating_container">
+        <div class="centered-content">
+            <!-- Rating Section -->
+            <div class="ratings">5</div>
+            <!-- Stars Section -->
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+           
+        </div>
+        <div class="centered-btn">
+            <p style="font-size:1.25rem;">Based on 15 reviews</p>
+            <div class="button-container">
+                <!-- Button 1 -->
+                <a href="#" class="button">SET ALL REVIEWS</a>
+                <!-- Button 2 -->
+                <a href="#" class="button">WRITE A REVIEW</a>
+            </div>
+        </div>
+       
+       
+    </div>
+</div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-columns">
+            <!-- Column 1: Logo and Contact Info -->
+            <div class="footer-column">
+                <!-- <div class="column-heading">Contact Us</div> -->
+                <img src="{% static 'img/new_images/logo1.png' %}" alt="Logo" class="footer-logo">
+                <ul class="contact-info">
+                    <li><p style="color:#fff;">{{ site_config.footer_text|linebreaksbr }}</p></li>
+                    <li><i class="fas fa-phone"></i> <p style="color:#fff;">{{ site_config.contact_phone|linebreaksbr }}</p></li>
+                    <li><i class="fas fa-envelope"></i> <p style="color:#fff;">{{ site_config.contact_email|linebreaksbr }}</p></li>
+                </ul>
+            </div>
 
-            //
-            var $btn_hb_1 = $('#btn_hb_1');
+            <!-- Column 2: Links -->
+            {% get_nav_bottom_new %}
 
-            function init_btn_hb_1() {
-                if ($(window).width() <= 767) {
-                    $btn_hb_1.removeClass('btn-green').addClass('btn-outline-light');
-                } else {
-                    $btn_hb_1.removeClass('btn-outline-light').addClass('btn-green');
-                }
-            }
+            <!-- Column 3: Services -->
+            <div class="footer-column">
+                <div class="column-heading">{{ page.section_3_header }}</div>
+                <ul class="footer-links">
+                    {% for key, service in services.items %}
+                    <li><a class="nav-link" href="{{ service.get_absolute_url }}">{{ service.name }}</a></li>
+                    {% endfor %}
+                    <!-- Add more service items as needed -->
+                </ul>
+            </div>
 
-            init_btn_hb_1();
-
-            $(window).resize(function () {
-                init_btn_hb_1();
-            });
-        });
-    </script>
-{% endblock %}
+            <!-- Column 4: Newsletter Signup -->
+            <div class="footer-column">
+                <div class="column-heading" style="color:#fff;">Signup Newsletter</div>
+                <input type="email" class="subscribe-input" placeholder="Enter Your Email">
+                <button class="subscribe-button">Subscribe</button>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Copyright Section -->
+<div class="copyright-section">
+    <div class="container">
+        <div class="copyright-content">
+            <!-- Social Media Icons -->
+            <div class="copyright-icons">
+                <a href="{{ site_config.facebook_link|default:'#' }}}" class="text-white"><i class="fab fa-facebook"></i></a>
+                <a href="{{ site_config.youtube_link|default:'#' }}" class="text-white"><i class="fab fa-youtube"></i></a>
+                <a href="{{ site_config.instagram_link|default:'#' }}" class="text-white"><i class="fab fa-instagram"></i></a>
+                <a href="{{ site_config.twitter_link|default:'#' }}" class="text-white"><i class="fab fa-twitter"></i></a>
+            </div>
+            <!-- Copyright Text -->
+            <p>Copyright &copy; 2023 All Rights Reserved</p>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+ <script>
+$(document).ready(function(){
+    $("#testimonial-slider").owlCarousel({
+        items:2,
+        itemsDesktop:[1000,3],
+        itemsDesktopSmall:[980,2],
+        itemsTablet:[768,2],
+        itemsMobile:[650,1],
+        pagination:true,
+        navigation:false,
+        slideSpeed:1000,
+        autoPlay:true
+    });
+});
+</script>
+</body>
+</html>

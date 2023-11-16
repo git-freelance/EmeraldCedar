@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6-h@roj!31so^592*li*o1&m4p!6gi+fha(0#nu*yd9m7nj5i%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -147,7 +147,7 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'America/Toronto'
 
-USE_I18N = True
+USE_I18N = False
 
 USE_L10N = True
 
