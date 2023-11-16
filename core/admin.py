@@ -8,7 +8,7 @@ from mptt.admin import DraggableMPTTAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 
-from .models import FeaturedProject, ProjectImage, Service, ServiceImage, TopNavigationItem, SiteConfiguration
+from .models import FeaturedProject, ProjectImage, Service, ServiceImage, TopNavigationItem, SiteConfiguration, AboutUsSection, StatisticsSection
 
 admin.site.unregister(Group)
 admin.site.unregister(Site)
@@ -90,7 +90,7 @@ class SiteConfiguration(AdminImageMixin, SingletonModelAdmin):
             'fields': ('about_header', 'about_text', 'about_image', 'about_button_text', 'about_button_page')
         }),
         ('Socials', {
-            'fields': ('facebook_link', 'twitter_link', 'youtube_link', 'instagram_link')
+            'fields': ('facebook_link', 'twitter_link', 'youtube_link', 'instagram_link', 'contact_phone', 'contact_email', )
         }),
     )
 
@@ -98,3 +98,6 @@ class SiteConfiguration(AdminImageMixin, SingletonModelAdmin):
         css = {
             'all': ('/static/css/admin.css',)
         }
+
+admin.site.register(AboutUsSection)
+admin.site.register(StatisticsSection)

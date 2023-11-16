@@ -127,9 +127,9 @@ class SiteConfiguration(SingletonModel):
     about_button_page = models.ForeignKey('pages.Page', blank=True, null=True, on_delete=models.SET_NULL,
                                           related_name='about_siteconfiguration', verbose_name='Button page')
 
-    # contact_phone = models.CharField(max_length=100, blank=True)
+    contact_phone = models.CharField(max_length=100, blank=True, verbose_name="Phone Number")
     # contact_address = models.TextField(blank=True)
-    # contact_email = models.EmailField(blank=True)
+    contact_email = models.EmailField(blank=True, verbose_name="Email Address")
 
     # working_hours = models.TextField(blank=True)
 
@@ -143,3 +143,26 @@ class SiteConfiguration(SingletonModel):
 
     def __str__(self):
         return 'Site Configuration'
+
+
+class AboutUsSection(models.Model):
+    title = models.CharField(max_length=200, blank=True, verbose_name='Header')
+    description = models.TextField(blank=True, verbose_name='description')
+    image = ImageField(upload_to=upload_common_images_to, blank=True, null=True, verbose_name='Image')
+
+    class Meta:
+        verbose_name = 'About Us'
+
+    def __str__(self):
+        return self.title
+
+
+class StatisticsSection(models.Model):
+    value = models.CharField(max_length=200, blank=True, verbose_name='Value')
+    title = models.TextField(blank=True, verbose_name='Title')
+
+    class Meta:
+        verbose_name = 'Statistics'
+
+    def __str__(self):
+        return self.title

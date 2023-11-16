@@ -19,18 +19,20 @@ class HomePageAdmin(AdminImageMixin, SingletonModelAdmin):
 
     fieldsets = (
         ('Banner', {
-            'fields': ('banner_text', 'banner_button_1_text', 'banner_button_1_page', 'banner_button_2_text',
-                       'banner_button_2_page')
+            'fields': ('banner_header', 'banner_text', 'banner_button_1_text', 'banner_button_1_page',)
         }),
         ('Section Welcome', {
             'fields': ('section_2_background_image', 'section_2_header', 'section_2_text', 'section_2_image',
                        'section_2_button_text', 'section_2_button_page')
         }),
         ('Section Services', {
-            'fields': ('section_3_background_image', 'section_3_header',)
+            'fields': ('section_3_background_image', 'section_3_header', 'section_3_short_description', )
         }),
         ('Section Testimonials', {
             'fields': ('section_4_header', 'section_4_testimonials',)
+        }),
+        ('Section About Us', {
+            'fields': ('section_about_us_header', 'section_about_us_short_description', 'section_about_us_description_1', "section_about_us_description_2",)
         }),
         ('Section Blog', {
             'fields': ('section_5_header',)

@@ -1,7 +1,7 @@
 from django import forms
 from django.core.mail import send_mail
 
-from core.models import SiteConfiguration
+import core.models
 
 
 class SelectWithDisabled(forms.Select):
@@ -63,7 +63,7 @@ Best Time: {best_time}
 Project Address: {project_address}
 Message: {message}
         """
-        email_list = SiteConfiguration.get_solo().email_list.splitlines() or None
+        email_list = core.models.SiteConfiguration.get_solo().email_list.splitlines() or None
         if email_list:
             try:
                 send_mail('Emerald Contact Form', message, None, email_list)
