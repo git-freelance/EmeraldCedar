@@ -10,7 +10,7 @@
           <!-- Column for text -->
           <div class="col-md-6 text-column">
             <h2>{{ service.name }}</h2>
-            <p>{{ service.body }}</p>
+            <p>{{ service.body | safe}}</p>
         <a href="{{ service.get_absolute_url }}" class="content-section-btn">{{ service.button_text }}</a>
           </div>
     
@@ -27,7 +27,7 @@
              <!-- Column for text -->
           <div class="col-md-6 text-column d-none d-sm-block">
             <h2>{{ service.name }}</h2>
-        <p>{{ service.body }}</p>
+            <p>{{ service.body | safe}}</p>
         <a href="{{ service.get_absolute_url }}" class="content-section-btn">{{ service.button_text }}</a>
           </div>
             <div class="col-md-6 image-column" {% if service.banner %}style="background: url('{{ service.banner.url }}') {{ position }} top no-repeat;"{% endif %}>
@@ -36,7 +36,7 @@
               </div>
               <div class="col-md-6 text-column d-block d-sm-none">
                 <h2>{{ service.name }}</h2>
-            <p>{{ service.body }}</p>
+                <p>{{ service.body | safe}}</p>
             <a href="{{ service.get_absolute_url }}" class="content-section-btn">{{ service.button_text }}</a>
               </div>
     
