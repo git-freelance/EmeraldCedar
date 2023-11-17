@@ -3,10 +3,10 @@
 {% block seo_keywords %}{{ page.seo_keywords }}{% endblock %}
 {% block seo_title %}{{ page.seo_title }}{% endblock %}
 
-{% comment %} 
+{% comment %}
 {% extends 'core/base_template.html' %}
 {% block template_body_block %}
-{% endblock %} 
+{% endblock %}
 {% endcomment %}
 
 
@@ -17,100 +17,194 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <!-- Bootstrap CSS -->
-    <link href="{% static 'css/style.css' %}"  rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <style>
+        @media only screen and (max-width: 600px) {
+            body {
+                /* background: black !important; */
+            }
+
+            .banner-text {
+                padding: 0rem 0rem;
+            }
+
+            .banner h1 {
+                font-size: 2rem;
+            }
+
+            .banner p {
+                font-size: 1rem;
+                padding: 0rem 2rem;
+            }
+
+            .testimonial-content .testimonial-icon {
+                width: 6rem;
+            }
+
+            .testimonial .testimonial-content {
+                padding: 35px 25px 35px 5.25rem;
+            }
+
+            .text-column {
+                padding: 0rem 0rem 8rem 1rem;
+            }
+
+            .image-column img {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Small devices (tablets) */
+        @media only screen and (min-width: 601px) and (max-width: 768px) {
+            .banner-text {
+                padding: 0rem 0rem;
+            }
+
+            .banner {
+                padding: 16rem 0rem;
+            }
+
+            .text-column {
+                padding: 0rem 1rem 6rem 0px;
+            }
+
+            .testimonial-content .testimonial-icon {
+                width: 6.25rem;
+            }
+
+            .testimonial .testimonial-content {
+                padding: 3.5rem 10px 30px 5rem
+            }
+
+            .testimonial {
+                margin: 0 10px 40px;
+            }
+
+            .testimonial-head-text {
+                margin-left: 4px;
+            }
+        }
+
+        /* Medium devices (laptops and small desktops) */
+        @media only screen and (min-width: 769px) and (max-width: 992px) {}
+
+        @media only screen and (min-width: 993px) and (max-width: 1200px) {
+            .banner-text {
+                padding: 0rem 6rem;
+            }
+
+            .banner {
+                padding: 20rem 0rem;
+            }
+
+            .testimonial .testimonial-content {
+                padding: 30px 25px 35px 8rem;
+            }
+        }
+
+        /* Extra large devices (large desktops) */
+        @media only screen and (min-width: 1201px) {}
+    </style>
+
 </head>
+
 <body>
 
-<!-- Background Section -->
-<section class="background-section" {% if page.section_2_background_image %}
-style="background-image: url('{{ page.section_2_background_image.url }}');"{% endif %}></section>
+    <!-- Background Section -->
+    <section class="background-section" {% if page.section_2_background_image %}
+        style="background-image: url('{{ page.section_2_background_image.url }}');" {% endif %}></section>
 
-<!-- Navbar -->
-{% get_nav_top_new %}
+    <!-- Navbar -->
+    {% get_nav_top_new %}
 
-<!-- Banner with Text -->
-<section class="banner">
-    <div class="banner-text">
-        <h1>{{ page.banner_header }}</h1>
-        <p>{{ page.banner_text }}</p>
-        <button class="banner-btn" href="{{ page.banner_button_1_page.get_absolute_url }}">{{ page.banner_button_1_text}}</button>
-    </div>
-</section>
+    <!-- Banner with Text -->
+    <section class="banner">
+        <div class="banner-text">
+            <h1>{{ page.banner_header }}</h1>
+            <p>{{ page.banner_text }}</p>
+            <button class="banner-btn" href="{{ page.banner_button_1_page.get_absolute_url }}">{{
+                page.banner_button_1_text}}</button>
+        </div>
+    </section>
 
-<!-- New Section -->
-<section class="new-section">
-    <div class="container">
-        <div class="row">
-            {% for stats in statistics %}
+    <!-- New Section -->
+    <section class="new-section">
+        <div class="container">
+            <div class="row">
+                {% for stats in statistics %}
                 <div class="col-md-3 georgian-info">
                     <div class="customer-number">{{ stats.value }}</div>
                     <p>{{ stats.title }}</p>
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    <!-- <h2>Our Happy Customers</h2>
+        <!-- <h2>Our Happy Customers</h2>
     <div class="customer-number">200</div>
     <p>Satisfied customers and counting!</p> -->
-</section>
+    </section>
 
-<section class="services" style="margin-bottom:4rem;">
-    <div class="container">
-    <h2>{{ page.section_3_header }}</h2> <hr>
-    <h1 style="font-size:3rem;">{{ page.section_3_short_description }}</h1>
-</div>
-</section>
-{% for index, service in services.items %}
+    <section class="services" style="margin-bottom:4rem;">
+        <div class="container">
+            <h2>{{ page.section_3_header }}</h2>
+            <hr>
+            <h1 style="font-size:3rem;">{{ page.section_3_short_description }}</h1>
+        </div>
+    </section>
+    {% for index, service in services.items %}
     {% get_service_box_new service index %}
-{% endfor %}
+    {% endfor %}
 
-<section class="AboutUs">
-    <div class="container">
-    <h2>{{ page.section_about_us_header }}</h2> <hr>
-    <h1 style="font-size:3rem;color:3DA437;">{{ page.section_about_us_short_description }}</h1>
-    <div class="row">
-        {% for about_info in about_us %}
-        <div class="col-md-4">
-            <div class="testimonial">
-                <img src="{% if about_info.image %}{{ about_info.image.url }}{% endif %}" alt="Image" class="img-fluid">
-                <div class="testimonial-text">
-                    <h2>{{ about_info.title }}</h2>
-                    <p>{{ about_info.description }}</p>
+    <section class="AboutUs">
+        <div class="container">
+            <h2>{{ page.section_about_us_header }}</h2>
+            <hr>
+            <h1 style="font-size:3rem;color:3DA437;">{{ page.section_about_us_short_description }}</h1>
+            <div class="row">
+                {% for about_info in about_us %}
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <img src="{% if about_info.image %}{{ about_info.image.url }}{% endif %}" alt="Image"
+                            class="img-fluid">
+                        <div class="testimonial-text">
+                            <h2>{{ about_info.title }}</h2>
+                            <p>{{ about_info.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_1 }}</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_2 }}</p>
                 </div>
             </div>
         </div>
-        {% endfor %}
-    </div>
-    <div class="row">
-        <div class="col-md-6 text-center">
-            <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_1 }}</p>
-        </div>
-        <div class="col-md-6 text-center">
-            <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_2 }}</p>
-        </div>
-    </div>
-</div>
-</section>
-<section class="review">
-    <div class="demo">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="testimonial-slider" class="owl-carousel">
-                        
-                        {% for testimonial in testimonials %}
+    </section>
+    <section class="review">
+        <div class="demo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="testimonial-slider" class="owl-carousel">
+
+                            {% for testimonial in testimonials %}
                             <div class="testimonial">
                                 <div class="testimonial-content">
                                     <div class="testimonial-icon">
-                                    <img src="{% static 'img/new_images/review.png' %}">
+                                        <img src="{% static 'img/new_images/review.png' %}">
                                     </div>
                                     <div class="testimonial-head">
-                                        <img src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}">
+                                        <img
+                                            src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}">
                                         <div class="testimonial-head-text">
                                             <h3>{{ testimonial.author }}</h3>
                                             <p>{{ testimonial.position }}</p>
@@ -123,109 +217,121 @@ style="background-image: url('{{ page.section_2_background_image.url }}');"{% en
                                 <!-- <h3 class="title">williamson</h3>
                                 <span class="post">Web Developer</span> -->
                             </div>
-                        {% endfor %}
-     
+                            {% endfor %}
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="rating_section">
-    <div class="container">
-    <div class="rating_container">
-        <div class="centered-content">
-            <!-- Rating Section -->
-            <div class="ratings">5</div>
-            <!-- Stars Section -->
-            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-           
-        </div>
-        <div class="centered-btn">
-            <p style="font-size:1.25rem;">Based on 15 reviews</p>
-            <div class="button-container">
-                <!-- Button 1 -->
-                <a href="#" class="button">SET ALL REVIEWS</a>
-                <!-- Button 2 -->
-                <a href="#" class="button">WRITE A REVIEW</a>
-            </div>
-        </div>
-       
-       
-    </div>
-</div>
-</section>
-<footer class="footer">
-    <div class="container">
-        <div class="footer-columns">
-            <!-- Column 1: Logo and Contact Info -->
-            <div class="footer-column">
-                <!-- <div class="column-heading">Contact Us</div> -->
-                <img src="{% static 'img/new_images/logo1.png' %}" alt="Logo" class="footer-logo">
-                <ul class="contact-info">
-                    <li><p style="color:#fff;">{{ site_config.footer_text|linebreaksbr }}</p></li>
-                    <li><i class="fas fa-phone"></i> <p style="color:#fff;">{{ site_config.contact_phone|linebreaksbr }}</p></li>
-                    <li><i class="fas fa-envelope"></i> <p style="color:#fff;">{{ site_config.contact_email|linebreaksbr }}</p></li>
-                </ul>
-            </div>
+    </section>
+    <section class="rating_section">
+        <div class="container">
+            <div class="rating_container">
+                <div class="centered-content">
+                    <!-- Rating Section -->
+                    <div class="ratings">5</div>
+                    <!-- Stars Section -->
+                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
 
-            <!-- Column 2: Links -->
-            {% get_nav_bottom_new %}
+                </div>
+                <div class="centered-btn">
+                    <p style="font-size:1.25rem;">Based on 15 reviews</p>
+                    <div class="button-container">
+                        <!-- Button 1 -->
+                        <a href="#" class="button">SET ALL REVIEWS</a>
+                        <!-- Button 2 -->
+                        <a href="#" class="button">WRITE A REVIEW</a>
+                    </div>
+                </div>
 
-            <!-- Column 3: Services -->
-            <div class="footer-column">
-                <div class="column-heading">{{ page.section_3_header }}</div>
-                <ul class="footer-links">
-                    {% for key, service in services.items %}
-                    <li><a class="nav-link" href="{{ service.get_absolute_url }}">{{ service.name }}</a></li>
-                    {% endfor %}
-                    <!-- Add more service items as needed -->
-                </ul>
+
             </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-columns">
+                <!-- Column 1: Logo and Contact Info -->
+                <div class="footer-column">
+                    <!-- <div class="column-heading">Contact Us</div> -->
+                    <img src="{% static 'img/new_images/logo1.png' %}" alt="Logo" class="footer-logo">
+                    <ul class="contact-info">
+                        <li>
+                            <p style="color:#fff;">{{ site_config.footer_text|linebreaksbr }}</p>
+                        </li>
+                        <li><i class="fas fa-phone"></i>
+                            <p style="color:#fff;">{{ site_config.contact_phone|linebreaksbr }}</p>
+                        </li>
+                        <li><i class="fas fa-envelope"></i>
+                            <p style="color:#fff;">{{ site_config.contact_email|linebreaksbr }}</p>
+                        </li>
+                    </ul>
+                </div>
 
-            <!-- Column 4: Newsletter Signup -->
-            <div class="footer-column">
-                <div class="column-heading" style="color:#fff;">Signup Newsletter</div>
-                <input type="email" class="subscribe-input" placeholder="Enter Your Email">
-                <button class="subscribe-button">Subscribe</button>
+                <!-- Column 2: Links -->
+                {% get_nav_bottom_new %}
+
+                <!-- Column 3: Services -->
+                <div class="footer-column">
+                    <div class="column-heading">{{ page.section_3_header }}</div>
+                    <ul class="footer-links">
+                        {% for key, service in services.items %}
+                        <li><a class="nav-link" href="{{ service.get_absolute_url }}">{{ service.name }}</a></li>
+                        {% endfor %}
+                        <!-- Add more service items as needed -->
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter Signup -->
+                <div class="footer-column">
+                    <div class="column-heading" style="color:#fff;">Signup Newsletter</div>
+                    <input type="email" class="subscribe-input" placeholder="Enter Your Email">
+                    <button class="subscribe-button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Copyright Section -->
+    <div class="copyright-section">
+        <div class="container">
+            <div class="copyright-content">
+                <!-- Social Media Icons -->
+                <div class="copyright-icons">
+                    <a href="{{ site_config.facebook_link|default:'#' }}}" class="text-white"><i
+                            class="fab fa-facebook"></i></a>
+                    <a href="{{ site_config.youtube_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="{{ site_config.instagram_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="{{ site_config.twitter_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-twitter"></i></a>
+                </div>
+                <!-- Copyright Text -->
+                <p>Copyright &copy; 2023 All Rights Reserved</p>
             </div>
         </div>
     </div>
-</footer>
-<!-- Copyright Section -->
-<div class="copyright-section">
-    <div class="container">
-        <div class="copyright-content">
-            <!-- Social Media Icons -->
-            <div class="copyright-icons">
-                <a href="{{ site_config.facebook_link|default:'#' }}}" class="text-white"><i class="fab fa-facebook"></i></a>
-                <a href="{{ site_config.youtube_link|default:'#' }}" class="text-white"><i class="fab fa-youtube"></i></a>
-                <a href="{{ site_config.instagram_link|default:'#' }}" class="text-white"><i class="fab fa-instagram"></i></a>
-                <a href="{{ site_config.twitter_link|default:'#' }}" class="text-white"><i class="fab fa-twitter"></i></a>
-            </div>
-            <!-- Copyright Text -->
-            <p>Copyright &copy; 2023 All Rights Reserved</p>
-        </div>
-    </div>
-</div>
-<!-- Bootstrap JS (optional) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
- <script>
-$(document).ready(function(){
-    $("#testimonial-slider").owlCarousel({
-        items:2,
-        itemsDesktop:[1000,3],
-        itemsDesktopSmall:[980,2],
-        itemsTablet:[768,2],
-        itemsMobile:[650,1],
-        pagination:true,
-        navigation:false,
-        slideSpeed:1000,
-        autoPlay:true
-    });
-});
-</script>
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#testimonial-slider").owlCarousel({
+                items: 2,
+                itemsDesktop: [1000, 3],
+                itemsDesktopSmall: [980, 2],
+                itemsTablet: [768, 2],
+                itemsMobile: [650, 1],
+                pagination: true,
+                navigation: false,
+                slideSpeed: 1000,
+                autoPlay: true
+            });
+        });
+    </script>
 </body>
+
 </html>
