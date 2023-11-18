@@ -1,74 +1,413 @@
+{% load static mptt_tags extras %}
+
+{% comment %} 
 {% extends 'core/base_template.html' %}
-{% load static extras %}
-
-{% block seo_description %}{{ service.seo_description }}{% endblock %}
-{% block seo_keywords %}{{ service.seo_keywords }}{% endblock %}
-{% block seo_title %}{{ service.seo_title }}{% endblock %}
-
 {% block template_body_block %}
-    <div class="page" id="page-service">
-        <section class="top-ban" id="page-ban" {% if service.banner %}
-                 style="background-image: url('{{ service.banner.url }}');"{% endif %}>
-            <div class="container h-100">
-                <div class="h-100 d-flex align-items-center justify-content-center">
-                    <h1>{{ service.name }}</h1>
-                </div>
+{% endblock %}
+{% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{{ service.seo_description }}">
+    <meta name="keywords" content="{{ service.seo_keywords }}">
+    <title>{% if service.seo_title %} {{ service.seo_title}} {% else %} EmeraldCedar{% endif %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/service.css' %}"  rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+<style>
+   
+    /* @media (min-width: 768px)
+  {
+    body{
+        background: black !important;
+   }
+  } */
+  @media only screen and (max-width: 600px) {
+    body{
+        /* background: black !important; */
+   }
+   .banner-text {
+        padding: 0rem 0rem;
+    }
+    .banner h1{
+        font-size: 2rem; 
+    }
+   .banner p {
+    font-size: 1rem;
+    padding: 0rem 2rem;
+}
+.testimonial-content .testimonial-icon{
+    width:6rem;
+}
+.testimonial .testimonial-content{
+    padding: 35px 25px 35px 5.25rem;
+}
+.text-column{
+    padding:0rem 0rem 8rem 1rem;
+}
+.image-column img{
+    padding:1.5rem;
+}
+
+.services-text-section{
+    padding: 5rem 0rem;
+}
+
+.gallery{
+    padding: 5rem 0rem;
+}
+.banner-text h1{
+    font-size: 2rem;;
+}
+  }
+  
+  /* Small devices (tablets) */
+  @media only screen and (min-width: 601px) and (max-width: 768px) {
+    
+    .banner-text {
+        padding: 0rem 0rem;
+    }
+    .banner{
+        padding:16rem 0rem;
+    }
+    .text-column{
+        padding: 0rem 1rem 6rem 0px;
+    }
+    .testimonial-content .testimonial-icon{
+        width:6.25rem;
+    }
+
+    .testimonial .testimonial-content{
+       padding: 3.5rem 10px 30px 5rem
+    }
+    .testimonial {
+    margin: 0 10px 40px;
+}
+.testimonial-head-text{
+    margin-left:4px;
+}
+.services-text-section{
+    padding: 5rem 7rem;
+}
+.gallery{
+    padding: 5rem 7rem;
+}
+  }
+  
+  /* Medium devices (laptops and small desktops) */
+  @media only screen and (min-width: 769px) and (max-width: 992px) {
+    body{
+        background-color: violet;
+    }
+  }
+  @media only screen and (min-width: 993px) and (max-width: 1200px) {
+    .banner-text {
+        padding: 0rem 6rem;
+    }
+    .banner{
+        padding:20rem 0rem;
+    }
+    .testimonial .testimonial-content{
+        padding: 30px 25px 35px 8rem;
+    }
+  }
+  
+  /* Extra large devices (large desktops) */
+  @media only screen and (min-width: 1201px) {
+   
+  }
+</style>
+</head>
+<body style="padding-top:0px;">
+
+<!-- Background Section -->
+
+    <section class="services-background-section" {% if service.banner %}
+    style="background-image: url('{{ service.banner.url }}');" {% endif %}>
+
+
+<!-- Navbar -->
+{% get_nav_top_new %}
+
+
+<!-- Banner with Text -->
+<section class="services-banner">
+    <div class="banner-text">
+        <h1>{{service}}</h1>
+    </div>
+</section>
+</section>
+</section>
+<!-- New Section -->
+<section class="post-banner">
+    <div class="services-text-section">
+        {% autoescape off %}
+        {{ service.body }}
+        {% endautoescape %}
+
+    </div>
+</section>
+<section class="gallery-section">
+    <div class="container">
+    <div class="gallery">
+        <h1>Gallery</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
+       
+    </div>
+    </div>
+    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false" style="padding-bottom:6rem;">
+        <div class="carousel-inner">
+          <div class="carousel-item active" >
+            <div class="row">
+                <div class="col-md-6"> <img src="images/gallery1.png" class="d-block" alt="..." style="float:right; margin-right:20px;"></div>
+                <div class="col-md-6"> <img src="images/gallery2.png" class="d-block" alt="..."  style="float:left; margin-left:20px;"></div>
             </div>
-        </section>
+          
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+                <div class="col-md-6"> <img src="images/gallery2.png" class="d-block" alt="..." style="float:right; margin-right:20px;"></div>
+                <div class="col-md-6"> <img src="images/gallery1.png" class="d-block" alt="..." style="float:left; margin-left:20px;"></div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            
+            <div class="row">
+                <div class="col-md-6"> <img src="images/gallery1.png" class="d-block" alt="..." style="float:right; margin-right:20px;"></div>
+                <div class="col-md-6"> <img src="images/gallery2.png" class="d-block" alt="..."  style="float:left; margin-left:20px;"></div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
 
-        <section class="p-body">
-            <div class="container">
-                <div class="mb-3 redactor-wr">
-                    {% autoescape off %}
-                        {{ service.body }}
-                    {% endautoescape %}
-                </div>
-                {% if service.button_text %}
-                    <a href="{{ service.button_page.get_absolute_url }}"
-                       class="btn btn-lg px-md-5 btn-green btn-sm-block">
-                        {{ service.button_text }}</a>
-                {% endif %}
+</section>
+<section class="review">
+    <div class="demo">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="testimonial-slider" class="owl-carousel">
 
-                <div class="my-4 my-lg-5">
-                    {% get_gallery_with_testimonial service.images.all service.testimonials.all %}
-                </div>
-
-                <div>
-                    <h2 class="text-center mb-4 font-weight-semibold">More Services</h2>
-
-                    <div class="owl-carousel owl-theme" id="owl-other-services">
-                        {% for other_service in other_services %}
-                            {% get_service_box other_service %}
+                        
+                        {% for testimonial in testimonials %}
+                        <div class="testimonial">
+                            <div class="testimonial-content">
+                                <div class="testimonial-icon">
+                                    <img src="{% static 'img/new_images/review.png' %}">
+                                </div>
+                                <div class="testimonial-head">
+                                    <img
+                                        src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}">
+                                    <div class="testimonial-head-text">
+                                        <h3>{{ testimonial.author }}</h3>
+                                        <p>{{ testimonial.position }}</p>
+                                    </div>
+                                </div>
+                                <p class="description">
+                                    {{ testimonial.text }}
+                                </p>
+                            </div>
+                            <!-- <h3 class="title">williamson</h3>
+                            <span class="post">Web Developer</span> -->
+                        </div>
                         {% endfor %}
+                        
+     
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
-{% endblock %}
+</section>
+<section class="rating_section">
+    <div class="container">
+    <div class="rating_container">
+        <div class="centered-content">
+            <!-- Rating Section -->
+            <div class="ratings">5</div>
+            <!-- Stars Section -->
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+           
+        </div>
+        <div class="centered-btn">
+            <p style="font-size:1.25rem;">Based on 15 reviews</p>
+            <div class="button-container">
+                <!-- Button 1 -->
+                <a href="#" class="button">SET ALL REVIEWS</a>
+                <!-- Button 2 -->
+                <a href="#" class="button">WRITE A REVIEW</a>
+            </div>
+        </div>
+       
+       
+    </div>
+</div>
+</section>
+<section class="form-section">
+    <div class="form">
+        <div class="container">
+            <div class="form-heading">
+            <!-- <h1>Lorem ipsum dolor sit amet</h1> -->
+        </div>
+        <div class="form-body">
+            {% autoescape off %}
+            {{service.contact}}
+            {% endautoescape %}
 
-{% block include_js %}
-    {{ block.super }}
-    <script>
-        $(function () {
-            $('#owl-other-services').owlCarousel({
-                loop: true,
-                nav: false,
-                margin: 30,
-                autoplay: true,
-                autoplayHoverPause: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                    },
-                    768: {
-                        items: 2,
-                    },
-                    992: {
-                        items: 3,
-                    }
-                }
-            });
-        });
-    </script>
-{% endblock %}
+        </div>
+        <form>
+            <div class="form-row">
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Your name" name="email">
+              </div>
+              <div class="col">
+                <select class="form-control" name="" id="">
+                    <option>What Service are you interested in</option>
+                    <option>...</option>
+                    <option>...</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Phone" name="email">
+              </div>
+              <div class="col">
+                <select class="form-control" name="" id="">
+                    <option>Budget</option>
+                    <option>...</option>
+                    <option>...</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Enter email" name="email">
+              </div>
+              <div class="col">
+                <select class="form-control" name="" id="">
+                    <option>How did you find about us</option>
+                    <option>...</option>
+                    <option>...</option>
+                </select>
+              </div>
+            </div>
+            </div>
+            <div class="form-row">
+                <textarea placeholder="Describe Your Project ..." class="form-control" rows="7" cols="auto"></textarea>
+            </div>
+            <div class="form-row" style="text-align: center;">
+            <input class="subscribe-button"  type="submit" value="Submit">
+            </div>
+          </form>
+        </div>
+    </div>
+
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-columns">
+            <!-- Column 1: Logo and Contact Info -->
+            <div class="footer-column">
+                <!-- <div class="column-heading">Contact Us</div> -->
+                <img src="{% static 'img/new_images/logo1.png' %}" alt="Logo" class="footer-logo">
+                <ul class="contact-info">
+                    <li>
+                        <p style="color:#fff;">{{ site_config.footer_text|linebreaksbr }}</p>
+                    </li>
+                    <li><i class="fas fa-phone"></i>
+                        <p style="color:#fff;">{{ site_config.contact_phone|linebreaksbr }}</p>
+                    </li>
+                    <li><i class="fas fa-envelope"></i>
+                        <p style="color:#fff;">{{ site_config.contact_email|linebreaksbr }}</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 2: Links -->
+            {% get_nav_bottom_new %}
+
+            <!-- Column 3: Services -->
+            <div class="footer-column">
+                <div class="column-heading">{{ page.section_3_header }}</div>
+                <ul class="footer-links">
+                    {% for key, service in services.items %}
+                    <li><a class="nav-link" href="{{ service.get_absolute_url }}">{{ service.name }}</a></li>
+                    {% endfor %}
+                    <!-- Add more service items as needed -->
+                </ul>
+            </div>
+
+            <!-- Column 4: Newsletter Signup -->
+            <div class="footer-column">
+                <div class="column-heading" style="color:#fff;">Signup Newsletter</div>
+                <input type="email" class="subscribe-input" placeholder="Enter Your Email">
+                <button class="subscribe-button">Subscribe</button>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Copyright Section -->
+    <!-- Copyright Section -->
+    <div class="copyright-section">
+        <div class="container">
+            <div class="copyright-content">
+                <!-- Social Media Icons -->
+                <div class="copyright-icons">
+                    <a href="{{ site_config.facebook_link|default:'#' }}}" class="text-white"><i
+                            class="fab fa-facebook"></i></a>
+                    <a href="{{ site_config.youtube_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="{{ site_config.instagram_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="{{ site_config.twitter_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-twitter"></i></a>
+                </div>
+                <!-- Copyright Text -->
+                <p>Copyright &copy; 2023 All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+
+ <script>
+$(document).ready(function(){
+    $("#testimonial-slider").owlCarousel({
+        items:2,
+        itemsDesktop:[1000,3],
+        itemsDesktopSmall:[980,2],
+        itemsTablet:[768,2],
+        itemsMobile:[650,1],
+        pagination:true,
+        navigation:false,
+        slideSpeed:1000,
+        autoPlay:true
+    });
+});
+</script>
+</body>
+</html>

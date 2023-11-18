@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    padding-top: 56px;
     /* Adjusted for the fixed navbar height */
     font-family: Roboto Serif;
 }
@@ -9,11 +8,9 @@ body {
 /* Background Section Styles */
 .background-section {
     background-color: black;
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
     z-index: -1;
 }
 

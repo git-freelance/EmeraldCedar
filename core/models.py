@@ -56,11 +56,10 @@ class Service(Page, SEOModelMixin, BannerMixin):
     featured_image = ImageField(upload_to=upload_common_images_to, blank=True, null=True)
     testimonials = models.ManyToManyField('pages.Testimonial', blank=True)
     body = RedactorField(allow_image_upload=True, allow_file_upload=False, blank=True)
-    button_text = models.CharField(max_length=50, blank=True, null=True, verbose_name='Button text')
-    button_page = models.ForeignKey('pages.Page', blank=True, null=True, on_delete=models.SET_NULL,
-                                    related_name='service_button', verbose_name='Button page')
 
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    contact = RedactorField(allow_image_upload=False, allow_file_upload=False, blank=True)
 
     class Meta:
         ordering = ('order',)

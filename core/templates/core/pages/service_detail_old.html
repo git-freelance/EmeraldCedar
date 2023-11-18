@@ -1,0 +1,74 @@
+{% extends 'core/base_template.html' %}
+{% load static extras %}
+
+{% block seo_description %}{{ service.seo_description }}{% endblock %}
+{% block seo_keywords %}{{ service.seo_keywords }}{% endblock %}
+{% block seo_title %}{{ service.seo_title }}{% endblock %}
+
+{% block template_body_block %}
+    <div class="page" id="page-service">
+        <section class="top-ban" id="page-ban" {% if service.banner %}
+                 style="background-image: url('{{ service.banner.url }}');"{% endif %}>
+            <div class="container h-100">
+                <div class="h-100 d-flex align-items-center justify-content-center">
+                    <h1>{{ service.name }}</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-body">
+            <div class="container">
+                <div class="mb-3 redactor-wr">
+                    {% autoescape off %}
+                        {{ service.body }}
+                    {% endautoescape %}
+                </div>
+                {% if service.button_text %}
+                    <a href="{{ service.button_page.get_absolute_url }}"
+                       class="btn btn-lg px-md-5 btn-green btn-sm-block">
+                        {{ service.button_text }}</a>
+                {% endif %}
+
+                <div class="my-4 my-lg-5">
+                    {% get_gallery_with_testimonial service.images.all service.testimonials.all %}
+                </div>
+
+                <div>
+                    <h2 class="text-center mb-4 font-weight-semibold">More Services</h2>
+
+                    <div class="owl-carousel owl-theme" id="owl-other-services">
+                        {% for other_service in other_services %}
+                            {% get_service_box other_service %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+    <script>
+        $(function () {
+            $('#owl-other-services').owlCarousel({
+                loop: true,
+                nav: false,
+                margin: 30,
+                autoplay: true,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    768: {
+                        items: 2,
+                    },
+                    992: {
+                        items: 3,
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
