@@ -9,3 +9,5 @@ media/
 /static/
 /venv/
 /djangoproject.log
+env
+.DS_Store
