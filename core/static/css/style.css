@@ -43,6 +43,7 @@ body {
 }
 
 .banner-text h1 {
+    font-family: 'Roboto Slab', serif;
     font-size: 4rem;
 }
 
