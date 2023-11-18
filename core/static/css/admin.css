@@ -10,4 +10,7 @@
 .text-right {
   text-align: right !important;
 }
+#redactor-toolbar-0 {
+  z-index: 1;
+}
 /*# sourceMappingURL=admin.css.map */
