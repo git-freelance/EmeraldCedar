@@ -2,8 +2,15 @@ body {
     margin: 0;
     padding-top: 56px;
     /* Adjusted for the fixed navbar height */
-    font-family: Roboto Serif;
 }
+
+body {
+    font-family: 'Montserrat', sans-serif;
+  }
+ .content-section h1, h2, h3{
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+  }
 
 /* Background Section Styles */
 .background-section {
