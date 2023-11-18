@@ -54,7 +54,7 @@ class ServiceAdmin(SortableAdminMixin, AdminImageMixin, admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'image_layer', 'featured_image', 'banner', 'testimonials', 'featured_content', 'body', 'contact')
+            'fields': ('name', 'image_layer', 'featured_image', 'banner', 'testimonials', 'featured_content', 'body', 'contact', 'gallery')
         }),
         ('SEO', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords')
