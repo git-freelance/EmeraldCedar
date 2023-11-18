@@ -28,7 +28,7 @@
           <div class="col-md-6 text-column d-none d-sm-block">
             <h2>{{ service.name }}</h2>
             <p>{{ service.featured_content | safe}}</p>
-        <a href="{{ service.get_absolute_url }}" class="content-section-btn">{{ service.button_text }}</a>
+        <a href="{{ service.get_absolute_url }}" class="content-section-btn">View More</a>
           </div>
             <div class="col-md-6 image-column" {% if service.image_layer %}style="background: url('{{ service.image_layer.url }}') {{ position }} top no-repeat;"{% endif %}>
                 <!-- Optional: You can include an <img> element within this column if needed -->
