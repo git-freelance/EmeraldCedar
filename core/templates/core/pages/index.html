@@ -124,7 +124,8 @@
 
     <!-- Background Section -->
     <section class="background-section" {% if page.section_2_background_image %}
-        style="background-image: url('{{ page.section_2_background_image.url }}');" {% endif %}>
+    style="background-image: url('{{ page.section_2_background_image.url }}'); background-size: cover;" {% endif %}>
+
 
     <!-- Navbar -->
     {% get_nav_top_new %}
