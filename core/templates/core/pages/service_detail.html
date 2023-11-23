@@ -14,7 +14,7 @@
     <meta name="keywords" content="{{ service.seo_keywords }}">
     <title>{% if service.seo_title %} {{ service.seo_title}} {% else %} EmeraldCedar{% endif %}</title>
     <!-- Bootstrap CSS -->
-    <link href="{% static 'css/service.css' %}"  rel="stylesheet">
+    <link href="{% static 'css/style.css' %}"  rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -25,23 +25,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     
 <style>
-   
-    /* @media (min-width: 768px)
-  {
-    body{
-        background: black !important;
-   }
-
-  } */
-  body {
-                font-family: 'Montserrat', sans-serif;
-            }
-        .post-banner h1, h2, h3{
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 600;
-            }
-  .carousel-wrap {
-    width: 900px;
+   .carousel-wrap {
+    width: 1000px;
     margin: auto;
     position: relative;
     padding-bottom: 4rem;
@@ -51,23 +36,48 @@
     height: 0px;
   }
 
-  .owl-theme .owl-dots .owl-dot.active span, 
+  /* .owl-theme .owl-dots .owl-dot.active span, 
   .owl-theme .owl-dots .owl-dot:hover span {
       background: #2caae1;
+  } */
+  .owl-theme .owl-controls .owl-page span{
+  display: block;
+    width: 12px;
+    height: 12px;
+    margin: 0px 7px;
+    filter: Alpha(Opacity=50);
+    opacity: .5;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    background: #869791;
   }
+  .owl-theme .owl-controls .owl-page.active span{
+    opacity: 1 !important;
+  }
+  .owl-theme .owl-controls .owl-page{
+    display:inline-block;
+  }
+  .owl-pagination{
+    text-align:center;
+  }
+  .owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span{
+    background: #000;
+}
 
-
-  .owl-carousel .item {
+  .carousel-wrap .item {
       text-align: center;
   }
-  .owl-carousel .nav-btn{
+  .carousel-wrap .nav-btn{
       height: 47px;
       position: absolute;
       width: 48px;
       cursor: pointer;
-      top: 100px !important;
+      top: 150px !important;
       background-color: #3D4A37 !important;
     border-radius: 50%;
+    opacity:0. !important;
   }
 
   .owl-carousel .owl-prev.disabled,
@@ -95,18 +105,61 @@
   }
 
 .item img{
-    margin-left: 3rem;
-    width: 80% !important;
+    margin-left: 1.4rem;
+    width: 95% !important;
 }
-  @media only screen and (max-width: 425px) {
+@media only screen and (max-width: 480px) {
+    .testimonial .testimonial-content{
+        padding:35px 25px 35px 4.25rem !important;
+    }
+    .owl-carousel .owl-item img{
+        width:80%;
+    }
+    .testimonial-head img{
+        max-width:5.5rem !important;
+    }
+    .testimonial-head-text h3{
+        font-size: 1.1rem;
+    }
+    .testimonial-head-text p{
+        font-size: 0.8rem;
+    }
+    .testimonial-head-text{
+        margin-left:0px;
+    }
+    .item img{
+        width:80% !important;
+    }
+}
+  @media only screen and (max-width: 426px) {
+    .nav-btn{
+        padding: 10px 17px 10px !important;
+    }
     .owl-carousel .nav-btn{
         display: none;
     }
     .item img {
     margin-left: 1rem !important;
     }
+    .stars{
+        font-size:3rem;
+    }
+    .links{
+            color:black !important;
+        }
+    /* .nav-link{
+        width:34%;
+    } */
+   
   }
 @media only screen and (max-width: 600px) {
+
+    .links{
+            color:black !important;
+        }
+    /* .nav-link{
+        width:34%;
+    } */
    .banner-text {
         padding: 0rem 0rem;
     }
@@ -155,6 +208,9 @@
     .owl-carousel .nav-btn{
         top:80px !important;
     }
+    .stars{
+        font-size:3rem;
+    }
   }
   
   /* Small devices (tablets) */
@@ -191,6 +247,9 @@
 .carousel-wrap {
     width: 496px;
     }
+    .links{
+            color:black !important;
+        }
     
   }
   
@@ -224,6 +283,19 @@
     }
     
   }
+  
+  /* Extra large devices (large desktops) */
+  @media only screen and (min-width: 1201px) {
+   
+  }
+  .links{
+    color:#fff;
+  }
+  .testimonial-head img{
+    max-width:8rem;
+  }
+  
+
 </style>
 </head>
 <body style="padding-top:0px;">
@@ -248,11 +320,12 @@
 </section>
 <!-- New Section -->
 <section class="post-banner">
+    <div class="container-fluid">
     <div class="services-text-section">
         {% autoescape off %}
         {{ service.body }}
         {% endautoescape %}
-
+    </div>
     </div>
 </section>
 
@@ -263,7 +336,7 @@
         <p>{% autoescape off %}{{service.gallery}}{% endautoescape %}</p>
        
     </div>
-    </div>
+    
     <div class="carousel-wrap">
         <div class="owl-carousel owl-theme Gallery-carousel">
             {% for k in service.images.all %}
@@ -274,7 +347,7 @@
             
         </div>
       </div>
-
+    </div>
 </section>
 
 <section class="review">

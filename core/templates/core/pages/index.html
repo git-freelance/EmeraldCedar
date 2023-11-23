@@ -24,98 +24,112 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-                font-family: 'Montserrat', sans-serif;
-            }
-        .content-section h1, h2, h3{
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 600;
-            }
-        @media only screen and (max-width: 600px) {
-            body {
-                /* background: black !important; */
-            }
-
-            .banner-text {
-                padding: 0rem 0rem;
-            }
-
-            .banner h1 {
-                font-size: 2rem;
-            }
-
-            .banner p {
-                font-size: 1rem;
-                padding: 0rem 2rem;
-            }
-
-            .testimonial-content .testimonial-icon {
-                width: 6rem;
-            }
-
-            .testimonial .testimonial-content {
-                padding: 35px 25px 35px 5.25rem;
-            }
-
-            .text-column {
-                padding: 0rem 0rem 8rem 1rem;
-            }
-
-            .image-column img {
-                padding: 1.5rem;
-            }
+       body {
+      font-family: 'Montserrat', sans-serif;
+    }
+   .content-section h1, h2, h3{
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+    .customer-number{
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+    .georgian-info{
+        font-family: 'Montserrat', sans-serif;
+        font-weight:600;
+    }
+   
+    @media only screen and (max-width: 426px) {
+        .links{
+            color:black !important;
         }
-
-        /* Small devices (tablets) */
-        @media only screen and (min-width: 601px) and (max-width: 768px) {
-            .banner-text {
-                padding: 0rem 0rem;
-            }
-
-            .banner {
-                padding: 16rem 0rem;
-            }
-
-            .text-column {
-                padding: 0rem 1rem 6rem 0px;
-            }
-
-            .testimonial-content .testimonial-icon {
-                width: 6.25rem;
-            }
-
-            .testimonial .testimonial-content {
-                padding: 3.5rem 10px 30px 5rem
-            }
-
-            .testimonial {
-                margin: 0 10px 40px;
-            }
-
-            .testimonial-head-text {
-                margin-left: 4px;
-            }
+    }
+@media only screen and (max-width: 600px) {
+    body{
+        /* background: black !important; */
+   }
+   .banner-text {
+        padding: 0rem 0rem;
+    }
+    .banner h1{
+        font-size: 2rem; 
+    }
+   .banner p {
+    font-size: 1rem;
+    padding: 0rem 2rem;
+}
+.testimonial-content .testimonial-icon{
+    width:6rem;
+}
+.testimonial .testimonial-content{
+    padding: 35px 25px 35px 5.25rem;
+}
+.text-column{
+    padding:0rem 0rem 8rem 1rem;
+}
+.image-column img{
+    padding:1.5rem;
+}
+.stars{
+    font-family: 'Montserrat', sans-serif;
+    font-size:3rem;
+}
+  }
+  
+  /* Small devices (tablets) */
+  @media only screen and (min-width: 601px) and (max-width: 768px) {
+    .links{
+            color:black !important;
         }
+    .banner-text {
+        padding: 0rem 0rem;
+    }
+    .banner{
+        padding:16rem 0rem;
+    }
+    .text-column{
+        padding: 0rem 1rem 6rem 0px;
+    }
+    .testimonial-content .testimonial-icon{
+        width:6.25rem;
+    }
 
-        /* Medium devices (laptops and small desktops) */
-        @media only screen and (min-width: 769px) and (max-width: 992px) {}
+    .testimonial .testimonial-content{
+       padding: 3.5rem 10px 30px 5rem
+    }
+    .testimonial {
+    margin: 0 10px 40px;
+}
+.testimonial-head-text{
+    margin-left:4px;
+}
+  }
+  
+  /* Medium devices (laptops and small desktops) */
+  @media only screen and (min-width: 769px) and (max-width: 992px) {
+  
+  }
+  @media only screen and (min-width: 993px) and (max-width: 1200px) {
+    .banner-text {
+        padding: 0rem 6rem;
+    }
+    .banner{
+        padding:20rem 0rem;
+    }
+    .testimonial .testimonial-content{
+        padding: 30px 25px 35px 8rem;
+    }
+  }
+  
+  /* Extra large devices (large desktops) */
+  @media only screen and (min-width: 1201px) {
+   
+  }
+  .links{
+    color:#fff;
+  }
 
-        @media only screen and (min-width: 993px) and (max-width: 1200px) {
-            .banner-text {
-                padding: 0rem 6rem;
-            }
-
-            .banner {
-                padding: 20rem 0rem;
-            }
-
-            .testimonial .testimonial-content {
-                padding: 30px 25px 35px 8rem;
-            }
-        }
-
-        /* Extra large devices (large desktops) */
-        @media only screen and (min-width: 1201px) {}
     </style>
 
 </head>
@@ -177,7 +191,7 @@
             <div class="row">
                 {% for about_info in about_us %}
                 <div class="col-md-4">
-                    <div class="testimonial">
+                    <div class="testimonial tstmnl">
                         <img src="{% if about_info.image %}{{ about_info.image.url }}{% endif %}" alt="Image"
                             class="img-fluid">
                         <div class="testimonial-text">
