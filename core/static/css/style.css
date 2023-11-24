@@ -435,7 +435,7 @@ padding:3.5rem;
 
 .services-background-section{
 background: url('images/Services_Banner.png') center/cover;
-
+background-color:black;
 top: 0;
 left: 0;
 width: 100%;
@@ -471,6 +471,9 @@ font-size:3rem;
 .services-text-section p{
 font-size:1.4rem;
 }
+.services-text-section li{
+    font-size:1.4rem;
+    }
 .gallery-section{
 background-color: #D9D9D9;
 }
