@@ -499,9 +499,11 @@ margin-bottom: 3rem;
 margin-bottom: 2rem;
 }
 .form-body{
-margin-bottom: 5rem;
+   padding: 0rem 10rem 5rem;
 }
-
+.form-body h1:first-child{
+    text-align:center;
+}
 .form-row{
 margin-bottom: 3rem;
 }
