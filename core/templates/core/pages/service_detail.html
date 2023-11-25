@@ -108,6 +108,7 @@
     padding: 0rem 2rem;
     
 }
+
 @media only screen and (max-width: 480px) {
     .testimonial .testimonial-content{
         padding:35px 25px 35px 4.25rem !important;
@@ -128,7 +129,7 @@
         margin-left:0px;
     }
     .item img{
-        width:80% !important;
+        width:100% !important;
     }
 }
   @media only screen and (max-width: 426px) {
@@ -138,9 +139,7 @@
     .owl-carousel .nav-btn{
         display: none;
     }
-    .item img {
-    margin-left: 1rem !important;
-    }
+   
     .stars{
         font-size:3rem;
     }
@@ -153,6 +152,15 @@
    
   }
 @media only screen and (max-width: 600px) {
+    .item img{
+        padding: 1rem !important;
+    }
+    .form-body{
+        padding: 0rem 0rem 5rem
+    }
+    .form-body input{
+        margin-bottom:3rem;
+    }
     .nav-item{
         border-bottom : 1px solid grey !important;
     }
@@ -196,7 +204,7 @@
     font-size: 2rem;;
 }
 .carousel-wrap {
-    width: 330px;
+    width: 100%;
     }
     .owl-carousel .prev-slide{
         left: -2rem;
@@ -204,9 +212,7 @@
     .owl-carousel .next-slide{
         right: -2rem;
     }
-    .item img {
-    margin-left: 2rem;
-    }
+   
     .owl-carousel .nav-btn{
         top:80px !important;
     }
@@ -436,10 +442,10 @@
         <form>
             <div class="form-row">
             <div class="row">
-              <div class="col">
+              <div class="col-md-6">
                 <input type="text" class="form-control" placeholder="Your name" name="email">
               </div>
-              <div class="col">
+              <div class="col-md-6">
                 <select class="form-control" name="" id="">
                     <option>What Service are you interested in</option>
                     <option>...</option>
@@ -450,10 +456,10 @@
         </div>
         <div class="form-row">
             <div class="row">
-              <div class="col">
+              <div class="col-md-6">
                 <input type="text" class="form-control" placeholder="Phone" name="email">
               </div>
-              <div class="col">
+              <div class="col-md-6">
                 <select class="form-control" name="" id="">
                     <option>Budget</option>
                     <option>...</option>
@@ -464,10 +470,10 @@
         </div>
         <div class="form-row">
             <div class="row">
-              <div class="col">
+              <div class="col-md-6">
                 <input type="text" class="form-control" placeholder="Enter email" name="email">
               </div>
-              <div class="col">
+              <div class="col-md-6">
                 <select class="form-control" name="" id="">
                     <option>How did you find about us</option>
                     <option>...</option>

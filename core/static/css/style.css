@@ -102,7 +102,9 @@ body {
 }
 
 .tstmnl img{
+    align-self: flex-start;
     width:5.5rem;
+    margin-top: 1.5rem;
 } 
 
 .testimonial-text {
@@ -231,7 +233,7 @@ left: 1px;
 } */
 .testimonial .description{
 font-size: 15px;
-font-style: italic;
+
 color: #8a8a8a;
 line-height: 23px;
 margin: 0;
@@ -472,11 +474,11 @@ font-size:2.2rem;
 }
 .services-text-section p{
 font-size:1.4rem;
-font-weight: 200;
+font-weight: 300;
 }
 .services-text-section li{
     font-size:1.4rem;
-    font-weight: 200;
+    font-weight: 300;
     }
 .gallery-section{
 background-color: #D9D9D9;
@@ -490,7 +492,7 @@ margin-bottom:3rem;
 }
 .gallery p{
 font-size: 1.4rem;
-font-weight: 200;
+font-weight: 300;
 }
 .carousel-item img{
 margin: auto;
@@ -519,7 +521,7 @@ text-align:center;
 }
 .review-head p{
 font-size:2rem;
-font-weight:200;
+font-weight:300;
 
 }
 .review-head hr{
