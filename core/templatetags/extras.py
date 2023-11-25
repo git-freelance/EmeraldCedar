@@ -20,7 +20,8 @@ def get_nav_top(context):
 @register.inclusion_tag('core/partials/header-new.html', takes_context=True)
 def get_nav_top_new(context):
     return {'request': context['request'],
-            'nodes': core.models.TopNavigationItem.objects.all().select_related('parent', 'page')}
+            'nodes': core.models.TopNavigationItem.objects.all().select_related('parent', 'page'),
+            "services": core.models.Service.objects.all() }
 
 
 @register.inclusion_tag('core/partials/footer-new.html', takes_context=True)
