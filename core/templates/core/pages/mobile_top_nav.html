@@ -1,5 +1,5 @@
 {% for k in nodes %}
-{% if k|striptags == "SERVICES" %}
+{% if k|striptags|upper == "SERVICES" %}
     <li class="nav-item d-lg-none">
         <a class="nav-link links" href="#" data-bs-toggle="offcanvas"
             data-bs-target="#servicesOffcanvas">{{ k }} <span style="float:right;"><i
