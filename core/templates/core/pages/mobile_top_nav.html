@@ -7,8 +7,7 @@
     </li>
 {% else %}
     <li class="nav-item">
-        <a class="nav-link links" href="#" data-bs-toggle="offcanvas"
-            data-bs-target="#servicesOffcanvas">{{ k }}</a>
+        <a class="nav-link links" href="{{ k.get_absolute_url }}">{{ k }}</a>
     </li>
 {% endif %}
 {% endfor %}
