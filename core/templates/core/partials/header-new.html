@@ -21,20 +21,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
-                    {% for k in nodes %}
-                    {% if k|striptags == "SERVICES" %}
-                        <li class="nav-item d-lg-none">
-                            <a class="nav-link links" href="#" data-bs-toggle="offcanvas"
-                                data-bs-target="#servicesOffcanvas">{{ k }} <span style="float:right;"><i
-                                        class="fa fa-angle-right" aria-hidden="true"></i></span></a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link links" href="#" data-bs-toggle="offcanvas"
-                                data-bs-target="#servicesOffcanvas">{{ k }}</a>
-                        </li>
-                    {% endif %}
-                    {% endfor %}
+                    {% include 'core/pages/mobile_top_nav.html' %} <!--This is top navbar for mobile comprises of service page-->
 
 
                     <!-- This is for desktop or hiher screen -->
