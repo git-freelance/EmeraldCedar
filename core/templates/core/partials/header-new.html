@@ -30,7 +30,7 @@
                             <li class="nav-item dropdown d-none d-lg-block">
                                 <a class="nav-link links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">{{ k }}</a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu dropdown-menu-end ">
                                     {% for service in services %}
                                         <li class="nav-item">
                                             <a class="dropdown-item" href="{{ service.get_absolute_url }}">{{ service }}</a>
