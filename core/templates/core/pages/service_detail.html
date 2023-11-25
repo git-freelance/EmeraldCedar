@@ -87,13 +87,13 @@
   }
 
   .owl-carousel .prev-slide{
-    left: -8rem;
+    left: -3.5rem;
     color: #fff;
     padding: 10px 5px 0px 17px;
   }
   .owl-carousel .next-slide{
      
-      right: -8rem;
+      right: -3rem;
       color: #fff;
       padding: 10px 5px 0px 17px;
   }
@@ -105,8 +105,8 @@
   }
 
 .item img{
-    margin-left: 1.4rem;
-    width: 95% !important;
+    padding: 0rem 2rem;
+    
 }
 @media only screen and (max-width: 480px) {
     .testimonial .testimonial-content{
@@ -334,11 +334,11 @@
 </section>
 
 <section class="gallery-section">
-    <div class="container">
+    <div class="container-fluid">
     <div class="gallery">
         <h1>Gallery</h1>
         <p>{% autoescape off %}{{service.gallery}}{% endautoescape %}</p>
-       
+    </div>
     </div>
     
     <div class="carousel-wrap">
@@ -351,10 +351,15 @@
             
         </div>
       </div>
-    </div>
+   
 </section>
 
 <section class="review">
+    <div class="review-head">
+        <p>Lorem ipsum</p>
+        <hr>
+        <h1>Lorem ipsum dolor sit amet</h1>
+    </div>
     <div class="demo">
         <div class="container">
             <div class="row">
@@ -418,7 +423,7 @@
 </section>
 <section class="form-section">
     <div class="form">
-        <div class="container">
+        <div class="container-fluid">
             <div class="form-heading">
             <!-- <h1>Lorem ipsum dolor sit amet</h1> -->
         </div>
@@ -572,6 +577,7 @@ $('.Gallery-carousel').owlCarousel({
         items:2,
     margin: 10,
     navigation:true,
+    pagination:false,
     navigationText:["<div class='nav-btn prev-slide'>&#10094;</div>","<div class='nav-btn next-slide'>&#10095;</div>"],
     itemsDesktop:[1000,2],
 itemsDesktopSmall:[980,2],

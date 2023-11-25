@@ -187,7 +187,7 @@ body {
 
 
 /* Customer Review */
-.demo{ background: #f8f8f8; margin-bottom: 2rem;}
+.demo{  margin-bottom: 2rem;}
 .testimonial{
 margin: 0 20px 40px;
 }
@@ -263,7 +263,9 @@ transition: all 0.4s ease 0s;
 background: #000;
 }
 
-
+.rating_section{
+    margin-bottom:6%;
+}
 .rating_container{
 padding:2rem;
 border:2px solid #e5e5e5;
@@ -463,29 +465,32 @@ padding: 0rem 10rem;
 .services-text-section{
 padding:5rem 10rem;
 }
-.services-text-section h1{
+.services-text-section h2{
 text-align:center;
 margin-bottom: 3rem;
-font-size:3rem;
+font-size:2.2rem;
 }
 .services-text-section p{
 font-size:1.4rem;
+font-weight: 200;
 }
 .services-text-section li{
     font-size:1.4rem;
+    font-weight: 200;
     }
 .gallery-section{
 background-color: #D9D9D9;
 }
 .gallery{
 text-align: center;
-padding:5rem 9rem;
+padding:5rem 10rem;
 }
 .gallery h1{
 margin-bottom:3rem;
 }
 .gallery p{
 font-size: 1.4rem;
+font-weight: 200;
 }
 .carousel-item img{
 margin: auto;
@@ -514,6 +519,7 @@ text-align:center;
 }
 .review-head p{
 font-size:2rem;
+font-weight:200;
 
 }
 .review-head hr{
