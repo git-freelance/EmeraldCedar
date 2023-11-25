@@ -52,7 +52,7 @@ class ProjectImage(models.Model):
 class Service(Page, SEOModelMixin, BannerMixin):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
-    featured_content = models.TextField(max_length=250, blank=True)
+    featured_content = models.TextField(max_length=1000, blank=True)
     image_layer = ImageField(upload_to=upload_common_images_to, blank=True, null=True)
     featured_image = ImageField(upload_to=upload_common_images_to, blank=True, null=True)
     testimonials = models.ManyToManyField('pages.Testimonial', blank=True)
