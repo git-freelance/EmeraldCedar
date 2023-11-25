@@ -1,88 +1,69 @@
-<!-- {% load static mptt_tags extras %}
-
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="{% static 'img/new_images/logo1.png' %}" alt="Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                {% recursetree nodes %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ node.get_absolute_url }}" style="color:#fff;">{{ node.name|safe }}</a>
-                        {% comment %} {% if not node.is_leaf_node %}
-                            <ul>
-                                {{ children }}
-                            </ul>
-                        {% endif %} {% endcomment %}
-                    </li>
-                {% endrecursetree %}
-            </ul>
-        </div>
-    </div>
-</nav> -->
-
-
+{% load static %}
 
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="{% static 'img/new_images/logo3.png' %}" alt="Logo">
         </a>
-        <button class="navbar-toggler" type="button"
-        data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                aria-controls="offcanvasDarkNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-start text-bg-light" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-            <div class="offcanvas-header">
-               <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5> 
-              <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item  d-lg-none">
-                    <a class="nav-link links" href="#" data-bs-toggle="offcanvas" data-bs-target="#servicesOffcanvas">Services <span style="float:right;"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
-                </li>
-                <li class="nav-item dropdown d-none d-lg-block">
-                    <a class="nav-link links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Services
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="http://167.99.190.83/service/cedar-ciding/">Cedar Ciding</a></li>
-                      <li><a class="dropdown-item" href="http://167.99.190.83/service/cedar-roof-installation/">Cedar Roof Installation</a></li>
-                    </ul>
-                  </li>
 
-                <li class="nav-item">
-                    <a class="nav-link  nav-btn" href="#" style="color:#B5DF8D; border:1px solid #B5DF8D;padding:10px 20px 10px 20px;border-radius:2px;">Contact</a>
-                </li>
-              </ul>
-             
+        <div class="offcanvas offcanvas-start text-bg-light" tabindex="-1" id="offcanvasDarkNavbar"
+            aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+                <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
             </div>
-          </div>
-          <div class="offcanvas offcanvas-start text-bg-light d-lg-none" tabindex="-1" id="servicesOffcanvas"
-    aria-labelledby="servicesOffcanvasLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="servicesOffcanvasLabel">Services</h5>
-        <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <!-- Add your Services menu content here -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="dropdown-item" href="http://167.99.190.83/service/cedar-ciding/">Cedar Ciding</a>
-            </li>
-            <li class="nav-item">
-                <a class="dropdown-item" href="http://167.99.190.83/service/cedar-roof-installation/">Cedar Roof Installation</a>
-            </li>
-            <!-- Add more services as needed -->
-        </ul>
-    </div>
-</div>
+
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                    {% include 'core/pages/mobile_top_nav.html' %} <!--This is top navbar for mobile comprises of service page-->
+
+
+                    <!-- This is for desktop or hiher screen -->
+                    {% for k in nodes %}
+                        {% if k|striptags == "SERVICES" %}
+                            <li class="nav-item dropdown d-none d-lg-block">
+                                <a class="nav-link links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">{{ k }}</a>
+                                <ul class="dropdown-menu">
+                                    {% for service in services %}
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" href="{{ service.get_absolute_url }}">{{ service }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+
+        <!--This section is being used in screen of less width when user tap on service-->
+        <div class="offcanvas offcanvas-start text-bg-light d-lg-none" tabindex="-1" id="servicesOffcanvas"
+            aria-labelledby="servicesOffcanvasLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="servicesOffcanvasLabel">Services</h5>
+                <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body">
+                <ul class="navbar-nav">
+                    {% for service in services %}
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="{{ service.get_absolute_url }}">{{ service }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
     </div>
 </nav>
