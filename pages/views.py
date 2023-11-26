@@ -78,7 +78,7 @@ class FeaturedProjectsView(ListView):
         ctx['service'] = FeaturedProjectsPage.get_solo()
         featured_projects_page_instance = FeaturedProjectsPage.get_solo()
         ctx['testimonials'] = featured_projects_page_instance.testimonials.all()
-     
+        ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
 
 
