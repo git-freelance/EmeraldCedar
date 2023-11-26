@@ -316,7 +316,8 @@
 
 <!-- Background Section -->
 
-<section class="services-background-section" style="background-image: url('/static/img/contact_banner_mage.png'); background-size: 100% 100%;">
+<section class="services-background-section" {% if service.banner %} style="background-image: url('{{ service.banner.url }}'); background-size: 100% 100%;" {% endif %}>
+
 
 
 
