@@ -257,6 +257,7 @@ class ProjectGalleryPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
     # banner_text = models.CharField(max_length=100, blank=True, null=True, default='Gallery')
     name = models.CharField(max_length=100, blank=True, null=True, default='Gallery')
+    contact = RedactorField(allow_image_upload=False, allow_file_upload=False, blank=True)
 
     class Meta:
         verbose_name = 'Project Gallery Page'
@@ -266,6 +267,21 @@ class ProjectGalleryPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
 
     def get_absolute_url(self):
         return resolve_url('gallery')
+
+class ClientTestinomials(Page, SEOModelMixin, BannerMixin, SingletonModel):
+    name = models.CharField(max_length=100, blank=True, null=True, default='Client’s Testimonials')
+    testimonials = models.ManyToManyField('pages.Testimonial', blank=True)
+    contact = RedactorField(allow_image_upload=False, allow_file_upload=False, blank=True)
+
+    class Meta:
+        verbose_name = 'Client Testinomial Page'
+
+    def __str__(self):
+        return 'Client Testinomial Page'
+
+    def get_absolute_url(self):
+        return resolve_url('client')
+
 
 
 class GalleryCategory(models.Model):

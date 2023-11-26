@@ -6,7 +6,7 @@ from adminsortable2.admin import SortableInlineAdminMixin
 from jet.admin import CompactInline
 
 from .models import HomePage, HomePageBanner, CustomPage, MapPage, Spot, FeaturedProjectsPage, ContactPage, \
-    ThankYouPage, TestimonialsPage, Testimonial, ProjectGalleryPage, GalleryCategory, GalleryImage
+    ThankYouPage, TestimonialsPage, Testimonial, ProjectGalleryPage, GalleryCategory, GalleryImage, ClientTestinomials
 
 
 class HomePageBannerInline(AdminImageMixin, SortableInlineAdminMixin, admin.TabularInline):
@@ -168,7 +168,25 @@ class ProjectGalleryPage(AdminImageMixin, SingletonModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'banner')
+            'fields': ('name', 'banner', 'contact')
+        }),
+        ('SEO', {
+            'fields': ('seo_title', 'seo_description', 'seo_keywords')
+        }),
+    )
+
+    class Media:
+        css = {
+            'all': ('/static/css/admin.css',)
+        }
+
+
+@admin.register(ClientTestinomials)
+class ClientTestinomialsPage(AdminImageMixin, SingletonModelAdmin):
+
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'banner', 'testimonials', 'contact')
         }),
         ('SEO', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords')
