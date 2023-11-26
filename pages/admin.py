@@ -168,7 +168,7 @@ class ProjectGalleryPage(AdminImageMixin, SingletonModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'banner')
+            'fields': ('name', 'banner', 'contact')
         }),
         ('SEO', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords')
