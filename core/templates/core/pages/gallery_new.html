@@ -1,30 +1,654 @@
 {% load static mptt_tags extras %}
-
 {% comment %} 
 {% extends 'core/base_template.html' %}
 {% block template_body_block %}
 {% endblock %}
 {% endcomment %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="{{ page.seo_description }}">
-    <meta name="keywords" content="{{ page.seo_keywords }}">
-    <title>{% if page.seo_title %} {{ page.seo_title}} {% else %} EmeraldCedar{% endif %}</title>
-   <!-- Bootstrap CSS -->
-   <link rel="shortcut icon" href="{% static 'img/new_images/logo3.png' %}">
-    <link href="{% static 'css/gallery.css' %}"  rel="stylesheet">
+    <meta name="description" content="{{ service.seo_description }}">
+    <meta name="keywords" content="{{ service.seo_keywords }}">
+    <title>{% if service.seo_title %} {{ service.seo_title}} {% else %}  BLUEWATER {% endif %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="shortcut icon" href="{% static 'img/new_images/logo3.png' %}">
+    <link href="{% static 'css/style.css' %}"  rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <h1>gallery</h1>
-    </body>
-    </html>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    
+<style>
+
+   .carousel-wrap {
+    width: 1000px;
+    margin: auto;
+    position: relative;
+    padding-bottom: 4rem;
+  }
+  .owl-carousel .owl-nav{
+    overflow: hidden;
+    height: 0px;
+  }
+
+  /* .owl-theme .owl-dots .owl-dot.active span, 
+  .owl-theme .owl-dots .owl-dot:hover span {
+      background: #2caae1;
+  } */
+  .owl-theme .owl-controls .owl-page span{
+  display: block;
+    width: 12px;
+    height: 12px;
+    margin: 0px 7px;
+    filter: Alpha(Opacity=50);
+    opacity: .5;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    background: #869791;
+  }
+  .owl-theme .owl-controls .owl-page.active span{
+    opacity: 1 !important;
+  }
+  .owl-theme .owl-controls .owl-page{
+    display:inline-block;
+  }
+  .owl-pagination{
+    text-align:center;
+  }
+  .owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span{
+    background: #000;
+}
+
+  .carousel-wrap .item {
+      text-align: center;
+  }
+  .carousel-wrap .nav-btn{
+      height: 47px;
+      position: absolute;
+      width: 48px;
+      cursor: pointer;
+      top: 150px !important;
+      background-color: #3D4A37 !important;
+    border-radius: 50%;
+    opacity:0. !important;
+  }
+
+  .owl-carousel .owl-prev.disabled,
+  .owl-carousel .owl-next.disabled{
+    pointer-events: none;
+    opacity: 0.2;
+  }
+
+  .owl-carousel .prev-slide{
+    left: -3.5rem;
+    color: #fff;
+    padding: 10px 5px 0px 17px;
+  }
+  .owl-carousel .next-slide{
+     
+      right: -3rem;
+      color: #fff;
+      padding: 10px 5px 0px 17px;
+  }
+  .owl-carousel .prev-slide:hover{
+     background-position: 0px -53px;
+  }
+  .owl-carousel .next-slide:hover{
+    background-position: -24px -53px;
+  }
+
+.item img{
+    padding: 0rem 2rem;
+    
+}
+
+@media only screen and (max-width: 480px) {
+    .testimonial .testimonial-content{
+        padding:35px 25px 35px 4.25rem !important;
+    }
+    .owl-carousel .owl-item img{
+        width:80%;
+    }
+    .testimonial-head img{
+        max-width:5.5rem !important;
+    }
+    .testimonial-head-text h3{
+        font-size: 1.1rem;
+    }
+    .testimonial-head-text p{
+        font-size: 0.8rem;
+    }
+    .testimonial-head-text{
+        margin-left:0px;
+    }
+    .item img{
+        width:100% !important;
+    }
+}
+  @media only screen and (max-width: 426px) {
+    .nav-btn{
+        padding: 10px 17px 10px !important;
+    }
+    .owl-carousel .nav-btn{
+        display: none;
+    }
+   
+    .stars{
+        font-size:3rem;
+    }
+    .links{
+            color:black !important;
+        }
+    /* .nav-link{
+        width:34%;
+    } */
+   
+  }
+@media only screen and (max-width: 600px) {
+    .services-banner{
+        padding:5rem 0rem 8rem;
+    }
+    .item img{
+        padding: 1rem !important;
+    }
+    .form-body{
+        padding: 0rem 0rem 5rem
+    }
+    .form-body input{
+        margin-bottom:3rem;
+    }
+    .nav-item{
+        border-bottom : 1px solid grey !important;
+    }
+    .links{
+            color:black !important;
+        }
+    /* .nav-link{
+        width:34%;
+    } */
+   .banner-text {
+        padding: 0rem 0rem;
+    }
+    .banner h1{
+        font-size: 2rem; 
+    }
+   .banner p {
+    font-size: 1rem;
+    padding: 0rem 2rem;
+}
+.testimonial-content .testimonial-icon{
+    width:6rem;
+}
+.testimonial .testimonial-content{
+    padding: 35px 25px 35px 5.25rem;
+}
+.text-column{
+    padding:0rem 0rem 8rem 1rem;
+}
+.image-column img{
+    padding:1.5rem;
+}
+
+.services-text-section{
+    padding: 5rem 0rem;
+}
+
+.gallery{
+    padding: 5rem 0rem;
+}
+.banner-text h1{
+    font-size: 2rem;;
+}
+.carousel-wrap {
+    width: 100%;
+    }
+    .owl-carousel .prev-slide{
+        left: -2rem;
+    }
+    .owl-carousel .next-slide{
+        right: -2rem;
+    }
+   
+    .owl-carousel .nav-btn{
+        top:80px !important;
+    }
+    .stars{
+        font-size:3rem;
+    }
+  }
+  
+  /* Small devices (tablets) */
+  @media only screen and (min-width: 601px) and (max-width: 768px) {
+    .nav-item{
+        border-bottom : 1px solid grey !important;
+    }
+    .banner-text {
+        padding: 0rem 0rem;
+    }
+    .banner{
+        padding:16rem 0rem;
+    }
+    .text-column{
+        padding: 0rem 1rem 6rem 0px;
+    }
+    .testimonial-content .testimonial-icon{
+        width:6.25rem;
+    }
+
+    .testimonial .testimonial-content{
+       padding: 3.5rem 10px 30px 5rem
+    }
+    .testimonial {
+    margin: 0 10px 40px;
+}
+.testimonial-head-text{
+    margin-left:4px;
+}
+.services-text-section{
+    padding: 5rem 7rem;
+}
+.gallery{
+    padding: 5rem 7rem;
+}
+.carousel-wrap {
+    width: 496px;
+    }
+    .links{
+            color:black !important;
+        }
+    
+  }
+  
+  /* Medium devices (laptops and small desktops) */
+  @media only screen and (min-width: 769px) and (max-width: 992px) {
+    body{
+        /* background-color: violet; */
+    }
+  }
+  @media only screen and (min-width: 993px) and (max-width: 1200px) {
+    .banner-text {
+        padding: 0rem 6rem;
+    }
+    .banner{
+        padding:20rem 0rem;
+    }
+    .testimonial .testimonial-content{
+        padding: 30px 25px 35px 8rem;
+    }
+    .owl-carousel .prev-slide{
+        left: -2rem;
+    }
+    .owl-carousel .next-slide{
+        right: -2rem;
+    }
+    .carousel-wrap {
+    width: 496px;
+    }
+    .owl-carousel .nav-btn{
+        top:40px !important;
+    }
+    
+  }
+  
+  /* Extra large devices (large desktops) */
+  @media only screen and (min-width: 1201px) {
+   
+  }
+  .links{
+    color:#fff;
+  }
+  .testimonial-head img{
+    max-width:8rem;
+  }
+
+
+
+  .gallery-sec{
+    letter-spacing:7px;
+    font-size:0.9rem;
+    color:rgb(24, 23, 23);
+    font-family: 'taro san-serif', sans-serif;
+ }
+  
+  .container-1{
+    width:93%;
+    margin: auto;
+  }
+
+  .img-gallary{
+    padding:0;
+    border-radius:unset;
+    width: 100%;
+  }
+
+  .gallary-row{
+    --bs-gutter-y: 0rem;
+    margin: auto;
+    width: 94%;
+  }
+
+
+  @media screen and (max-width: 480px) {
+  .gallery-sec {
+    text-align: start;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+  }
+
+  .gallary-hr{
+    width:60px !important;
+  }
+}
+
+@font-face {
+    font-family: 'taro san-serif'; /* Choose a name for your font */
+    src: url({% static 'fonts/Fontspring-DEMO-taro-regular.otf' %}) format('opentype');
+  }
+  
+
+.gallary-hr{
+    width:80px;
+    margin:0.6rem 0.6rem;
+}
+
+.gallary-col{
+    padding: 0;
+}
+
+.gallary-head{
+    font-family: 'taro san-serif', sans-serif;
+    font-size:1.6rem;
+}
+
+</style>
+</head>
+<body style="padding-top:0px;">
+
+<!-- Background Section -->
+
+
+
+<section class="services-background-section" {% if service.banner %} style="background-image: url('{{ service.banner.url }}'); background-size: 100% 100%;" {% endif %}>
+
+<!-- Navbar -->
+{% get_nav_top_new %}
+<!-- Banner with Text -->
+<section class="services-banner">
+    <div class="banner-text">
+        <h1>{{service.name}}</h1>
+    </div>
+</section>
+</section>
+</section>
+
+
+<!--section Kitchen-->
+{% for category_with_images in categories_with_images %}
+<section class="gallary-kitchen">
+    <div class="container-1 text-center">
+        <div class="my-4">
+            <div class="d-flex">
+                <p style="margin-bottom:0" class="gallery-sec">INSPIRATION PROJECTS</p>
+                <hr class="gallary-hr"/>
+            </div>
+            <p class="float-start mb-4 gallary-head"><b>{{ category_with_images.category.name }}</b></p>
+        </div>
+
+        <div class="gallary-row row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3">
+
+          {% for image in category_with_images.images %}
+
+          <div class="col text-center  gallary-col">
+            <div class="p-3"><img src="{{ image.image.url }}" class="img-thumbnail img-gallary" alt="..."></div>
+          </div>
+
+          {% endfor %}
+
+        </div>
+      </div>
+</section>
+{% endfor %}
+
+<section class="review">
+    <div class="review-head">
+        <p>Lorem ipsum</p>
+        <hr>
+        <h1>Lorem ipsum dolor sit amet</h1>
+    </div>
+    <div class="demo">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="testimonial-slider" class="owl-carousel">
+
+                        
+                        {% for testimonial in testimonials %}
+                        <div class="testimonial">
+                            <div class="testimonial-content">
+                                <div class="testimonial-icon">
+                                    <img src="{% static 'img/new_images/review.png' %}">
+                                </div>
+                                <div class="testimonial-head">
+                                    <img
+                                        src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}">
+                                    <div class="testimonial-head-text">
+                                        <h3>{{ testimonial.author }}</h3>
+                                        <p>{{ testimonial.position }}</p>
+                                    </div>
+                                </div>
+                                <p class="description">
+                                    {{ testimonial.text }}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="rating_section">
+    <div class="container">
+    <div class="rating_container">
+        <div class="centered-content">
+            <!-- Rating Section -->
+            <div class="ratings">5</div>
+            <!-- Stars Section -->
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+           
+        </div>
+        <div class="centered-btn">
+            <p style="font-size:1.25rem;">Based on 15 reviews</p>
+            <div class="button-container">
+                <!-- Button 1 -->
+                <a href="#" class="button">SET ALL REVIEWS</a>
+                <!-- Button 2 -->
+                <a href="#" class="button">WRITE A REVIEW</a>
+            </div>
+        </div>
+       
+       
+    </div>
+</div>
+</section>
+
+<section class="form-section">
+    <div class="form">
+        <div class="container-fluid">
+            <div class="form-heading">
+            {% comment %} <h1>Lorem ipsum dolor sit amet</h1>  {% endcomment %}
+        </div>
+        <div class="form-body">
+            {% autoescape off %}
+            {{service.contact}}
+            {% endautoescape %}
+
+       
+        <form>
+            <div class="form-row">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Your name" name="email">
+              </div>
+              <div class="col-md-6">
+                <select class="form-select" name="" id="">
+                    <option>What Service are you interested in</option>
+                    <option>...</option>
+                    <option>...</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Phone" name="email">
+              </div>
+              <div class="col-md-6">
+                <select class="form-select" name="" id="">
+                    <option>Budget</option>
+                    <option>...</option>
+                    <option>...</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Enter email" name="email">
+              </div>
+              <div class="col-md-6">
+                <select class="form-select" name="" id="">
+                    <option>How did you find about us</option>
+                    <option>...</option>
+                    <option>...</option>
+                </select>
+              </div>
+            </div>
+            </div>
+            <div class="form-row">
+                <textarea placeholder="Describe Your Project ..." class="form-control" rows="7" cols="auto"></textarea>
+            </div>
+            <div class="form-row" style="text-align: center;">
+            <input class="subscribe-button"  type="submit" value="Submit">
+            </div>
+          </form>
+        </div>
+        </div>
+    </div>
+
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-columns">
+            <!-- Column 1: Logo and Contact Info -->
+            <div class="footer-column">
+                <!-- <div class="column-heading">Contact Us</div> -->
+                <a href="{% url 'index' %}"> <img src="{% static 'img/new_images/logo3.png' %}" alt="Logo" class="footer-logo"> </a>
+                <ul class="contact-info">
+                    <li>
+                        <p style="color:#fff;">{{ site_config.footer_text|linebreaksbr }}</p>
+                    </li>
+                    <li><i class="fas fa-phone"></i>
+                        <p style="color:#fff;">{{ site_config.contact_phone|linebreaksbr }}</p>
+                    </li>
+                    <li><i class="fas fa-envelope"></i>
+                        <p style="color:#fff;">{{ site_config.contact_email|linebreaksbr }}</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 2: Links -->
+            {% get_nav_bottom_new %}
+
+            <!-- Column 3: Services -->
+            <div class="footer-column">
+                <div class="column-heading">Our Services</div>
+                <ul class="footer-links">
+                    {% for key, service in services.items %}
+                    <li><a class="nav-link" href="{{ service.get_absolute_url }}">{{ service.name }}</a></li>
+                    {% endfor %}
+                    <!-- Add more service items as needed -->
+                </ul>
+            </div>
+
+            <!-- Column 4: Newsletter Signup -->
+            <div class="footer-column">
+                <div class="column-heading" style="color:#fff;">Signup Newsletter</div>
+                <input type="email" class="subscribe-input" placeholder="Enter Your Email">
+                <button class="subscribe-button">Subscribe</button>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Copyright Section -->
+    <!-- Copyright Section -->
+    <div class="copyright-section">
+        <div class="container">
+            <div class="copyright-content">
+                <!-- Social Media Icons -->
+                <div class="copyright-icons">
+                    <a href="{{ site_config.facebook_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-facebook"></i></a>
+                    <a href="{{ site_config.youtube_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-youtube"></i></a>
+                    <a href="{{ site_config.instagram_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="{{ site_config.twitter_link|default:'#' }}" class="text-white"><i
+                            class="fab fa-twitter"></i></a>
+                </div>
+                <!-- Copyright Text -->
+                <p>Copyright &copy; 2023 All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+
+ <script>
+$(document).ready(function(){
+    $("#testimonial-slider").owlCarousel({
+        items:2,
+        itemsDesktop:[1000,3],
+        itemsDesktopSmall:[980,2],
+        itemsTablet:[768,2],
+        itemsMobile:[650,1],
+        pagination:true,
+        navigation:false,
+        slideSpeed:1000,
+        autoPlay:true
+    });
+});
+
+$('.Gallery-carousel').owlCarousel({
+        items:2,
+    margin: 10,
+    navigation:true,
+    pagination:false,
+    navigationText:["<div class='nav-btn prev-slide'>&#10094;</div>","<div class='nav-btn next-slide'>&#10095;</div>"],
+    itemsDesktop:[1000,2],
+itemsDesktopSmall:[980,2],
+itemsTablet:[768,1],
+itemsMobile:[650,1],
+});
+</script>
+
+
+</body>
+</html>
