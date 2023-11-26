@@ -118,12 +118,17 @@ class ContactView(FormView):
 
 
 class ThankYouView(DetailView):
-    template_name = 'core/pages/thank_you.html'
+    template_name = 'core/pages/thank_you_new.html'
     model = ThankYouPage
     context_object_name = 'page'
 
     def get_object(self, queryset=None):
         return self.model.get_solo()
+    
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
+        return ctx
 
 
 class TestimonialsListView(ListView):
