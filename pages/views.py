@@ -130,7 +130,7 @@ class ContactView(FormView):
             )
 
             from_email = 'deepansh.freelancing@gmail.com'
-            recipient_list = ['vishal.mehta9123@gmail.com', 'loveagg120@gmail.com']
+            recipient_list = ['bogdan@webreign.ca']
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
             print(str(e))
