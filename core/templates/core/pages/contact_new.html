@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{{ service.seo_description }}">
     <meta name="keywords" content="{{ service.seo_keywords }}">
-    <title>{% if service.seo_title %} {{ service.seo_title}} {% else %} EmeraldCedar{% endif %}</title>
+    <title>{% if service.seo_title %} {{ service.seo_title}} {% else %}  BLUEWATER {% endif %}</title>
     <!-- Bootstrap CSS -->
     <link rel="shortcut icon" href="{% static 'img/new_images/logo3.png' %}">
     <link href="{% static 'css/style.css' %}"  rel="stylesheet">
@@ -316,7 +316,8 @@
 
 <!-- Background Section -->
 
-<section class="services-background-section" style="background-image: url('/static/img/contact_banner_mage.png'); background-size: 100% 100%;">
+<section class="services-background-section" {% if service.banner %} style="background-image: url('{{ service.banner.url }}'); background-size: 100% 100%;" {% endif %}>
+
 
 
 

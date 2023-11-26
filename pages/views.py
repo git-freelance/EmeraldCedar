@@ -106,7 +106,10 @@ class ContactView(FormView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['page'] = ContactPage.get_solo()
+        ctx['service'] = ContactPage.get_solo()
+        featured_contact_page_instance = ContactPage.get_solo()
+        ctx['testimonials'] = featured_contact_page_instance.testimonials.all()
+        ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
 
     def form_valid(self, form):
@@ -115,12 +118,17 @@ class ContactView(FormView):
 
 
 class ThankYouView(DetailView):
-    template_name = 'core/pages/thank_you.html'
+    template_name = 'core/pages/thank_you_new.html'
     model = ThankYouPage
     context_object_name = 'page'
 
     def get_object(self, queryset=None):
         return self.model.get_solo()
+    
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
+        return ctx
 
 
 class TestimonialsListView(ListView):
@@ -142,13 +150,19 @@ class GalleryView(DetailView):
     def get_object(self, queryset=None):
         return self.model.get_solo()
 
-    def get(self, request, *args, **kwargs):
-        ret = super().get(request, *args, **kwargs)
-        category_id = request.GET.get('category_id')
-        if category_id:# and request.is_ajax():
-            category = get_object_or_404(GalleryCategory, pk=category_id)
-            rendered = get_gallery_with_testimonial(photos=category.images.all(),
-                                                    testimonials=self.object.testimonials.all())
-            return render(request, 'core/partials/gallery_with_testimonial.html', rendered)
-        else:
-            return ret
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Fetch categories and images
+        categories_with_images = []
+        for category in self.object.categories.all():
+            images = category.images.all()
+            categories_with_images.append({'category': category, 'images': images})
+
+        context['categories_with_images'] = categories_with_images
+
+ 
+        context['service'] = ProjectGalleryPage.get_solo()
+        context['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
+
+        return context
