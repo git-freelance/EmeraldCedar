@@ -121,7 +121,7 @@ class ThankYouView(DetailView):
 
 
 class TestimonialsListView(ListView):
-    template_name = 'core/pages/testimonial.html'
+    template_name = 'core/pages/testinomial.html'
     model = Testimonial
     context_object_name = 'testimonials'
 
