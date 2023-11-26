@@ -3,6 +3,10 @@ body {
   
     font-family: Roboto Serif;
 }
+.cust_stars {
+    font-size: 1.5rem;
+    color: #D4740C;
+}
 .offcanvas{
     max-width:75% !important;
   }
@@ -506,7 +510,11 @@ margin-bottom: 3rem;
 margin-bottom: 2rem;
 }
 .form-body{
-   padding: 0rem 10rem 5rem;
+   padding: 0rem 5rem 5rem;
+}
+.form-body p{
+    font-size: 1.4rem;
+    font-weight: 300;
 }
 .form-body h1:first-child{
     text-align:center;
