@@ -106,7 +106,10 @@ class ContactView(FormView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['page'] = ContactPage.get_solo()
+        ctx['service'] = ContactPage.get_solo()
+        featured_contact_page_instance = ContactPage.get_solo()
+        ctx['testimonials'] = featured_contact_page_instance.testimonials.all()
+        ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
 
     def form_valid(self, form):

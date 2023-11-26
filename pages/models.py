@@ -201,7 +201,7 @@ class FeaturedProjectsPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
 class ContactPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
     banner_text = models.CharField(max_length=100, blank=True, null=True, default='Contact Us')
-    body = RedactorField(allow_image_upload=True, allow_file_upload=False, blank=True)
+    testimonials = models.ManyToManyField('pages.Testimonial', blank=True)
 
     class Meta:
         verbose_name = 'Contact Page'
