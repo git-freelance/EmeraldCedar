@@ -97,7 +97,7 @@ class CustomPageDetailView(DetailView):
 
 
 class ContactView(FormView):
-    template_name = 'core/pages/contact.html'
+    template_name = 'core/pages/contact_new.html'
     form_class = ContactForm
     success_url = reverse_lazy('thankyou')
 
@@ -121,7 +121,7 @@ class ThankYouView(DetailView):
 
 
 class TestimonialsListView(ListView):
-    template_name = 'core/pages/testimonials.html'
+    template_name = 'core/pages/testimonial.html'
     model = Testimonial
     context_object_name = 'testimonials'
 
@@ -132,7 +132,7 @@ class TestimonialsListView(ListView):
 
 
 class GalleryView(DetailView):
-    template_name = 'core/pages/gallery.html'
+    template_name = 'core/pages/gallery_new.html'
     model = ProjectGalleryPage
     context_object_name = 'page'
 
