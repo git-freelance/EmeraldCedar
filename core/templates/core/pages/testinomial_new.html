@@ -157,6 +157,29 @@
    
   }
 @media only screen and (max-width: 600px) {
+ .text_right{
+    text-align:center !important;
+ }
+ .cust_img{
+   width:50% !important;
+ }
+ .vector{
+    text-align:left !important;
+ }
+ .review{
+    padding:1rem 0rem 0rem 0rem !important;
+    text-align:center !important;
+ }
+ .review_l{
+    padding:1rem 0rem 0rem 0rem !important;
+    text-align:center !important;
+ }
+ .text_left{
+    display:none !important;
+ }
+ .img_lt{
+    display:block !important;
+ }
     .services-banner{
         padding:5rem 0rem 8rem;
     }
@@ -318,6 +341,9 @@
   .text_right{
     text-align:right;
   }
+  .vector{
+    text-align:right;
+  }
   .text_left{
     text-align:left;
   }
@@ -339,6 +365,9 @@
 }
 .review-left{
     margin-bottom: 6rem;
+}
+.form-section{
+    padding-top:4rem;
 }
 </style>
 </head>
@@ -379,13 +408,13 @@
     <div class="review-ryt">
         <div class="row">
             <div class="col-sm-3 text_right">
-                <div class="cust_img" style="float:right;">
+                <!-- <div class="cust_img" style="float:right;"> -->
                     <img class="cust_img" src="/static/img/cust_1.png">
-                </div>
+                <!-- </div> -->
             </div>
             <div class="col-sm-9">
                 <div class="row">
-                    <div class="col-sm-1 text_right">
+                    <div class="col-sm-1 vector">
                         <img src="/static/img/Vector.png">
                     </div>
                     <div class="col-sm-11">
@@ -403,10 +432,14 @@
     </div>
     <div class="review-left">
         <div class="row">
-          
+            <div class="col-md-3 text_right img_lt">
+             
+                <img class="cust_img" src="/static/img/cust_2.png">
+           
+        </div>
             <div class="col-md-9">
                 <div class="row">
-                    <div class="col-sm-3 text_right">
+                    <div class="col-sm-3 vector">
                         <img src="/static/img/Vector.png">
                     </div>
                     <div class="col-sm-9">
@@ -430,14 +463,14 @@
     <div class="review-ryt">
         <div class="row">
             <div class="col-md-3 text_right">
-                <div class="cust_img" style="float:right;">
+             
                     <img class="cust_img" src="/static/img/cust_3.png">
-                </div>
+               
             </div>
             <div class="col-md-9">
                 <div class="row">
-                    <div class="col-sm-1 text_right">
-                        <img src="/static/img/Vector.png">
+                    <div class="col-sm-1 vector">
+                        <img  src="/static/img/Vector.png">
                     </div>
                     <div class="col-sm-11">
                         <div class="review">
@@ -454,13 +487,17 @@
     </div>
     <div class="review-left">
         <div class="row">
-          
+            <div class="col-md-3 text_right img_lt">
+             
+                <img class="cust_img" src="/static/img/cust_4.png">
+           
+        </div>
             <div class="col-md-9">
                 <div class="row">
-                    <div class="col-sm-3 text_right">
+                    <div class="col-md-3 vector">
                         <img src="/static/img/Vector.png">
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-md-9">
                         <div class="review_l">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum</p>
                             <div class="cust_stars">★★★★★</div>
