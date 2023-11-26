@@ -76,7 +76,9 @@ class FeaturedProjectsView(ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['service'] = FeaturedProjectsPage.get_solo()
-        ctx['testimonials'] = self.object.testimonials.all()
+        featured_projects_page_instance = FeaturedProjectsPage.get_solo()
+        ctx['testimonials'] = featured_projects_page_instance.testimonials.all()
+     
         return ctx
 
 
