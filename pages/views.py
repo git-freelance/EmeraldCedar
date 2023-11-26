@@ -1,13 +1,13 @@
 import json
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, FormView
 from django.urls import reverse_lazy
 
 from core.helpers import chunks_with_reps
 from core.forms import ContactForm
 from core.templatetags.extras import get_gallery_with_testimonial
-
+from django.core.mail import send_mail
 from blog.models import Post
 from .models import HomePage, MapPage, CustomPage, ContactPage, ThankYouPage, FeaturedProjectsPage, TestimonialsPage, \
     Testimonial, ProjectGalleryPage, GalleryCategory
@@ -115,6 +115,27 @@ class ContactView(FormView):
     def form_valid(self, form):
         form.send_mail()
         return super().form_valid(form)
+    
+    def post(self, request, *args, **kwargs):
+        try:
+            form_data = self.request.POST
+            subject = 'New Contact Form Submission'
+            message = (
+                f"User Name: {form_data.get('name')}\n"
+                f"Email: {form_data.get('email')}\n"
+                f"Phone: {form_data.get('phone')}\n"
+                f"Best Contact Time: {form_data.get('best_contact_time')}\n"
+                f"Project Address: {form_data.get('project_address')}\n\n"
+                f"Message:\n{form_data.get('how_can_help')}"
+            )
+
+            from_email = 'deepansh.freelancing@gmail.com'
+            recipient_list = ['vishal.mehta9123@gmail.com', 'loveagg120@gmail.com']
+            send_mail(subject, message, from_email, recipient_list)
+        except Exception as e:
+            print(str(e))
+        return redirect('thankyou')
+
 
 
 class ThankYouView(DetailView):

@@ -209,3 +209,11 @@ FILE_UPLOAD_PERMISSIONS=0o644
 #SECURE_SSL_REDIRECT = True
 
 from .logger import LOGGING
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "deepansh.freelancing@gmail.com"
+EMAIL_HOST_PASSWORD = "gama lsgt cndj jllj"
