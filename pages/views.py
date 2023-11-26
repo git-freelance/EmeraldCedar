@@ -160,6 +160,7 @@ class TestimonialsListView(ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['page'] = TestimonialsPage.get_solo()
+        ctx['service'] = FeaturedProjectsPage.get_solo()
         return ctx
 
 
