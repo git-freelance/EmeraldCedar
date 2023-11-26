@@ -256,7 +256,7 @@ class Testimonial(models.Model):
 class ProjectGalleryPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
     # banner_text = models.CharField(max_length=100, blank=True, null=True, default='Gallery')
-    testimonials = models.ManyToManyField('pages.Testimonial', blank=True)
+    name = models.CharField(max_length=100, blank=True, null=True, default='Gallery')
 
     class Meta:
         verbose_name = 'Project Gallery Page'

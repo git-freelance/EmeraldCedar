@@ -1,7 +1,4 @@
 {% load static mptt_tags extras %}
-
-
-
 {% comment %} 
 {% extends 'core/base_template.html' %}
 {% block template_body_block %}
@@ -377,18 +374,16 @@
 
 <!-- Background Section -->
 
-<section class="services-background-section" style="background-image: url({% static '/img/new_images/banner.jpg' %}); background-size: 100% 100%;" >
 
 
+<section class="services-background-section" {% if service.banner %} style="background-image: url('{{ service.banner.url }}'); background-size: 100% 100%;" {% endif %}>
 
 <!-- Navbar -->
 {% get_nav_top_new %}
-
-
 <!-- Banner with Text -->
 <section class="services-banner">
     <div class="banner-text">
-        <h1>Projects</h1>
+        <h1>{{service.name}}</h1>
     </div>
 </section>
 </section>
@@ -396,6 +391,7 @@
 
 
 <!--section Kitchen-->
+{% for category_with_images in categories_with_images %}
 <section class="gallary-kitchen">
     <div class="container-1 text-center">
         <div class="my-4">
@@ -403,143 +399,23 @@
                 <p style="margin-bottom:0" class="gallery-sec">INSPIRATION PROJECTS</p>
                 <hr class="gallary-hr"/>
             </div>
-            <p class="float-start mb-4 gallary-head"><b>Kitchen</b></p>
+            <p class="float-start mb-4 gallary-head"><b>{{ category_with_images.category.name }}</b></p>
         </div>
 
         <div class="gallary-row row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3">
-          
-          <div class="col text-center  gallary-col gallary-col">
-            <div class="p-3">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU"  class="img-thumbnail img-gallary" alt="...">
-            </div>
-          </div>
-          
-          
+
+          {% for image in category_with_images.images %}
+
           <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
+            <div class="p-3"><img src="{{ image.image.url }}" class="img-thumbnail img-gallary" alt="..."></div>
           </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
+
+          {% endfor %}
+
         </div>
       </div>
 </section>
-
-
-<!-- section Bathroom -->
-<section class="gallary-bathroom">
-    <div class="container-1 text-center">
-        <div class="my-4">
-            <div class="d-flex">
-                <p style="margin-bottom:0" class="text-start gallery-sec">INSPIRATION PROJECTS</p><hr style="margin:0.6rem 0.6rem" width="80"/>
-            </div>
-            <p class="float-start mb-4 gallary-head"><b>Bathroom</b></p>
-        </div>
-
-        <div class="gallary-row row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3">
-          
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          
-          
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-        </div>
-      </div>
-</section>
-
-
-<!--  Section Staircase  -->
-<section class="gallary-kitchen">
-    <div class="container-1 text-center">
-        <div class="my-4">
-            <div class="d-flex">
-                <p style="margin-bottom:0" class="float-start  gallery-sec">INSPIRATION PROJECTS</p><hr style="margin:0.6rem 0.6rem" width="80"/>
-            </div>
-            <p class="float-start mb-4 gallary-head"><b>Staircase</b></p>
-        </div>
-
-        <div class="gallary-row row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3">
-          
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          
-          
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-        </div>
-      </div>
-</section>
-
-
-<!--  Section Basement  -->
-<section class="gallary-basement">
-    <div class="container-1 text-center">
-        <div class="my-4">
-            <div class="d-flex">
-                <p style="margin-bottom:0" class="float-start  gallery-sec">INSPIRATION PROJECTS</p><hr style="margin:0.6rem 0.6rem" width="80"/>
-            </div>
-            <p class="float-start mb-4 gallary-head"><b>Basement</b></p>
-        </div>
-
-        <div class="gallary-row row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3">
-          
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          
-          
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="..."></div>
-          </div>
-          <div class="col text-center  gallary-col">
-            <div class="p-3">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSunMgmUPC1NebYI4gPOhIJjwuUeqz2MBuB5A&usqp=CAU" class="img-thumbnail img-gallary" alt="...">
-            </div>
-          </div>
-          
-        </div>
-      </div>
-</section>
-
-
+{% endfor %}
 
 <section class="review">
     <div class="review-head">
@@ -572,8 +448,6 @@
                                     {{ testimonial.text }}
                                 </p>
                             </div>
-                            <!-- <h3 class="title">williamson</h3>
-                            <span class="post">Web Developer</span> -->
                         </div>
                         {% endfor %}
                         
