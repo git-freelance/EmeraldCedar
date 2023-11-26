@@ -89,7 +89,7 @@ class MapPageAdmin(AdminImageMixin, SingletonModelAdmin):
 class FeaturedProjectsPageAdmin(AdminImageMixin, SingletonModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('banner', 'banner_text')
+            'fields': ('banner', 'banner_text', 'testimonials', 'contact')
         }),
         ('SEO', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords')

@@ -69,13 +69,13 @@ class ServiceDetailView(DetailView):
 
 
 class FeaturedProjectsView(ListView):
-    template_name = 'core/pages/featured_projects.html'
+    template_name = 'core/pages/project_new.html'
     model = core.models.FeaturedProject
     context_object_name = 'projects'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['page'] = FeaturedProjectsPage.get_solo()
+        ctx['service'] = FeaturedProjectsPage.get_solo()
         return ctx
 
 
