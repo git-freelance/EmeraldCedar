@@ -10,7 +10,7 @@ from core.templatetags.extras import get_gallery_with_testimonial
 from django.core.mail import send_mail
 from blog.models import Post
 from .models import HomePage, MapPage, CustomPage, ContactPage, ThankYouPage, FeaturedProjectsPage, TestimonialsPage, \
-    Testimonial, ProjectGalleryPage, GalleryCategory
+    Testimonial, ProjectGalleryPage, GalleryCategory, ClientTestinomials
 
 
 import core.models
@@ -160,7 +160,7 @@ class TestimonialsListView(ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['page'] = TestimonialsPage.get_solo()
-        ctx['service'] = FeaturedProjectsPage.get_solo()
+        ctx['service'] = ClientTestinomials.get_solo()
         return ctx
 
 
