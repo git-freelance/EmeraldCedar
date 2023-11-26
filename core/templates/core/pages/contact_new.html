@@ -370,33 +370,35 @@
                         {% endautoescape %}
             
                    
-                    <form>
+                        <form id="myForm" method="post"  onsubmit="disableSubmitButton()">
+
+                        {% csrf_token %}
                         <div class="form-row">
                       
-                            <input type="text" class="form-control" placeholder="Name*" name="email">
+                            <input type="text" class="form-control" placeholder="Name*" name="name" required>
                          </div>
                         <div class="form-row">
                       
-                            <input type="text" class="form-control" placeholder="Email*" name="email">
+                            <input type="email" class="form-control" placeholder="Email*" name="email" required>
                          </div>
                         <div class="form-row">
                       
-                            <input type="text" class="form-control" placeholder="Phone*" name="email">
+                            <input type="number" class="form-control" placeholder="Phone*" name="phone" required>
                          </div>
                         <div class="form-row">
                       
-                            <input type="text" class="form-control" placeholder="Best Contact Time*" name="email">
+                            <input type="text" class="form-control" placeholder="Best Contact Time*" name="best_contact_time" required>
                          </div>
                         <div class="form-row">
                       
-                            <input type="text" class="form-control" placeholder="Project Address" name="email">
+                            <input type="text" class="form-control" placeholder="Project Address" name="project_address" required>
                          </div>
                         
                         <div class="form-row">
-                            <textarea placeholder="How we can help you?" class="form-control" rows="7" cols="auto"></textarea>
+                            <textarea placeholder="How we can help you?" class="form-control" rows="7" cols="auto" name="how_can_help" required></textarea>
                         </div>
                         <div class="form-row" style="text-align: center;">
-                        <input class="subscribe-button"  type="submit" value="Send Message">
+                            <input class="subscribe-button" type="submit" value="Send Message" id="submitButton">
                         </div>
                       </form>
                     </div>
@@ -575,6 +577,11 @@ itemsDesktopSmall:[980,2],
 itemsTablet:[768,1],
 itemsMobile:[650,1],
 });
+
+function disableSubmitButton() {
+  document.getElementById('submitButton').disabled = true;
+  document.getElementById('submitButton').value = 'Sending...';
+}
 </script>
 
 
