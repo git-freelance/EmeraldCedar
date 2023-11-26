@@ -69,13 +69,16 @@ class ServiceDetailView(DetailView):
 
 
 class FeaturedProjectsView(ListView):
-    template_name = 'core/pages/featured_projects.html'
+    template_name = 'core/pages/project_new.html'
     model = core.models.FeaturedProject
     context_object_name = 'projects'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['page'] = FeaturedProjectsPage.get_solo()
+        ctx['service'] = FeaturedProjectsPage.get_solo()
+        featured_projects_page_instance = FeaturedProjectsPage.get_solo()
+        ctx['testimonials'] = featured_projects_page_instance.testimonials.all()
+        ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
 
 
@@ -97,7 +100,7 @@ class CustomPageDetailView(DetailView):
 
 
 class ContactView(FormView):
-    template_name = 'core/pages/contact.html'
+    template_name = 'core/pages/contact_new.html'
     form_class = ContactForm
     success_url = reverse_lazy('thankyou')
 
@@ -121,7 +124,7 @@ class ThankYouView(DetailView):
 
 
 class TestimonialsListView(ListView):
-    template_name = 'core/pages/testimonials.html'
+    template_name = 'core/pages/testinomial_new.html'
     model = Testimonial
     context_object_name = 'testimonials'
 
@@ -132,7 +135,7 @@ class TestimonialsListView(ListView):
 
 
 class GalleryView(DetailView):
-    template_name = 'core/pages/gallery.html'
+    template_name = 'core/pages/gallery_new.html'
     model = ProjectGalleryPage
     context_object_name = 'page'
 
