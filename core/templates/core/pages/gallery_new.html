@@ -323,13 +323,13 @@
     margin: auto;
   }
 
-  .img-gallary{
+  .img-gallery{
     padding:0;
     border-radius:unset;
     width: 100%;
   }
 
-  .gallary-row{
+  .gallery-row{
     --bs-gutter-y: 0rem;
     margin: auto;
     width: 94%;
@@ -343,7 +343,7 @@
     font-size: 0.8rem;
   }
 
-  .gallary-hr{
+  .gallery-hr{
     width:60px !important;
   }
 }
@@ -354,18 +354,22 @@
   }
   
 
-.gallary-hr{
+.gallery-hr{
     width:80px;
     margin:0.6rem 0.6rem;
 }
 
-.gallary-col{
+.gallery-col{
     padding: 0;
 }
 
-.gallary-head{
+.gallery-head{
     font-family: 'taro san-serif', sans-serif;
     font-size:1.6rem;
+}
+
+.gallery-heading{
+    margin:3rem 0;
 }
 
 </style>
@@ -392,22 +396,24 @@
 
 <!--section Kitchen-->
 {% for category_with_images in categories_with_images %}
-<section class="gallary-kitchen">
+<section class="gallery-kitchen">
     <div class="container-1 text-center">
-        <div class="my-4">
-            <div class="d-flex">
+        <div class="gallery-heading">
+            <div class="d-flex mb-3">
                 <p style="margin-bottom:0" class="gallery-sec">INSPIRATION PROJECTS</p>
-                <hr class="gallary-hr"/>
+                <hr class="gallery-hr"/>
             </div>
-            <p class="float-start mb-4 gallary-head"><b>{{ category_with_images.category.name }}</b></p>
+            <div class="d-flex">
+                <p class="float-start gallery-head" style="margin-bottom:0"><b>{{ category_with_images.category.name }}</b></p>
+            </div>
         </div>
 
-        <div class="gallary-row row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3">
+        <div class="gallery-row row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3">
 
           {% for image in category_with_images.images %}
 
-          <div class="col text-center  gallary-col">
-            <div class="p-3"><img src="{{ image.image.url }}" class="img-thumbnail img-gallary" alt="..."></div>
+          <div class="col text-center  gallery-col">
+            <div class="px-3 pb-3"><img src="{{ image.image.url }}" class="img-thumbnail img-gallery" alt="..."></div>
           </div>
 
           {% endfor %}
