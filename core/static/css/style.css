@@ -7,6 +7,10 @@ body {
     font-size: 1.5rem;
     color: #D4740C;
 }
+.form-body li{
+    font-size:1.4rem;
+    font-weight:300;
+    }
 .offcanvas{
     max-width:75% !important;
   }
