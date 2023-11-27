@@ -360,6 +360,9 @@
   .gallery-hr{
     width:60px !important;
   }
+  .gallery_buttons{
+    padding-left:0.5rem !important;
+  }
 }
 
 @font-face {
@@ -385,6 +388,9 @@
 .gallery-heading{
     margin:3rem 0;
 }
+.gallery_buttons{
+    padding-left:1rem;
+}
 
 </style>
 </head>
@@ -409,17 +415,19 @@
 
 
 <!--section Kitchen-->
-<div class="container mt-5">
+<div class="container-fluid mt-5">
     <div class="mb-30">
+        <div class="row">
         <div class="form-row">
             {% for category in page.categories.all %}
-                <div class="col-auto mb-2">
-                    <button class="btn btn-outline-success btn-category {% if category == first_category %}active{% endif %}"
+                <div class="col-auto mb-2 gallery_buttons" style="float:left;">
+                    <button class="btn btn-sm btn-outline-success btn-category {% if category == first_category %}active{% endif %}"
                             data-id="{{ category.pk }}" data-name="{{ category.name }}">
                         {{ category.name }}</button>
                 </div>
             {% endfor %}
         </div>
+    </div>
     </div></div>
 
 {% for category_with_images in categories_with_images %}
