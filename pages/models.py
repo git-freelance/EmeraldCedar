@@ -100,7 +100,7 @@ class HomePage(Page, SEOModelMixin, SingletonModel):
     section_6_button_text = models.CharField(max_length=50, blank=True, null=True, verbose_name='Button text')
     section_6_button_page = models.ForeignKey('pages.Page', blank=True, null=True, on_delete=models.SET_NULL,
                                               related_name='section_6_homepage', verbose_name='Button page')
-    section_about_us_description_1 = models.TextField(blank=True, verbose_name='Description 1')
+    section_about_us_description_1 = RedactorField(allow_image_upload=False, allow_file_upload=False, blank=True)
     section_about_us_description_2 = models.TextField(blank=True, verbose_name='Description 2')
     section_about_us_short_description = models.TextField(blank=True, verbose_name='Short Description')
     section_about_us_header = models.CharField(max_length=200, blank=True, verbose_name='Section Header')
@@ -185,8 +185,6 @@ class Spot(models.Model):
 class FeaturedProjectsPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
     banner_text = models.CharField(max_length=100, blank=True, null=True, default='Featured Projects')
-    testimonials = models.ManyToManyField('pages.Testimonial', blank=True)
-    contact = RedactorField(allow_image_upload=False, allow_file_upload=False, blank=True)
 
     class Meta:
         verbose_name = 'Featured Projects Page'
@@ -201,7 +199,6 @@ class FeaturedProjectsPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
 class ContactPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
     banner_text = models.CharField(max_length=100, blank=True, null=True, default='Contact Us')
-    testimonials = models.ManyToManyField('pages.Testimonial', blank=True)
 
     class Meta:
         verbose_name = 'Contact Page'
@@ -257,7 +254,6 @@ class ProjectGalleryPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
     # banner_text = models.CharField(max_length=100, blank=True, null=True, default='Gallery')
     name = models.CharField(max_length=100, blank=True, null=True, default='Gallery')
-    contact = RedactorField(allow_image_upload=False, allow_file_upload=False, blank=True)
 
     class Meta:
         verbose_name = 'Project Gallery Page'

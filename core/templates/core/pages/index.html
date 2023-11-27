@@ -159,7 +159,7 @@
         <div class="banner-text">
             <h1>{{ page.banner_header }}</h1>
             <p>{{ page.banner_text }}</p>
-            <button class="banner-btn" href="{{ page.banner_button_1_page.get_absolute_url }}">{{page.banner_button_1_text}}</button>
+            <button class="banner-btn" onclick="window.location.href='{{ page.banner_button_1_page.get_absolute_url }}'">{{page.banner_button_1_text}}</button>
         </div>
     </section>
 
@@ -186,7 +186,6 @@
         <div class="container">
             <h2>{{ page.section_3_header }}</h2>
             <hr>
-            <h1>{% autoescape off %}{{ page.section_3_short_description }}{% endautoescape %}</h1>
         </div>
     </section>
     {% for index, service in services.items %}
@@ -197,7 +196,7 @@
         <div class="container">
             <h2>{{ page.section_about_us_header }}</h2>
             <hr>
-            <h1 style="font-size:3rem;color:3DA437;">{{ page.section_about_us_short_description }}</h1>
+            <!-- <h1 style="font-size:3rem;color:3DA437;">{{ page.section_about_us_short_description }}</h1> -->
             <div class="row">
                 {% for about_info in about_us %}
                 <div class="col-md-4">
@@ -213,8 +212,8 @@
                 {% endfor %}
             </div>
             <div class="row">
-                <div class="text-center">
-                    <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_1 }}</p>
+                <div class="text-center" style="font-size: 24px;">
+                    <p style="font-size:1.5rem;padding:2rem">{% autoescape off %}{{ page.section_about_us_description_1 }}{% endautoescape %}</p>
                 <!-- </div>
                 <div class="col-md-6 text-center"> -->
                     <!-- <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_2 }}</p> -->
@@ -233,11 +232,11 @@
                             <div class="testimonial">
                                 <div class="testimonial-content">
                                     <div class="testimonial-icon">
-                                        <img src="{% static 'img/new_images/review.png' %}">
+                                        <img src="{% static 'img/new_images/review.png' %}" width="122" height="118">
                                     </div>
                                     <div class="testimonial-head">
                                         <img
-                                            src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}">
+                                            src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}" width="122" height="118">
                                         <div class="testimonial-head-text">
                                             <h3>{{ testimonial.author }}</h3>
                                             <p>{{ testimonial.position }}</p>
@@ -272,7 +271,7 @@
                     <p style="font-size:1.25rem;">Based on 15 reviews</p>
                     <div class="button-container">
                         <!-- Button 1 -->
-                        <a href="#" class="button">SET ALL REVIEWS</a>
+                        <a href="{% url 'testimonials' %}" class="button">SET ALL REVIEWS</a>
                         <!-- Button 2 -->
                         <a href="#" class="button">WRITE A REVIEW</a>
                     </div>

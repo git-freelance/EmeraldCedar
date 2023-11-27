@@ -77,7 +77,6 @@ class FeaturedProjectsView(ListView):
         ctx = super().get_context_data(**kwargs)
         ctx['service'] = FeaturedProjectsPage.get_solo()
         featured_projects_page_instance = FeaturedProjectsPage.get_solo()
-        ctx['testimonials'] = featured_projects_page_instance.testimonials.all()
         ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
 
@@ -108,7 +107,6 @@ class ContactView(FormView):
         ctx = super().get_context_data(**kwargs)
         ctx['service'] = ContactPage.get_solo()
         featured_contact_page_instance = ContactPage.get_solo()
-        ctx['testimonials'] = featured_contact_page_instance.testimonials.all()
         ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
 
@@ -130,7 +128,7 @@ class ContactView(FormView):
             )
 
             from_email = 'deepansh.freelancing@gmail.com'
-            recipient_list = ['vishal.mehta9123@gmail.com', 'loveagg120@gmail.com']
+            recipient_list = ['bogdan@webreign.ca']
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
             print(str(e))

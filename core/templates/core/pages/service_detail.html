@@ -445,7 +445,7 @@
                                     </div>
                                     <div class="testimonial-head">
                                         <img
-                                            src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}">
+                                            src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}"  width="122" height="118">
                                         <div class="testimonial-head-text">
                                             <h3>{{ testimonial.author }}</h3>
                                             <p>{{ testimonial.position }}</p>
@@ -481,7 +481,7 @@
                     <p style="font-size:1.25rem;">Based on 15 reviews</p>
                     <div class="button-container">
                         <!-- Button 1 -->
-                        <a href="#" class="button">SET ALL REVIEWS</a>
+                       <a href="{% url 'testimonials' %}" class="button">SET ALL REVIEWS</a>
                         <!-- Button 2 -->
                         <a href="#" class="button">WRITE A REVIEW</a>
                     </div>

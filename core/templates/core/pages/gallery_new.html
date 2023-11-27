@@ -25,10 +25,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     
 <style>
+    .form-body {
+        padding: 0rem 2.5rem 5rem;
+    }
 
     @media only screen and (min-width: 601px) and (max-width: 768px) {
     .form-body {
-        padding: 0rem 3rem 5rem;
+        padding: 0rem 1rem 5rem;
     }
     }
 
@@ -431,65 +434,7 @@
 
 
 
-<section class="form-section mt-5">
-    <div class="form">
-        <div class="container-fluid">
-            <div class="form-heading">
-            </div>
-            <div class="form-body">
-                {% autoescape off %}
-                {{service.contact}}
-                {% endautoescape %}
-                <form>
-                    <div class="form-row">
-                        <input type="text" class="form-control" placeholder="Your name" name="email">
-                    </div>
-                    <div class="form-row">
-                        <select class="form-control" name="" id="">
-                            <option>What Service are you interested in</option>
-                            <option>...</option>
-                            <option>...</option>
-                        </select>
-
-                    </div>
-                    <div class="form-row">
-
-
-                        <input type="text" class="form-control" placeholder="Phone" name="email">
-
-                    </div>
-                    <div class="form-row">
-                        <select class="form-control" name="" id="">
-                            <option>Budget</option>
-                            <option>...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="form-row">
-                        <input type="text" class="form-control" placeholder="Enter email" name="email">
-                    </div>
-                    <div class="form-row">
-                        <select class="form-control" name="" id="">
-                            <option>How did you find about us</option>
-                            <option>...</option>
-                            <option>...</option>
-                        </select>
-                    </div>           
-            <div class="form-row">
-                <textarea placeholder="Describe Your Project ..." class="form-control" rows="7" cols="auto"></textarea>
-            </div>
-            <div class="form-row" style="text-align: center;">
-                <input class="subscribe-button" type="submit" value="Submit">
-            </div>
-            </form>
-        </div>
-        </div>
-    </div>
-
-
-</section>
-
-<footer class="footer">
+<footer class="footer mt-5">
     <div class="container">
         <div class="footer-columns">
             <!-- Column 1: Logo and Contact Info -->
