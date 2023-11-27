@@ -10,7 +10,7 @@ from core.templatetags.extras import get_gallery_with_testimonial
 from django.core.mail import send_mail
 from blog.models import Post
 from .models import HomePage, MapPage, CustomPage, ContactPage, ThankYouPage, FeaturedProjectsPage, TestimonialsPage, \
-    Testimonial, ProjectGalleryPage, GalleryCategory, ClientTestinomials
+    Testimonial, ProjectGalleryPage, GalleryCategory, ClientTestinomials, Testimonial
 
 
 import core.models
@@ -66,6 +66,25 @@ class ServiceDetailView(DetailView):
         ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
 
         return ctx
+    
+    def post(self, request, *args, **kwargs):
+        try:
+            form_data = self.request.POST
+            subject = 'New Service Enquiry'
+            message = (
+                f"User Name: {form_data.get('user_name')}\n"
+                f"Email: {form_data.get('email')}\n"
+                f"Phone: {form_data.get('phone')}\n"
+                f"Service Enquired for: {form_data.get('services_intrest')}\n"
+                f"Postal code: {form_data.get('head_with_postal_code')}\n\n"
+                f"Project Description:\n{form_data.get('project_description')}"
+            )
+            from_email = 'deepansh.freelancing@gmail.com'
+            recipient_list = ['vishal.mehta9123@gmail.com', 'bogdan@webreign.ca']
+            send_mail(subject, message, from_email, recipient_list)
+        except Exception as e:
+            print(str(e))
+        return redirect('thankyou')
 
 
 class FeaturedProjectsView(ListView):
@@ -159,7 +178,28 @@ class TestimonialsListView(ListView):
         ctx = super().get_context_data(**kwargs)
         ctx['page'] = TestimonialsPage.get_solo()
         ctx['service'] = ClientTestinomials.get_solo()
+        ctx['testimonial'] = {index: service  for index, service in enumerate(Testimonial.objects.all(), start=1)}
+        ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
+    
+    def post(self, request, *args, **kwargs):
+        try:
+            form_data = self.request.POST
+            subject = 'New Service Enquiry'
+            message = (
+                f"User Name: {form_data.get('user_name')}\n"
+                f"Email: {form_data.get('email')}\n"
+                f"Phone: {form_data.get('phone')}\n"
+                f"Service Enquired for: {form_data.get('services_intrest')}\n"
+                f"Postal code: {form_data.get('head_with_postal_code')}\n\n"
+                f"Project Description:\n{form_data.get('project_description')}"
+            )
+            from_email = 'deepansh.freelancing@gmail.com'
+            recipient_list = ['vishal.mehta9123@gmail.com', 'bogdan@webreign.ca']
+            send_mail(subject, message, from_email, recipient_list)
+        except Exception as e:
+            print(str(e))
+        return redirect('thankyou')
 
 
 class GalleryView(DetailView):
@@ -170,19 +210,25 @@ class GalleryView(DetailView):
     def get_object(self, queryset=None):
         return self.model.get_solo()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # Fetch categories and images
-        categories_with_images = []
-        for category in self.object.categories.all():
+    def get(self, request, *args, **kwargs):
+        ret = super().get(request, *args, **kwargs)
+        category_id = request.GET.get('category_id')
+        if category_id:
+            category = get_object_or_404(GalleryCategory, pk=category_id)
+            rendered = get_gallery_with_testimonial(photos=category.images.all(), category=category)
+            return render(self.request, 'core/partials/gallery_with_testimonial.html', rendered)
+        else:
+            category = self.object.categories.order_by('id').first()
+            categories_with_images = []
+            
             images = category.images.all()
             categories_with_images.append({'category': category, 'images': images})
 
-        context['categories_with_images'] = categories_with_images
-
- 
-        context['service'] = ProjectGalleryPage.get_solo()
-        context['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
-
-        return context
+            rendered = {}
+            rendered["service"] = ProjectGalleryPage.get_solo()
+            rendered["services"] =  {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
+            rendered["categories_with_images"] = categories_with_images
+            rendered["oldest_category"] = category.id
+            rendered["gallery_categories"] = self.object.categories.all()
+            ret.context_data.update(rendered)
+            return render(self.request, 'core/pages/gallery_new.html', rendered)

@@ -537,51 +537,39 @@
                     {% endautoescape %}
 
 
-                    <form>
+                    <form id="myForm" method="post"  onsubmit="disableSubmitButton()">
+                        {% csrf_token %}
                         <div class="form-row">
-
-
-                            <input type="text" class="form-control" placeholder="Your name" name="email">
+                            <input type="text" class="form-control" placeholder="Your name" name="user_name" required>
                         </div>
                         <div class="form-row">
-                            <select class="form-control" name="" id="">
-                                <option>What Service are you interested in</option>
-                                <option>...</option>
-                                <option>...</option>
-                            </select>
-
-                        </div>
-                        <div class="form-row">
-
-
-                            <input type="text" class="form-control" placeholder="Phone" name="email">
-
-                        </div>
-                        <div class="form-row">
-                            <select class="form-control" name="" id="">
-                                <option>Budget</option>
-                                <option>...</option>
-                                <option>...</option>
+                            <select class="form-control" name="services_intrest" id="" required>
+                                <option disabled selected value="">What Service are you interested in</option>
+                                {% for key, service in services.items %}
+                                    <option value="{{service.name}}">{{service.name}}</option>
+                                {% endfor %}
                             </select>
                         </div>
+                        
+                        <div class="form-row">
+
+                            <input type="number" class="form-control" placeholder="Phone" name="phone" required>
+
+                        </div>
 
                         <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Enter email" name="email">
+                            <input type="email" class="form-control" placeholder="Enter email" name="email" required>
                         </div>
                         <div class="form-row">
-                            <select class="form-control" name="" id="">
-                                <option>How did you find about us</option>
-                                <option>...</option>
-                                <option>...</option>
-                            </select>
+                            <input type="text" class="form-control" placeholder="How did you head with Postal Code" name="head_with_postal_code" required>
                         </div>
 
                         <div class="form-row">
                             <textarea placeholder="Describe Your Project ..." class="form-control" rows="7"
-                                cols="auto"></textarea>
+                                cols="auto" name="project_description" required></textarea>
                         </div>
                         <div class="form-row" style="text-align: center;">
-                            <input class="subscribe-button" type="submit" value="Submit">
+                            <input class="subscribe-button" type="submit" value="Submit" id="submitButton">
                         </div>
                     </form>
                 </div>
@@ -690,6 +678,11 @@
             itemsMobile: [650, 1],
             loop: true,
         });
+
+        function disableSubmitButton() {
+        document.getElementById('submitButton').disabled = true;
+        document.getElementById('submitButton').value = 'Submitting...';
+        }
     </script>
 
 

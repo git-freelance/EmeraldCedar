@@ -37,13 +37,17 @@ def get_service_box(service):
 @register.inclusion_tag('core/partials/service_box_new.html')
 def get_service_box_new(service, position):
     position = 'left' if int(position%2) else 'right'
-    print(position, service)
     return {'service': service, "position": position}
 
 
+@register.inclusion_tag('core/partials/testimonial_new_box.html')
+def get_testimonialbox_new(testimonial, position):
+    position = 'left' if int(position%2) else 'right'
+    return {'testimonial': testimonial, "position": position}
+
 @register.inclusion_tag('core/partials/gallery_with_testimonial.html')
-def get_gallery_with_testimonial(photos, testimonials=None):
-    return {'photos_chunks': chunks(photos, 7), 'testimonials': testimonials}
+def get_gallery_with_testimonial(photos, category=None):
+    return {'photos_chunks': chunks(photos, 7), 'category': category}
 
 
 @register.inclusion_tag('core/partials/gallery_row.html')

@@ -399,7 +399,7 @@
 <!-- Banner with Text -->
 <section class="services-banner">
     <div class="banner-text">
-        <h1>{{service}}</h1>
+        <h1>{{service.name}}</h1>
     </div>
 </section>
 </section>
@@ -417,116 +417,9 @@
 
 <section class="cust_review">
     <div class="container-fluid">
-    <div class="review-ryt">
-        <div class="row">
-            <div class="col-sm-3 text_right">
-                <!-- <div class="cust_img" style="float:right;"> -->
-                    <img class="cust_img" src="/static/img/cust_1.png">
-                <!-- </div> -->
-            </div>
-            <div class="col-sm-9">
-                <div class="row">
-                    <div class="col-sm-1 vector">
-                        <img src="/static/img/Vector.png">
-                    </div>
-                    <div class="col-sm-11">
-                        <div class="review">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum</p>
-                            <div class="cust_stars">★★★★★</div>
-                            <div class="row">
-                                <h2>Lorem ipsum <span class="designation">dolor sit amet</span></h2> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="review-left">
-        <div class="row">
-            <div class="col-md-3 text_right img_lt">
-             
-                <img class="cust_img" src="/static/img/cust_2.png">
-           
-        </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-sm-3 vector">
-                        <img src="/static/img/Vector.png">
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="review_l">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum</p>
-                            <div class="cust_stars">★★★★★</div>
-                            <div class="row">
-                                <h2>Lorem ipsum <span class="designation">dolor sit amet</span></h2> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 text_left">
-              
-                    <img class="cust_img" src="/static/img/cust_2.png">
-              
-            </div>
-        </div>
-    </div>
-    <div class="review-ryt">
-        <div class="row">
-            <div class="col-md-3 text_right">
-             
-                    <img class="cust_img" src="/static/img/cust_3.png">
-               
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-sm-1 vector">
-                        <img  src="/static/img/Vector.png">
-                    </div>
-                    <div class="col-sm-11">
-                        <div class="review">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum</p>
-                            <div class="cust_stars">★★★★★</div>
-                            <div class="row">
-                                <h2>Lorem ipsum <span class="designation">dolor sit amet</span></h2> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="review-left">
-        <div class="row">
-            <div class="col-md-3 text_right img_lt">
-             
-                <img class="cust_img" src="/static/img/cust_4.png">
-           
-        </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-3 vector">
-                        <img src="/static/img/Vector.png">
-                    </div>
-                    <div class="col-md-9">
-                        <div class="review_l">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum</p>
-                            <div class="cust_stars">★★★★★</div>
-                            <div class="row">
-                                <h2>Lorem ipsum <span class="designation">dolor sit amet</span></h2> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 text_left">
-              
-                    <img class="cust_img" src="/static/img/cust_4.png">
-              
-            </div>
-        </div>
-    </div>
+    {% for index, testimonial in testimonial.items %}
+    {% get_testimonialbox_new testimonial index %}
+    {% endfor %}
 </div>
 </section>
 
@@ -542,53 +435,41 @@
                 {% endautoescape %}
 
 
-                <form>
+                <form id="myForm" method="post"  onsubmit="disableSubmitButton()">
+                    {% csrf_token %}
                     <div class="form-row">
-
-
-                        <input type="text" class="form-control" placeholder="Your name" name="email">
+                        <input type="text" class="form-control" placeholder="Your name" name="user_name" required>
                     </div>
                     <div class="form-row">
-                        <select class="form-control" name="" id="">
-                            <option>What Service are you interested in</option>
-                            <option>...</option>
-                            <option>...</option>
-                        </select>
-
-                    </div>
-                    <div class="form-row">
-
-
-                        <input type="text" class="form-control" placeholder="Phone" name="email">
-
-                    </div>
-                    <div class="form-row">
-                        <select class="form-control" name="" id="">
-                            <option>Budget</option>
-                            <option>...</option>
-                            <option>...</option>
+                        <select class="form-control" name="services_intrest" id="" required>
+                            <option disabled selected value="">What Service are you interested in</option>
+                            {% for key, service in services.items %}
+                                <option value="{{service.name}}">{{service.name}}</option>
+                            {% endfor %}
                         </select>
                     </div>
+                    
+                    <div class="form-row">
+
+                        <input type="number" class="form-control" placeholder="Phone" name="phone" required>
+
+                    </div>
 
                     <div class="form-row">
-                        <input type="text" class="form-control" placeholder="Enter email" name="email">
+                        <input type="email" class="form-control" placeholder="Enter email" name="email" required>
                     </div>
                     <div class="form-row">
-                        <select class="form-control" name="" id="">
-                            <option>How did you find about us</option>
-                            <option>...</option>
-                            <option>...</option>
-                        </select>
+                        <input type="text" class="form-control" placeholder="How did you head with Postal Code" name="head_with_postal_code" required>
                     </div>
-           
-            <div class="form-row">
-                <textarea placeholder="Describe Your Project ..." class="form-control" rows="7"
-                    cols="auto"></textarea>
-            </div>
-            <div class="form-row" style="text-align: center;">
-                <input class="subscribe-button" type="submit" value="Submit">
-            </div>
-            </form>
+
+                    <div class="form-row">
+                        <textarea placeholder="Describe Your Project ..." class="form-control" rows="7"
+                            cols="auto" name="project_description" required></textarea>
+                    </div>
+                    <div class="form-row" style="text-align: center;">
+                        <input class="subscribe-button" type="submit" value="Submit" id="submitButton">
+                    </div>
+                </form>
         </div>
         </div>
     </div>
@@ -692,6 +573,11 @@ itemsDesktopSmall:[980,2],
 itemsTablet:[768,1],
 itemsMobile:[650,1],
 });
+
+function disableSubmitButton() {
+        document.getElementById('submitButton').disabled = true;
+        document.getElementById('submitButton').value = 'Submitting...';
+        }
 </script>
 
 
