@@ -186,7 +186,6 @@
         <div class="container">
             <h2>{{ page.section_3_header }}</h2>
             <hr>
-            <h1>{% autoescape off %}{{ page.section_3_short_description }}{% endautoescape %}</h1>
         </div>
     </section>
     {% for index, service in services.items %}
@@ -213,8 +212,8 @@
                 {% endfor %}
             </div>
             <div class="row">
-                <div class="text-center">
-                    <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_1 }}</p>
+                <div class="text-center" style="font-size: 24px;">
+                    <p style="font-size:1.5rem;padding:2rem">{% autoescape off %}{{ page.section_about_us_description_1 }}{% endautoescape %}</p>
                 <!-- </div>
                 <div class="col-md-6 text-center"> -->
                     <!-- <p style="font-size:1.5rem;padding:2rem">{{ page.section_about_us_description_2 }}</p> -->
