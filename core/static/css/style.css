@@ -111,8 +111,10 @@ body {
 
 .tstmnl img{
     align-self: flex-start;
-    width:5.5rem;
+    /* width:5.5rem; */
     margin-top: 1.5rem;
+    height: 80px;
+    width: 80px;
 } 
 
 .testimonial-text {
