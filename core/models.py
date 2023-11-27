@@ -152,7 +152,7 @@ class AboutUsSection(models.Model):
     image = ImageField(upload_to=upload_common_images_to, blank=True, null=True, verbose_name='Image')
 
     class Meta:
-        verbose_name = 'About Us'
+        verbose_name_plural = 'About Us'
 
     def __str__(self):
         return self.title
@@ -163,7 +163,7 @@ class StatisticsSection(models.Model):
     title = models.TextField(blank=True, verbose_name='Title')
 
     class Meta:
-        verbose_name = 'Statistics'
+        verbose_name_plural = 'Statistics'
 
     def __str__(self):
         return self.title

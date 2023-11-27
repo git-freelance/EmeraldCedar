@@ -141,9 +141,9 @@ class ContactView(FormView):
                 f"User Name: {form_data.get('name')}\n"
                 f"Email: {form_data.get('email')}\n"
                 f"Phone: {form_data.get('phone')}\n"
-                f"Best Contact Time: {form_data.get('best_contact_time')}\n"
-                f"Project Address: {form_data.get('project_address')}\n\n"
-                f"Message:\n{form_data.get('how_can_help')}"
+                f"Service Enquired for: {form_data.get('services_intrest')}\n"
+                f"Postal code: {form_data.get('head_with_postal_code')}\n\n"
+                f"Project Description:\n{form_data.get('project_description')}"
             )
 
             from_email = 'deepansh.freelancing@gmail.com'
