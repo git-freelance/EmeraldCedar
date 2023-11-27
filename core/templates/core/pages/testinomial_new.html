@@ -438,11 +438,11 @@
                 <form id="myForm" method="post"  onsubmit="disableSubmitButton()">
                     {% csrf_token %}
                     <div class="form-row">
-                        <input type="text" class="form-control" placeholder="Your name" name="user_name" required>
+                        <input type="text" class="form-control" placeholder="Your Name" name="user_name" required>
                     </div>
                     <div class="form-row">
                         <select class="form-control" name="services_intrest" id="" required>
-                            <option disabled selected value="">What Service are you interested in</option>
+                            <option disabled selected value="">What Service Are You Interested In?</option>
                             {% for key, service in services.items %}
                                 <option value="{{service.name}}">{{service.name}}</option>
                             {% endfor %}
@@ -456,10 +456,10 @@
                     </div>
 
                     <div class="form-row">
-                        <input type="email" class="form-control" placeholder="Enter email" name="email" required>
+                        <input type="email" class="form-control" placeholder="Your Email" name="email" required>
                     </div>
                     <div class="form-row">
-                        <input type="text" class="form-control" placeholder="How did you head with Postal Code" name="head_with_postal_code" required>
+                        <input type="text" class="form-control" placeholder="Postal Code" name="head_with_postal_code" required>
                     </div>
 
                     <div class="form-row">
