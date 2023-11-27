@@ -89,7 +89,7 @@ class MapPageAdmin(AdminImageMixin, SingletonModelAdmin):
 class FeaturedProjectsPageAdmin(AdminImageMixin, SingletonModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('banner', 'banner_text', 'testimonials', 'contact')
+            'fields': ('banner', 'banner_text')
         }),
         ('SEO', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords')
@@ -101,7 +101,7 @@ class FeaturedProjectsPageAdmin(AdminImageMixin, SingletonModelAdmin):
 class ContactPageAdmin(AdminImageMixin, SingletonModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('banner', 'banner_text', 'testimonials')
+            'fields': ('banner', 'banner_text')
         }),
         ('SEO', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords')
@@ -168,7 +168,7 @@ class ProjectGalleryPage(AdminImageMixin, SingletonModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', 'banner', 'contact')
+            'fields': ('name', 'banner')
         }),
         ('SEO', {
             'fields': ('seo_title', 'seo_description', 'seo_keywords')

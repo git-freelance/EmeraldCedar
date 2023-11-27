@@ -159,7 +159,7 @@
         <div class="banner-text">
             <h1>{{ page.banner_header }}</h1>
             <p>{{ page.banner_text }}</p>
-            <button class="banner-btn" href="{{ page.banner_button_1_page.get_absolute_url }}">{{page.banner_button_1_text}}</button>
+            <button class="banner-btn" onclick="window.location.href='{{ page.banner_button_1_page.get_absolute_url }}'">{{page.banner_button_1_text}}</button>
         </div>
     </section>
 
@@ -271,7 +271,7 @@
                     <p style="font-size:1.25rem;">Based on 15 reviews</p>
                     <div class="button-container">
                         <!-- Button 1 -->
-                        <a href="#" class="button">SET ALL REVIEWS</a>
+                        <a href="{% url 'testimonials' %}" class="button">SET ALL REVIEWS</a>
                         <!-- Button 2 -->
                         <a href="#" class="button">WRITE A REVIEW</a>
                     </div>

@@ -185,8 +185,6 @@ class Spot(models.Model):
 class FeaturedProjectsPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
     banner_text = models.CharField(max_length=100, blank=True, null=True, default='Featured Projects')
-    testimonials = models.ManyToManyField('pages.Testimonial', blank=True)
-    contact = RedactorField(allow_image_upload=False, allow_file_upload=False, blank=True)
 
     class Meta:
         verbose_name = 'Featured Projects Page'
@@ -201,7 +199,6 @@ class FeaturedProjectsPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
 class ContactPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
     banner_text = models.CharField(max_length=100, blank=True, null=True, default='Contact Us')
-    testimonials = models.ManyToManyField('pages.Testimonial', blank=True)
 
     class Meta:
         verbose_name = 'Contact Page'
@@ -257,7 +254,6 @@ class ProjectGalleryPage(Page, SEOModelMixin, BannerMixin, SingletonModel):
     id = models.AutoField(primary_key=True)  # Hack for using inheritance with singleton model
     # banner_text = models.CharField(max_length=100, blank=True, null=True, default='Gallery')
     name = models.CharField(max_length=100, blank=True, null=True, default='Gallery')
-    contact = RedactorField(allow_image_upload=False, allow_file_upload=False, blank=True)
 
     class Meta:
         verbose_name = 'Project Gallery Page'
