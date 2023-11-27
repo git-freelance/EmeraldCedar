@@ -267,9 +267,7 @@
 
         /* Small devices (tablets) */
         @media only screen and (min-width: 601px) and (max-width: 768px) {
-            .form-body {
-    padding: 0rem 2rem 5rem;
-}
+
             .nav-item {
                 border-bottom: 1px solid grey !important;
             }
@@ -349,7 +347,7 @@
             }
 
             .carousel-wrap {
-                width: 496px;
+                width: 800px;
             }
 
             .owl-carousel .nav-btn {
@@ -359,7 +357,43 @@
         }
 
         /* Extra large devices (large desktops) */
-        @media only screen and (min-width: 1201px) {}
+        @media only screen and (min-width: 1201px) and (max-width: 1440) {
+
+            .carousel-wrap {
+                width: 1200px;
+            }
+
+        }
+
+        /* @media only screen and (min-width: 1441px) and (max-width: 2560) {
+
+           
+
+        } */
+        @media screen and (min-width: 2560px) {
+
+            /* Your styles for 4K screens here */
+            .carousel-wrap {
+                width: 2000px;
+            }
+
+            .carousel-wrap .nav-btn {
+                height: 90px;
+                width: 90px;
+                top: 45% !important;
+            }
+            .owl-carousel .next-slide{
+                right: -6.5rem;
+                font-size:40px;
+                padding: 10px 5px 0px 30px;
+            }
+            .owl-carousel .prev-slide{
+                left: -6.5rem;
+                font-size:40px;
+                padding: 10px 5px 0px 30px;
+            }
+        }
+
 
         .links {
             color: #fff;
@@ -444,8 +478,8 @@
                                         <img src="{% static 'img/new_images/review.png' %}">
                                     </div>
                                     <div class="testimonial-head">
-                                        <img
-                                            src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}"  width="122" height="118">
+                                        <img src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}"
+                                            width="122" height="118">
                                         <div class="testimonial-head-text">
                                             <h3>{{ testimonial.author }}</h3>
                                             <p>{{ testimonial.position }}</p>
@@ -481,7 +515,7 @@
                     <p style="font-size:1.25rem;">Based on 15 reviews</p>
                     <div class="button-container">
                         <!-- Button 1 -->
-                       <a href="{% url 'testimonials' %}" class="button">SET ALL REVIEWS</a>
+                        <a href="{% url 'testimonials' %}" class="button">SET ALL REVIEWS</a>
                         <!-- Button 2 -->
                         <a href="#" class="button">WRITE A REVIEW</a>
                     </div>
@@ -493,7 +527,7 @@
     </section>
     <section class="form-section">
         <div class="form">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="form-heading">
                     <!-- <h1>Lorem ipsum dolor sit amet</h1> -->
                 </div>
@@ -541,16 +575,16 @@
                                 <option>...</option>
                             </select>
                         </div>
-               
-                <div class="form-row">
-                    <textarea placeholder="Describe Your Project ..." class="form-control" rows="7"
-                        cols="auto"></textarea>
+
+                        <div class="form-row">
+                            <textarea placeholder="Describe Your Project ..." class="form-control" rows="7"
+                                cols="auto"></textarea>
+                        </div>
+                        <div class="form-row" style="text-align: center;">
+                            <input class="subscribe-button" type="submit" value="Submit">
+                        </div>
+                    </form>
                 </div>
-                <div class="form-row" style="text-align: center;">
-                    <input class="subscribe-button" type="submit" value="Submit">
-                </div>
-                </form>
-            </div>
             </div>
         </div>
         </div>
@@ -650,10 +684,11 @@
             navigation: true,
             pagination: false,
             navigationText: ["<div class='nav-btn prev-slide'>&#10094;</div>", "<div class='nav-btn next-slide'>&#10095;</div>"],
-            itemsDesktop: [1000, 2],
+            itemsDesktop: [10000, 2],
             itemsDesktopSmall: [980, 2],
             itemsTablet: [768, 1],
             itemsMobile: [650, 1],
+            loop: true,
         });
     </script>
 
