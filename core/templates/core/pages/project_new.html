@@ -349,51 +349,7 @@
 </section>
 
 
-<section class="review">
-    <div class="review-head">
-        <p>Lorem ipsum</p>
-        <hr>
-        <h1>Lorem ipsum dolor sit amet</h1>
-    </div>
-    <div class="demo">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="testimonial-slider" class="owl-carousel">
-
-                        
-                        {% for testimonial in testimonials %}
-                        <div class="testimonial">
-                            <div class="testimonial-content">
-                                <div class="testimonial-icon">
-                                    <img src="{% static 'img/new_images/review.png' %}">
-                                </div>
-                                <div class="testimonial-head">
-                                    <img
-                                        src="{% if testimonial.user_image %}{{ testimonial.user_image.url }}{% endif %}">
-                                    <div class="testimonial-head-text">
-                                        <h3>{{ testimonial.author }}</h3>
-                                        <p>{{ testimonial.position }}</p>
-                                    </div>
-                                </div>
-                                <p class="description">
-                                    {{ testimonial.text }}
-                                </p>
-                            </div>
-                            <!-- <h3 class="title">williamson</h3>
-                            <span class="post">Web Developer</span> -->
-                        </div>
-                        {% endfor %}
-                        
-     
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="footer">
+<footer class="footer mt-5">
     <div class="container">
         <div class="footer-columns">
             <!-- Column 1: Logo and Contact Info -->
