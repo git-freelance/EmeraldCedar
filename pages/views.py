@@ -160,6 +160,7 @@ class TestimonialsListView(ListView):
         ctx['page'] = TestimonialsPage.get_solo()
         ctx['service'] = ClientTestinomials.get_solo()
         ctx['testimonial'] = {index: service  for index, service in enumerate(Testimonial.objects.all(), start=1)}
+        ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
 
 
