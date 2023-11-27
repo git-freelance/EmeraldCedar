@@ -416,8 +416,8 @@
 </section> -->
 
 <section class="cust_review">
-    {% for index, testimonial in testimonial.items %}
     <div class="container-fluid">
+    {% for index, testimonial in testimonial.items %}
     {% get_testimonialbox_new testimonial index %}
     {% endfor %}
 </div>
