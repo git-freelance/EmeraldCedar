@@ -373,26 +373,35 @@
                       
                             <input type="text" class="form-control" placeholder="Your Name" name="name" required>
                          </div>
-                        <div class="form-row">
-                      
-                            <input type="email" class="form-control" placeholder="Your Email" name="email" required>
-                         </div>
+
+                         <div class="form-row">
+                            <select class="form-control" name="services_intrest" id="" required>
+                                <option disabled selected value="">What Service Are You Interested In?</option>
+                                {% for key, service in services.items %}
+                                    <option value="{{service.name}}">{{service.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
                         <div class="form-row">
                       
                             <input type="number" class="form-control" placeholder="Phone" name="phone" required>
                          </div>
+
                         <div class="form-row">
                       
-                            <input type="text" class="form-control" placeholder="Best Contact Time" name="best_contact_time" required>
+                            <input type="email" class="form-control" placeholder="Your Email" name="email" required>
                          </div>
-                        <div class="form-row">
-                      
-                            <input type="text" class="form-control" placeholder="Project Address" name="project_address" required>
-                         </div>
-                        
-                        <div class="form-row">
-                            <textarea placeholder="How we can help you?" class="form-control" rows="7" cols="auto" name="how_can_help" required></textarea>
+
+                         <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Postal Code" name="head_with_postal_code" required>
                         </div>
+
+                        <div class="form-row">
+                            <textarea placeholder="Describe Your Project ..." class="form-control" rows="7"
+                                cols="auto" name="project_description" required></textarea>
+                        </div>
+                        
                         <div class="form-row" style="text-align: center;">
                             <input class="subscribe-button" type="submit" value="Send Message" id="submitButton">
                         </div>
