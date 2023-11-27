@@ -386,7 +386,7 @@
 }
 
 .gallery-heading{
-    margin:3rem 0;
+    margin:2rem 0;
 }
 .gallery_buttons{
     padding-left:1rem;
@@ -407,7 +407,7 @@
 <!-- Banner with Text -->
 <section class="services-banner">
     <div class="banner-text">
-        <h1>{{service.name}}</h1>
+        <h1 id="ban-he">{{service.name}}</h1>
     </div>
 </section>
 </section>
@@ -418,8 +418,8 @@
 <div class="container-fluid mt-5">
     <div class="mb-30">
         <div class="row">
-        <div class="form-row">
-            {% for category in page.categories.all %}
+        <div class="form-rows">
+            {% for category in gallery_categories %}
                 <div class="col-auto mb-2 gallery_buttons" style="float:left;">
                     <button class="btn btn-sm btn-outline-success btn-category {% if category == first_category %}active{% endif %}"
                             data-id="{{ category.pk }}" data-name="{{ category.name }}">
@@ -430,37 +430,17 @@
     </div>
     </div></div>
 
-{% for category_with_images in categories_with_images %}
-<section class="gallery-kitchen">
-    <div class="container-1 text-center">
-        <div class="gallery-heading">
-            <div class="d-flex mb-3">
-                <p style="margin-bottom:0" class="gallery-sec">INSPIRATION PROJECTS</p>
-                <hr class="gallery-hr"/>
-            </div>
-            <div class="d-flex">
-                <p class="float-start gallery-head" style="margin-bottom:0"><b>{{ category_with_images.category.name }}</b></p>
-            </div>
-        </div>
+    <!-- {% if is_normal %}
 
-        <div class="gallery-row row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-2 g-lg-3">
+    {% include 'core/partials/gallery_normal.html' %}
+    {%endif%} -->
 
-          {% for image in category_with_images.images %}
 
-          <a href="{{ image.image.url }}" data-fancybox="gallery" class="img-box">
+    <section class="gallery-kitchen" id="gal-contd">
+        {% get_gallery_with_testimonial first_category.images.all page.testimonials.all %}
 
-          <div class="col text-center  gallery-col">
-            <div class="px-3 pb-3"><img src="{{ image.image.url }}" class="img-thumbnail img-gallery" alt="..."></div>
-          </div>
+        </section>
 
-        </a>
-
-          {% endfor %}
-
-        </div>
-      </div>
-</section>
-{% endfor %}
 
 
 
@@ -543,31 +523,41 @@
 <script src="{% static 'js/base.js' %}"></script>
 
  <script>
-$(document).ready(function(){
-    $("#testimonial-slider").owlCarousel({
-        items:2,
-        itemsDesktop:[1000,3],
-        itemsDesktopSmall:[980,2],
-        itemsTablet:[768,2],
-        itemsMobile:[650,1],
-        pagination:true,
-        navigation:false,
-        slideSpeed:1000,
-        autoPlay:true
-    });
-});
+        $(function () {
+            $('.btn-category').click(function () {
+                var $self = $(this);
+                var category_id = $self.data('id');
+                $('.btn-category').removeClass('active');
+                $self.addClass('active');
+                $.get('.', {category_id: category_id}, function (data) {
+                    $('#ban-he').html($self.data('name'));
+                    //$('#gal-cont').html(data);
+                    //
+                    $('#gal-contd').fadeOut(100, function () {
+                        $(this).html(data).fadeIn(100, function () {
+                            init_gallery_testi();
+                        });
+                    });
+                    //
+                    //init_gallery_testi();
+                });
+                return false;
+            });
+        });
 
-$('.Gallery-carousel').owlCarousel({
-        items:2,
-    margin: 10,
-    navigation:true,
-    pagination:false,
-    navigationText:["<div class='nav-btn prev-slide'>&#10094;</div>","<div class='nav-btn next-slide'>&#10095;</div>"],
-    itemsDesktop:[1000,2],
-itemsDesktopSmall:[980,2],
-itemsTablet:[768,1],
-itemsMobile:[650,1],
-});
+        $(document).ready(function () {
+        var category_id = {{oldest_category|safe}}
+
+        $.get('.', { category_id: category_id }, function (data) {
+            
+        
+            $('#ban-he').html();
+            $('#gal-contd').html(data);
+            $('.btn-category').removeClass('active'); // Remove 'active' class from all buttons
+    $('.btn-category[data-id="' + category_id + '"]').addClass('active'); // Add 'active' class to the button with the specified category_id
+            init_gallery_testi();
+        });
+    });
 </script>
 
 

@@ -42,8 +42,8 @@ def get_service_box_new(service, position):
 
 
 @register.inclusion_tag('core/partials/gallery_with_testimonial.html')
-def get_gallery_with_testimonial(photos, testimonials=None):
-    return {'photos_chunks': chunks(photos, 7), 'testimonials': testimonials}
+def get_gallery_with_testimonial(photos, category=None):
+    return {'photos_chunks': chunks(photos, 7), 'category': category}
 
 
 @register.inclusion_tag('core/partials/gallery_row.html')

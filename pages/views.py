@@ -170,19 +170,25 @@ class GalleryView(DetailView):
     def get_object(self, queryset=None):
         return self.model.get_solo()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # Fetch categories and images
-        categories_with_images = []
-        for category in self.object.categories.all():
+    def get(self, request, *args, **kwargs):
+        ret = super().get(request, *args, **kwargs)
+        category_id = request.GET.get('category_id')
+        if category_id:
+            category = get_object_or_404(GalleryCategory, pk=category_id)
+            rendered = get_gallery_with_testimonial(photos=category.images.all(), category=category)
+            return render(self.request, 'core/partials/gallery_with_testimonial.html', rendered)
+        else:
+            category = self.object.categories.order_by('id').first()
+            categories_with_images = []
+            
             images = category.images.all()
             categories_with_images.append({'category': category, 'images': images})
 
-        context['categories_with_images'] = categories_with_images
-
- 
-        context['service'] = ProjectGalleryPage.get_solo()
-        context['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
-
-        return context
+            rendered = {}
+            rendered["service"] = ProjectGalleryPage.get_solo()
+            rendered["services"] =  {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
+            rendered["categories_with_images"] = categories_with_images
+            rendered["oldest_category"] = category.id
+            rendered["gallery_categories"] = self.object.categories.all()
+            ret.context_data.update(rendered)
+            return render(self.request, 'core/pages/gallery_new.html', rendered)
