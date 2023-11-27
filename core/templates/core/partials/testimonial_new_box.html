@@ -1,0 +1,58 @@
+{% load extras %}
+{% load static %}
+{% if position == 'left' %}
+<div class="review-ryt">
+    <div class="row">
+        <div class="col-sm-3 text_right">
+            <img class="cust_img" src="{% if testimonial.user_image %}{{testimonial.user_image.url}}{%else%}{% static 'img/new_images/user1.png' %}{%endif%}" width="205.2" height="205.2" style="border-radius: 50%;">
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-1 vector">
+                    <img src="/static/img/Vector.png" >
+                </div>
+                <div class="col-sm-11">
+                    <div class="review">
+                        <p>{{testimonial.text}}</p>
+                        <div class="cust_stars">★★★★★</div>
+                        <div class="row">
+                            <h2>{{testimonial.author}}<span class="designation"> {{testimonial.position}}</span></h2> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+<div class="review-left">
+    <div class="row">
+        <div class="col-md-3 text_right img_lt">
+            <img class="cust_img" src="{% if testimonial.user_image %}{{testimonial.user_image.url}}{%else%}{% static 'img/new_images/user1.png' %}{%endif%}" width="205.2" height="205.2" style="border-radius: 50%;">
+    </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-sm-3 vector">
+                    <img src="/static/img/Vector.png" >
+                </div>
+                <div class="col-sm-9">
+                    <div class="review_l">
+                        <p>{{testimonial.text}}</p>
+                        <div class="cust_stars">★★★★★</div>
+                        <div class="row">
+                            <h2>{{testimonial.author}}<span class="designation"> {{testimonial.position}}</span></h2> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text_left">
+            <img class="cust_img" src="{% if testimonial.user_image %}{{testimonial.user_image.url}}{%else%}{% static 'img/new_images/user1.png' %}{%endif%}" width="205.2" height="205.2" style="border-radius: 50%;">
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
