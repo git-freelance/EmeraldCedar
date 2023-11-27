@@ -66,6 +66,25 @@ class ServiceDetailView(DetailView):
         ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
 
         return ctx
+    
+    def post(self, request, *args, **kwargs):
+        try:
+            form_data = self.request.POST
+            subject = 'New Service Enquiry'
+            message = (
+                f"User Name: {form_data.get('user_name')}\n"
+                f"Email: {form_data.get('email')}\n"
+                f"Phone: {form_data.get('phone')}\n"
+                f"Service Enquired for: {form_data.get('services_intrest')}\n"
+                f"Postal code: {form_data.get('head_with_postal_code')}\n\n"
+                f"Project Description:\n{form_data.get('project_description')}"
+            )
+            from_email = 'deepansh.freelancing@gmail.com'
+            recipient_list = ['vishal.mehta9123@gmail.com', 'bogdan@webreign.ca']
+            send_mail(subject, message, from_email, recipient_list)
+        except Exception as e:
+            print(str(e))
+        return redirect('thankyou')
 
 
 class FeaturedProjectsView(ListView):
@@ -162,6 +181,25 @@ class TestimonialsListView(ListView):
         ctx['testimonial'] = {index: service  for index, service in enumerate(Testimonial.objects.all(), start=1)}
         ctx['services'] = {index: service  for index, service in enumerate(core.models.Service.objects.all(), start=1)}
         return ctx
+    
+    def post(self, request, *args, **kwargs):
+        try:
+            form_data = self.request.POST
+            subject = 'New Service Enquiry'
+            message = (
+                f"User Name: {form_data.get('user_name')}\n"
+                f"Email: {form_data.get('email')}\n"
+                f"Phone: {form_data.get('phone')}\n"
+                f"Service Enquired for: {form_data.get('services_intrest')}\n"
+                f"Postal code: {form_data.get('head_with_postal_code')}\n\n"
+                f"Project Description:\n{form_data.get('project_description')}"
+            )
+            from_email = 'deepansh.freelancing@gmail.com'
+            recipient_list = ['vishal.mehta9123@gmail.com', 'bogdan@webreign.ca']
+            send_mail(subject, message, from_email, recipient_list)
+        except Exception as e:
+            print(str(e))
+        return redirect('thankyou')
 
 
 class GalleryView(DetailView):
