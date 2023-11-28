@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 from blog.models import Post
 from .models import HomePage, MapPage, CustomPage, ContactPage, ThankYouPage, FeaturedProjectsPage, TestimonialsPage, \
     Testimonial, ProjectGalleryPage, GalleryCategory, ClientTestinomials, Testimonial
+from EmeraldCedar.settings import EMAIL_HOST_USER
 
 
 import core.models
@@ -79,8 +80,8 @@ class ServiceDetailView(DetailView):
                 f"Postal code: {form_data.get('head_with_postal_code')}\n\n"
                 f"Project Description:\n{form_data.get('project_description')}"
             )
-            from_email = 'deepansh.freelancing@gmail.com'
-            recipient_list = ['vishal.mehta9123@gmail.com', 'bogdan@webreign.ca']
+            from_email = EMAIL_HOST_USER
+            recipient_list = ['vishal.mehta9123@gmail.com', 'bogdan@webreign.ca', 'info@bluewaterdesignbuild.ca']
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
             print(str(e))
@@ -146,8 +147,8 @@ class ContactView(FormView):
                 f"Project Description:\n{form_data.get('project_description')}"
             )
 
-            from_email = 'deepansh.freelancing@gmail.com'
-            recipient_list = ['bogdan@webreign.ca']
+            from_email = EMAIL_HOST_USER
+            recipient_list = ['vishal.mehta9123@gmail.com', 'bogdan@webreign.ca', 'info@bluwaterdesignbuild.ca']
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
             print(str(e))
@@ -194,8 +195,8 @@ class TestimonialsListView(ListView):
                 f"Postal code: {form_data.get('head_with_postal_code')}\n\n"
                 f"Project Description:\n{form_data.get('project_description')}"
             )
-            from_email = 'deepansh.freelancing@gmail.com'
-            recipient_list = ['vishal.mehta9123@gmail.com', 'bogdan@webreign.ca']
+            from_email = EMAIL_HOST_USER
+            recipient_list = ['vishal.mehta9123@gmail.com', 'bogdan@webreign.ca', 'info@bluewaterdesignbuild.ca']
             send_mail(subject, message, from_email, recipient_list)
         except Exception as e:
             print(str(e))
